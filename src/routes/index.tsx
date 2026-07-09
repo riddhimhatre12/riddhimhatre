@@ -89,7 +89,7 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
           className="font-display text-black text-center leading-[0.85] whitespace-nowrap"
-          style={{ fontSize: "15.5vw", letterSpacing: "-0.04em" }}
+          style={{ fontSize: "13vw", letterSpacing: "-0.045em" }}
         >
           PORTFOLIO
         </motion.h1>
