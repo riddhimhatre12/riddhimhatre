@@ -82,27 +82,40 @@ function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.2]);
 
   return (
-    <section ref={ref} className="relative px-6 md:px-16 pt-8 md:pt-16 pb-24">
-      <motion.div style={{ y, opacity }} className="relative">
-        <motion.h1
+    <section ref={ref} className="relative px-4 md:px-8 pt-8 md:pt-16 pb-24">
+      <motion.div style={{ y, opacity }} className="relative w-full">
+        <motion.svg
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display text-black text-center leading-[0.85] tracking-tight"
-          style={{ fontSize: "clamp(4rem, 18vw, 18rem)" }}
+          viewBox="0 0 1000 220"
+          className="w-full h-auto block"
+          preserveAspectRatio="xMidYMid meet"
         >
-          PORTFOLIO
-        </motion.h1>
+          <text
+            x="500"
+            y="185"
+            textAnchor="middle"
+            textLength="980"
+            lengthAdjust="spacingAndGlyphs"
+            style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "220px" }}
+            fill="#111"
+          >
+            PORTFOLIO
+          </text>
+        </motion.svg>
         <motion.p
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="font-script text-black text-center -mt-[10vw] md:-mt-[9vw]"
-          style={{ fontSize: "clamp(2.5rem, 9vw, 9rem)" }}
+          className="font-script text-black text-center whitespace-nowrap"
+          style={{ fontSize: "10vw", marginTop: "-6vw", lineHeight: 1 }}
         >
           Maryna Kovalchuk
         </motion.p>
       </motion.div>
+
+
 
       <Reveal delay={1} className="flex justify-center mt-20">
         <span className="font-display text-sm tracking-widest border border-black rounded-full px-6 py-2">
