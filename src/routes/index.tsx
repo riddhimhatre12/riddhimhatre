@@ -88,16 +88,17 @@ function Hero() {
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-          viewBox="0 0 1000 240"
+          viewBox="0 0 1000 220"
           className="w-full h-auto block"
           preserveAspectRatio="xMidYMid meet"
         >
           <text
             x="500"
-            y="200"
+            y="185"
             textAnchor="middle"
-            className="font-display"
-            style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "260px", letterSpacing: "-10px" }}
+            textLength="980"
+            lengthAdjust="spacingAndGlyphs"
+            style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "220px" }}
             fill="#111"
           >
             PORTFOLIO
