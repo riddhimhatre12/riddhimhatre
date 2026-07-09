@@ -82,27 +82,38 @@ function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.2]);
 
   return (
-    <section ref={ref} className="relative px-4 md:px-10 pt-8 md:pt-16 pb-24">
-      <motion.div style={{ y, opacity }} className="relative">
-        <motion.h1
+    <section ref={ref} className="relative px-4 md:px-8 pt-8 md:pt-16 pb-24">
+      <motion.div style={{ y, opacity }} className="relative w-full">
+        <motion.svg
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display text-black text-center leading-[0.85] whitespace-nowrap"
-          style={{ fontSize: "13vw", letterSpacing: "-0.045em" }}
+          viewBox="0 0 1000 240"
+          className="w-full h-auto block"
+          preserveAspectRatio="xMidYMid meet"
         >
-          PORTFOLIO
-        </motion.h1>
+          <text
+            x="500"
+            y="200"
+            textAnchor="middle"
+            className="font-display"
+            style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "260px", letterSpacing: "-10px" }}
+            fill="#111"
+          >
+            PORTFOLIO
+          </text>
+        </motion.svg>
         <motion.p
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="font-script text-black text-center whitespace-nowrap"
-          style={{ fontSize: "10vw", marginTop: "-6vw" }}
+          style={{ fontSize: "10vw", marginTop: "-6vw", lineHeight: 1 }}
         >
           Maryna Kovalchuk
         </motion.p>
       </motion.div>
+
 
 
       <Reveal delay={1} className="flex justify-center mt-20">
