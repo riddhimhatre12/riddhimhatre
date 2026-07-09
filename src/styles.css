@@ -2,6 +2,12 @@
 @source "../src";
 @import "tw-animate-css";
 
+@theme {
+  --font-display: "Archivo Black", "Anton", system-ui, sans-serif;
+  --font-script: "Great Vibes", "Allura", cursive;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 /*
