@@ -84,6 +84,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "Portfolio of Maryna Kovalchuk — social media management, content creation and brand storytelling." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Portfolio — Maryna Kovalchuk" },
+      { name: "twitter:description", content: "Portfolio of Maryna Kovalchuk — social media management, content creation and brand storytelling." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/18a1423a-eddb-416a-b562-8cc839c678f2" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/18a1423a-eddb-416a-b562-8cc839c678f2" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
