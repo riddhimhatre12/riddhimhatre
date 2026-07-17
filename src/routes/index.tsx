@@ -16,9 +16,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const bg = "#f0efeb";
-const ink = "#111111";
-
 const IMAGES: Record<string, string> = {
   portrait,
   portraitCutout,
@@ -62,12 +59,12 @@ function Reveal({
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const item =
-    "relative font-display tracking-wider text-[13px] md:text-sm hover:text-neutral-500 transition-colors py-1 block after:absolute after:bottom-0 after:left-0 after:h-[1.5px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-black after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100";
+    "font-display tracking-widest text-[15px] md:text-[17px] text-black hover:text-neutral-500 transition-colors py-1 block underline underline-offset-[10px] decoration-[2.5px] font-black";
   const mobileItem =
-    "font-display tracking-widest text-lg text-black hover:text-neutral-500 py-3 block border-b border-black/5 text-center";
+    "font-display tracking-widest text-lg text-black hover:text-neutral-500 py-3 block border-b border-black/5 text-center underline underline-offset-4 decoration-2";
 
   return (
-    <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-[#f0efeb]/90 border-b border-black/5 px-6 md:px-16 py-4 transition-all duration-300">
+    <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/90 border-b border-black/5 px-6 md:px-16 py-6 transition-all duration-300">
       <div className="max-w-6xl mx-auto flex items-center justify-between md:block">
         {/* Mobile Header Brand */}
         <div className="flex md:hidden items-center gap-1.5">
@@ -76,7 +73,7 @@ function Nav() {
         </div>
 
         {/* Desktop navigation */}
-        <ul className="hidden md:grid md:grid-cols-6 items-center justify-center text-center gap-y-2 gap-x-6 md:gap-x-0">
+        <ul className="hidden md:grid md:grid-cols-5 items-center justify-center text-center gap-x-12 max-w-4xl mx-auto">
           <li>
             <a href="#about" className={item}>
               ABOUT
@@ -87,15 +84,12 @@ function Nav() {
               SKILLS
             </a>
           </li>
-          <li>
-            <a href="#experience" className={item}>
-              EXPERIENCE
-            </a>
-          </li>
-          <li className="hidden md:flex justify-center items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-black/80" />
-            <span className="w-1.5 h-1.5 rounded-full bg-black/80" />
-            <span className="w-1.5 h-1.5 rounded-full bg-black/80" />
+          <li className="flex justify-center items-center">
+            <div className="flex justify-center items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-black" />
+              <span className="w-2.5 h-2.5 rounded-full bg-black" />
+              <span className="w-2.5 h-2.5 rounded-full bg-black" />
+            </div>
           </li>
           <li>
             <a href="#projects" className={item}>
@@ -127,7 +121,7 @@ function Nav() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="md:hidden overflow-hidden mt-2 bg-[#f0efeb]/95 rounded-b-xl"
+            className="md:hidden overflow-hidden mt-2 bg-white/95 rounded-b-xl"
           >
             <nav className="flex flex-col py-2">
               <a
@@ -143,13 +137,6 @@ function Nav() {
                 className={mobileItem}
               >
                 SKILLS
-              </a>
-              <a
-                href="#experience"
-                onClick={() => setIsOpen(false)}
-                className={mobileItem}
-              >
-                EXPERIENCE
               </a>
               <a
                 href="#projects"
@@ -181,40 +168,42 @@ function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.2]);
 
   return (
-    <section ref={ref} className="relative px-4 md:px-8 pt-8 md:pt-16 pb-24">
-      <motion.div style={{ y, opacity }} className="relative w-full">
-        <motion.svg
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-          viewBox="0 0 1000 220"
-          className="w-full h-auto block"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <text
-            x="500"
-            y="185"
-            textAnchor="middle"
-            textLength="980"
-            lengthAdjust="spacingAndGlyphs"
-            style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "220px" }}
-            fill="#111"
+    <section ref={ref} className="relative px-4 md:px-8 pt-12 md:pt-20 pb-24">
+      <motion.div style={{ y, opacity }} className="relative w-full flex flex-col items-center">
+        <div className="relative w-full">
+          <motion.svg
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+            viewBox="0 0 1000 220"
+            className="w-full h-auto block"
+            preserveAspectRatio="xMidYMid meet"
           >
-            PORTFOLIO
-          </text>
-        </motion.svg>
-        <motion.p
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="font-script text-black text-center whitespace-nowrap mt-[-2vw] sm:mt-[-4vw] md:mt-[-6vw]"
-          style={{ fontSize: "clamp(2.5rem, 10vw, 6.5rem)", lineHeight: 1.1 }}
-        >
-          {data.hero.name || "Riddhi Mhatre"}
-        </motion.p>
+            <text
+              x="500"
+              y="185"
+              textAnchor="middle"
+              textLength="980"
+              lengthAdjust="spacingAndGlyphs"
+              style={{ fontFamily: "'Archivo Black', sans-serif", fontSize: "220px" }}
+              fill="#111"
+            >
+              PORTFOLIO
+            </text>
+          </motion.svg>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute left-0 right-0 bottom-[-2.5vw] font-script text-black text-center whitespace-nowrap leading-none select-none pointer-events-none"
+            style={{ fontSize: "clamp(2.5rem, 9.5vw, 7.5rem)" }}
+          >
+            {data.hero.name || "Riddhi Mhatre"}
+          </motion.p>
+        </div>
       </motion.div>
 
-      <Reveal delay={1} className="flex justify-center mt-20">
+      <Reveal delay={1} className="flex justify-center mt-24">
         <span className="font-display text-sm tracking-widest border border-black rounded-full px-6 py-2">
           {data.hero.year || "2026"}
         </span>
@@ -229,14 +218,18 @@ function About() {
   const contact = about.contact;
 
   return (
-    <section id="about" className="px-6 md:px-16 py-24">
+    <section id="about" className="px-6 md:px-16 py-24 bg-inherit">
       <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center max-w-6xl mx-auto">
-        <Reveal className="w-full">
+        <div className="w-full relative">
           <div className="relative aspect-square max-w-md mx-auto flex items-end justify-center overflow-visible">
-            {/* Soft Light-Grey Circle Backdrop */}
-            <div className="absolute left-1/2 bottom-0 -translate-x-1/2 w-[85%] h-[85%] rounded-full bg-[#e9ebea]" />
-            {/* Transparent Cutout Portrait */}
-            <img
+            {/* Soft White Circle Backdrop - solid white as in the screenshot */}
+            <div className="absolute left-1/2 bottom-0 -translate-x-1/2 w-[88%] h-[88%] rounded-full bg-white shadow-sm" />
+            {/* Transparent Cutout Portrait with Slide-in from Left Animation */}
+            <motion.img
+              initial={{ x: -150, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 1.1, ease: [0.25, 1, 0.5, 1] }}
               src={IMAGES[about.portraitCutout] || about.portraitCutout || portraitCutout}
               alt="Riddhi Mhatre portrait"
               className="relative z-10 w-[95%] h-auto object-cover select-none pointer-events-none origin-bottom"
@@ -245,7 +238,7 @@ function About() {
               loading="lazy"
             />
           </div>
-        </Reveal>
+        </div>
 
         <div className="flex flex-col justify-center h-full">
           <Reveal>
@@ -268,7 +261,7 @@ function About() {
           </div>
 
           <Reveal delay={0.5} className="mt-8 pt-6 border-t border-black/5">
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+            <div className="grid md:grid-cols-2 gap-6 items-end">
               <div className="space-y-3">
                 <p className="font-display text-lg tracking-wider text-black uppercase font-bold">
                   LET'S CONNECT!
@@ -299,7 +292,7 @@ function About() {
                 )}
               </div>
 
-              <div className="flex items-center gap-3.5 self-start lg:self-auto pt-2 lg:pt-0">
+              <div className="flex items-center justify-start md:justify-end gap-3.5 pt-4 md:pt-0">
                 {contact.tiktok && (
                   <a
                     href={contact.tiktok}
@@ -396,7 +389,6 @@ function DatabaseIcon() {
   );
 }
 
-// WrenchIcon
 function WrenchIcon() {
   return (
     <svg
@@ -491,16 +483,15 @@ function InstagramIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
       className="w-8 h-8 text-black transition-transform hover:scale-110 duration-200"
+      fill="currentColor"
     >
-      <rect x="2" y="2" width="20" height="20" rx="6" ry="6" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+      <rect width="24" height="24" rx="6" fill="black" />
+      <g transform="scale(0.8) translate(3, 3)" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+      </g>
     </svg>
   );
 }
@@ -690,7 +681,7 @@ function CaseStudy({
   goal,
   approach,
   stats,
-  color = bg,
+  color,
   image,
 }: {
   id: string;
@@ -706,7 +697,7 @@ function CaseStudy({
   image?: string;
 }) {
   return (
-    <section id={id} className="px-6 md:px-16 py-24" style={{ backgroundColor: color }}>
+    <section id={id} className="px-6 md:px-16 py-24" style={{ backgroundColor: color || "#f0efeb" }}>
       <div className="max-w-6xl mx-auto">
         <Reveal>
           <h3 className="font-display text-4xl md:text-6xl tracking-tight leading-[0.95]">
@@ -785,7 +776,7 @@ function Contact() {
   const contact = about.contact;
 
   return (
-    <section id="contact" className="px-4 sm:px-6 md:px-16 py-24 md:py-32 text-center">
+    <section id="contact" className="px-4 sm:px-6 md:px-16 py-24 md:py-32 text-center bg-[#f0efeb]">
       <Reveal>
         <div className="inline-block bg-white rounded-[2rem] sm:rounded-[3rem] px-6 sm:px-12 md:px-20 py-6 md:py-10 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.25)] max-w-full">
           <h2
@@ -918,36 +909,35 @@ function Index() {
   const caseStudies = data.caseStudies || [];
 
   return (
-    <main
-      className="min-h-screen font-sans overflow-x-hidden"
-      style={{ backgroundColor: bg, color: ink }}
-    >
+    <div className="min-h-screen bg-white text-[#111111] font-sans overflow-x-hidden">
       <Nav />
-      <Hero />
-      <About />
-      <Skills />
-      <ExperienceAndEducation />
-      <Projects />
-      {caseStudies.map((cs: any) => (
-        <CaseStudy
-          key={cs.id}
-          id={cs.id}
-          title={cs.title}
-          client={cs.client}
-          industry={cs.industry}
-          location={cs.location}
-          platforms={cs.platforms}
-          goal={cs.goal}
-          approach={cs.approach}
-          stats={cs.stats}
-          color={cs.color}
-          image={IMAGES[cs.image] || cs.image}
-        />
-      ))}
-      <Contact />
-      <footer className="text-center py-8 text-xs text-neutral-500">
-        © {data.hero.year || "2026"} {data.hero.name || "Riddhi Mhatre"}
-      </footer>
-    </main>
+      <main className="bg-[#f0efeb] rounded-t-[2.5rem] md:rounded-t-[3.5rem] overflow-hidden animate-fade-in">
+        <Hero />
+        <About />
+        <Skills />
+        <ExperienceAndEducation />
+        <Projects />
+        {caseStudies.map((cs: any) => (
+          <CaseStudy
+            key={cs.id}
+            id={cs.id}
+            title={cs.title}
+            client={cs.client}
+            industry={cs.industry}
+            location={cs.location}
+            platforms={cs.platforms}
+            goal={cs.goal}
+            approach={cs.approach}
+            stats={cs.stats}
+            color={cs.color}
+            image={IMAGES[cs.image] || cs.image}
+          />
+        ))}
+        <Contact />
+        <footer className="text-center py-8 text-xs text-neutral-500 bg-[#f0efeb]">
+          © {data.hero.year || "2026"} {data.hero.name || "Riddhi Mhatre"}
+        </footer>
+      </main>
+    </div>
   );
 }
