@@ -6,6 +6,7 @@
   --font-display: "Archivo Black", "Anton", system-ui, sans-serif;
   --font-script: "Great Vibes", "Allura", cursive;
   --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 @custom-variant dark (&:is(.dark *));
@@ -139,6 +140,10 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   * {
     border-color: var(--color-border);
   }
@@ -146,5 +151,20 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+  }
+
+  /* Custom Premium Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f0efeb;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #c7c6c1;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #888782;
   }
 }

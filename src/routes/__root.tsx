@@ -7,10 +7,9 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
   return (
@@ -37,9 +36,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -77,26 +73,44 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Portfolio — Maryna Kovalchuk" },
-      { name: "description", content: "Portfolio of Maryna Kovalchuk — social media management, content creation and brand storytelling." },
-      { name: "author", content: "Maryna Kovalchuk" },
-      { property: "og:title", content: "Portfolio — Maryna Kovalchuk" },
-      { property: "og:description", content: "Portfolio of Maryna Kovalchuk — social media management, content creation and brand storytelling." },
+      { title: "Portfolio — Riddhi Girish Mhatre" },
+      {
+        name: "description",
+        content:
+          "Portfolio of Riddhi Girish Mhatre — seeking an entry-level role in SQL, Web Development, Java, or Manual Testing.",
+      },
+      { name: "author", content: "Riddhi Girish Mhatre" },
+      { property: "og:title", content: "Portfolio — Riddhi Girish Mhatre" },
+      {
+        property: "og:description",
+        content:
+          "Portfolio of Riddhi Girish Mhatre — seeking an entry-level role in SQL, Web Development, Java, or Manual Testing.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Portfolio — Maryna Kovalchuk" },
-      { name: "twitter:description", content: "Portfolio of Maryna Kovalchuk — social media management, content creation and brand storytelling." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/18a1423a-eddb-416a-b562-8cc839c678f2" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/18a1423a-eddb-416a-b562-8cc839c678f2" },
+      { name: "twitter:title", content: "Portfolio — Riddhi Girish Mhatre" },
+      {
+        name: "twitter:description",
+        content:
+          "Portfolio of Riddhi Girish Mhatre — seeking an entry-level role in SQL, Web Development, Java, or Manual Testing.",
+      },
+      {
+        property: "og:image",
+        content: "/favicon.svg",
+      },
+      {
+        name: "twitter:image",
+        content: "/favicon.svg",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap",
       },
     ],
   }),
