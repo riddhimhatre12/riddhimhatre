@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import portrait from "@/assets/portrait.jpg";
-import portraitCutout from "@/assets/portrait_riddhi_cutout.png";
+import portraitCutout from "@/assets/sticker.png";
 import exercoachgym from "@/assets/exercoachgym.png";
 import meterReading from "@/assets/meter_reading.png";
 import ecommerce from "@/assets/ecommerce.png";
@@ -221,9 +221,9 @@ function About() {
     <section id="about" className="px-6 md:px-16 py-24 bg-inherit">
       <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center max-w-6xl mx-auto">
         <div className="w-full relative">
-          <div className="relative aspect-square max-w-md mx-auto flex items-end justify-center overflow-visible">
-            {/* Soft White Circle Backdrop - solid white as in the screenshot */}
-            <div className="absolute left-1/2 bottom-0 -translate-x-1/2 w-[88%] h-[88%] rounded-full bg-white shadow-sm" />
+          <div className="relative aspect-square max-w-lg md:max-w-xl mx-auto flex items-end justify-center md:-ml-8 lg:-ml-12">
+            {/* Light Grey Circle Backdrop */}
+            <div className="absolute left-1/2 bottom-0 -translate-x-1/2 w-full h-full rounded-full bg-[#f4f5f5]" />
             {/* Transparent Cutout Portrait with Slide-in from Left Animation */}
             <motion.img
               initial={{ x: -150, opacity: 0 }}
@@ -232,7 +232,7 @@ function About() {
               transition={{ duration: 1.1, ease: [0.25, 1, 0.5, 1] }}
               src={IMAGES[about.portraitCutout] || about.portraitCutout || portraitCutout}
               alt="Riddhi Mhatre portrait"
-              className="relative z-10 w-[95%] h-auto object-cover select-none pointer-events-none origin-bottom"
+              className="relative z-10 max-h-[200%] max-w-[200%] w-auto object-contain select-none pointer-events-none origin-bottom object-bottom scale-110 md:scale-125"
               width={768}
               height={768}
               loading="lazy"
@@ -260,10 +260,10 @@ function About() {
             ))}
           </div>
 
-          <Reveal delay={0.5} className="mt-8 pt-6 border-t border-black/5">
-            <div className="grid md:grid-cols-2 gap-6 items-end">
+          <Reveal delay={0.5} className="mt-8 pt-4">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
               <div className="space-y-3">
-                <p className="font-display text-lg tracking-wider text-black uppercase font-bold">
+                <p className="font-display text-xl tracking-tighter text-black uppercase font-bold">
                   LET'S CONNECT!
                 </p>
                 
@@ -272,7 +272,7 @@ function About() {
                     <MailIcon className="w-5 h-5 flex-shrink-0" />
                     <a
                       href={`mailto:${contact.email}`}
-                      className="text-base md:text-lg font-medium hover:text-neutral-500 transition-colors break-all sm:break-normal"
+                      className="text-[15px] md:text-base font-medium hover:text-neutral-500 transition-colors break-all sm:break-normal"
                     >
                       {contact.email}
                     </a>
@@ -284,7 +284,7 @@ function About() {
                     <PhoneIcon className="w-5 h-5 flex-shrink-0" />
                     <a
                       href={`tel:${contact.phone}`}
-                      className="text-base md:text-lg font-medium hover:text-neutral-500 transition-colors"
+                      className="text-[15px] md:text-base font-medium hover:text-neutral-500 transition-colors"
                     >
                       {contact.phone}
                     </a>
@@ -292,7 +292,7 @@ function About() {
                 )}
               </div>
 
-              <div className="flex items-center justify-start md:justify-end gap-3.5 pt-4 md:pt-0">
+              <div className="flex items-center justify-start sm:justify-end gap-3.5 pt-4 sm:pt-0">
                 {contact.tiktok && (
                   <a
                     href={contact.tiktok}
@@ -513,74 +513,159 @@ function LinkedInIcon() {
   );
 }
 
+function AwardIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="w-10 h-10 flex-shrink-0 text-black"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.25"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12" />
+      <path d="M12 15a7 7 0 1 0 0-14 7 7 0 0 0 0 14z" />
+      <polygon points="12 4.5 13.2 7 16 7.2 14 9 14.5 11.5 12 10.2 9.5 11.5 10 9 8 7.2 10.8 7" />
+    </svg>
+  );
+}
+
 function Skills() {
   const data = Route.useLoaderData();
-  const skillsList = data.skills || [];
 
-  const ICONS: Record<string, React.ReactNode> = {
-    CodeIcon: <CodeIcon />,
-    ServerIcon: <ServerIcon />,
-    DatabaseIcon: <DatabaseIcon />,
-    WrenchIcon: <WrenchIcon />,
-    ErpIcon: <ErpIcon />,
-  };
+  const certs = [
+    {
+      title: "Manual Testing Certification",
+      provider: "QSpiders",
+      status: "Completed",
+    },
+    {
+      title: "Data Analytics Internship",
+      provider: "BizTech IT",
+      status: "Completed",
+    },
+    {
+      title: "BSc in Information Technology",
+      provider: "Mumbai University",
+      status: "Graduated",
+    },
+  ];
+
+  const tools = [
+    {
+      name: "HTML5",
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="currentColor">
+          <path d="M1.5 0h21l-1.91 21.563L12 24l-8.59-2.437L1.5 0zm10.5 4.5v15h.007l5.63-1.562.61-6.938H12V9.375h6.375l.18-2.125H12V4.5z" fill="#E34F26"/>
+        </svg>
+      )
+    },
+    {
+      name: "CSS3",
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="currentColor">
+          <path d="M1.5 0h21l-1.91 21.563L12 24l-8.59-2.437L1.5 0zm10.5 4.5v2.75h4.125l-.18 2.125H12v2.75h3.765l-.36 4.125-3.405.938V24l5.63-1.562.61-6.938h.185l.18-2.125h-.365l.18-2.125H18.75V4.5H12z" fill="#1572B6"/>
+        </svg>
+      )
+    },
+    {
+      name: "JavaScript",
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="currentColor">
+          <path d="M0 0h24v24H0V0zm20.008 15.65c-.15-.65-.6-1.15-1.5-1.5-1.05-.35-1.75-.5-2.65-.5-.9 0-1.55.25-1.55.9 0 .65.55.85 1.55 1.2.95.35 2 .75 2.75 1.35.85.65 1.15 1.45 1.15 2.4 0 1.95-1.55 3.15-3.85 3.15-2.05 0-3.35-.95-3.8-2.2l1.65-1c.25.55.6.85 1.25.95s1.25-.15 1.25-.75c0-.4-.25-.65-.95-.9-.65-.25-1.7-.6-2.45-.95-.75-.4-1.15-1.1-1.15-2 0-1.85 1.45-3 3.4-3 1.75 0 2.95.85 3.4 1.95l-1.65 1.05zM9.54 13h1.9v8.4h-.25c-1.35 0-2.3-.3-2.85-.95-.55-.65-.7-1.75-.7-3.15V13z" fill="#F7DF1E"/>
+        </svg>
+      )
+    },
+    {
+      name: "Java",
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="currentColor">
+          <path d="M9.08 19.38c-1.62-.24-3-.61-3-.61v-.1s1.39-.12 2.87.16c1.62.3 3.3.43 4.88.24 1.16-.14 1.83-.55 1.83-1.07 0-.76-1.37-1.13-2.62-1.34-2.13-.37-4.9-.3-7.1-.98-1.52-.46-2.52-1.37-2.52-2.5 0-1.4 1.37-2.62 4.14-3.41 2.38-.67 5.61-.79 8.29-.46 2.38.3 4.39 1 4.39 2.07 0 1.28-2.19 1.77-3.84 2-1.49.21-3 .24-4.51.15-1.83-.09-3.72-.24-5.55.06-1.1.18-1.68.61-1.68 1 0 .61 1 1 2.47 1.25 2 .37 4.54.34 6.74.67 1.77.27 3 .85 3 2.07 0 1.71-2.22 2.75-5.91 3.05a18.8 18.8 0 0 1-5.16.03zM12 0s.5 2.5-1.5 4.5S9 9 11 11s2.5-1.5 2-3.5S11.5 4 12 0z" fill="#007396"/>
+        </svg>
+      )
+    },
+    {
+      name: "SQL DB",
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="currentColor">
+          <path d="M12 0C5.373 0 0 1.79 0 4v3.5c0 2.21 5.373 4 12 4s12-1.79 12-4V4c0-2.21-5.373-4-12-4zm0 13.5c-6.627 0-12-1.79-12-4V13c0 2.21 5.373 4 12 4s12-1.79 12-4v-3.5c0 2.21-5.373 4-12 4zm0 6.5c-6.627 0-12-1.79-12-4V20c0 2.21 5.373 4 12 4s12-1.79 12-4v-3.5c0 2.21-5.373 4-12 4z" fill="#4479A1"/>
+        </svg>
+      )
+    },
+    {
+      name: "Git",
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="currentColor">
+          <path d="M23.384 11.233L12.767.616a1.085 1.085 0 0 0-1.536 0L9.424 2.424l3.193 3.193a2.637 2.637 0 0 1 3.111 3.111l3.193 3.193a2.637 2.637 0 0 1 .15 3.228l3.193 3.193a1.085 1.085 0 0 0 1.318-1.748zM12.55 12.55a2.637 2.637 0 1 1-3.729-3.729 2.637 2.637 0 0 1 3.729 3.729zM1.085 12.767l10.617 10.617a1.085 1.085 0 0 0 1.536 0l2.617-2.617-3.193-3.193a2.637 2.637 0 0 1-3.111-3.111L6.36 11.27a2.637 2.637 0 0 1-.15-3.228L1.085 11.233a1.085 1.085 0 0 0 0 1.534z" fill="#F05032"/>
+        </svg>
+      )
+    },
+    {
+      name: "GitHub",
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="currentColor">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" fill="#181717"/>
+        </svg>
+      )
+    },
+    {
+      name: "MS Excel",
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="currentColor">
+          <path d="M23 1.5H8.5A1.5 1.5 0 0 0 7 3v3.5H3.5A1.5 1.5 0 0 0 2 8v8a1.5 1.5 0 0 0 1.5 1.5H7V21a1.5 1.5 0 0 0 1.5 1.5H23a1.5 1.5 0 0 0 1.5-1.5V3a1.5 1.5 0 0 0-1.5-1.5zm-1.5 18H8.5V4.5h13v15zM4 14.5l2.25-3L4 8.5h2l1.25 1.75L8.5 8.5h2l-2.25 3 2.25 3h-2L7.25 12.75 6 14.5H4z" fill="#107C41"/>
+        </svg>
+      )
+    },
+    {
+      name: "Postman",
+      icon: (
+        <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="currentColor">
+          <path d="M22.75 11.25a.75.75 0 0 0-.75.75c0 5.25-4.25 9.5-9.5 9.5S3 17.25 3 12s4.25-9.5 9.5-9.5c1.83 0 3.56.51 5.06 1.41a.75.75 0 1 0 .78-1.28A10.932 10.932 0 0 0 12.5 1C6.15 1 1 6.15 1 12.5S6.15 24 12.5 24 24 18.85 24 12.5a.75.75 0 0 0-.75-.75z" fill="#FF6C37"/>
+          <circle cx="15.5" cy="8.5" r="4.5" fill="#FF6C37"/>
+        </svg>
+      )
+    }
+  ];
 
   return (
-    <section id="skills" className="px-6 md:px-16 py-24 md:py-32 bg-inherit">
+    <section id="skills" className="px-6 md:px-16 py-24 md:py-32 bg-white">
       <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-12 gap-8 items-end mb-16">
-          <div className="md:col-span-8">
-            <Reveal>
-              <h2 className="font-serif text-4xl md:text-6xl tracking-tight leading-[1.1] text-neutral-900">
-                {data.skillsTitle || "A toolkit for building reliable software."}
-              </h2>
-            </Reveal>
-          </div>
-          <div className="md:col-span-4">
-            <Reveal delay={0.15}>
-              <p className="text-neutral-500 text-sm md:text-base leading-relaxed">
-                {data.skillsSubtitle || "Foundation in web technology, SQL databases, Java programming, and manual testing methodologies."}
-              </p>
-            </Reveal>
-          </div>
-        </div>
+        <Reveal>
+          <h2 className="font-display text-5xl md:text-7xl tracking-tight mb-20 text-black font-extrabold leading-none">
+            SKILLS &<br />CERTIFICATES
+          </h2>
+        </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-6 md:gap-8">
-          {skillsList.map((group: any, i: number) => (
-            <Reveal key={group.title} delay={i * 0.1} className={group.span}>
-              <motion.div
-                whileHover={{ y: -8, scale: 1.015 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="bg-white rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.03)] border border-black/5 flex flex-col justify-between h-full hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-shadow duration-300"
-              >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <div className="w-12 h-12 rounded-full bg-neutral-950 flex items-center justify-center shadow-md">
-                      {ICONS[group.icon] || <CodeIcon />}
-                    </div>
-                    <span className="font-sans text-neutral-400 text-sm font-semibold tracking-wider">
-                      {group.num}
-                    </span>
-                  </div>
-                  <h3 className="font-serif text-3xl font-semibold mt-8 mb-6 text-neutral-900">
-                    {group.title}
-                  </h3>
+        <div className="grid md:grid-cols-12 gap-12 md:gap-16 items-start">
+          {/* Left Column: Certifications */}
+          <div className="md:col-span-6 space-y-10 md:space-y-12">
+            {certs.map((cert, i) => (
+              <Reveal key={cert.title} delay={i * 0.1}>
+                <div className="flex gap-4 items-center">
+                  <AwardIcon />
+                  <h4 className="font-sans text-[15px] md:text-[17px] leading-snug">
+                    <span className="font-black uppercase text-black tracking-tight">{cert.title}</span>
+                    <span className="font-medium text-black ml-1.5 whitespace-nowrap">by {cert.provider}</span>
+                  </h4>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {(group.skills || []).map((skill: string) => (
-                    <motion.span
-                      key={skill}
-                      whileHover={{ scale: 1.08 }}
-                      transition={{ type: "spring", stiffness: 450, damping: 15 }}
-                      className="bg-neutral-50 hover:bg-neutral-100 hover:text-black cursor-default transition-colors text-neutral-800 rounded-full px-4 py-2 text-sm border border-neutral-200/60 font-sans font-medium"
-                    >
-                      {skill}
-                    </motion.span>
-                  ))}
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Right Column: Tools Grid */}
+          <div className="md:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4 mt-10 md:mt-0">
+            {tools.map((tool, i) => (
+              <Reveal key={tool.name} delay={i * 0.05}>
+                <div className="bg-[#f4f5f5] hover:bg-[#ebebeb] hover:scale-[1.02] transition-all py-5 px-3 rounded-2xl flex items-center justify-center gap-2.5 cursor-default select-none">
+                  {tool.icon}
+                  <span className="font-sans font-semibold text-[15px] text-neutral-900 leading-none">
+                    {tool.name}
+                  </span>
                 </div>
-              </motion.div>
-            </Reveal>
-          ))}
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>
