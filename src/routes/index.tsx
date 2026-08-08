@@ -3,10 +3,16 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import portrait from "@/assets/portrait.jpg";
-import portraitCutout from "@/assets/sticker.png";
+import portraitCutout from "@/assets/portrait_clean.jpg";
+import awardBadge from "@/assets/award_badge.png";
 import exercoachgym from "@/assets/exercoachgym.png";
 import meterReading from "@/assets/meter_reading.png";
 import ecommerce from "@/assets/ecommerce.png";
+import dashboard from "@/assets/dashboard.png";
+import totebagCampaign from "@/assets/totebag_campaign.png";
+import unlimitedPhone from "@/assets/unlimited_phone.png";
+import unlimitedScreenFlat from "@/assets/unlimited_screen_flat.png";
+import exercoachMobile from "@/assets/exercoach_mobile.png";
 import { getPortfolioData } from "@/lib/portfolio";
 
 export const Route = createFileRoute("/")({
@@ -22,6 +28,7 @@ const IMAGES: Record<string, string> = {
   exercoachgym,
   meterReading,
   ecommerce,
+  dashboard,
 };
 
 function Reveal({
@@ -222,8 +229,6 @@ function About() {
       <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center max-w-6xl mx-auto">
         <div className="w-full relative">
           <div className="relative aspect-square max-w-lg md:max-w-xl mx-auto flex items-end justify-center md:-ml-8 lg:-ml-12">
-            {/* Light Grey Circle Backdrop */}
-            <div className="absolute left-1/2 bottom-0 -translate-x-1/2 w-full h-full rounded-full bg-[#f4f5f5]" />
             {/* Transparent Cutout Portrait with Slide-in from Left Animation */}
             <motion.img
               initial={{ x: -150, opacity: 0 }}
@@ -232,7 +237,7 @@ function About() {
               transition={{ duration: 1.1, ease: [0.25, 1, 0.5, 1] }}
               src={IMAGES[about.portraitCutout] || about.portraitCutout || portraitCutout}
               alt="Riddhi Mhatre portrait"
-              className="relative z-10 max-h-[200%] max-w-[200%] w-auto object-contain select-none pointer-events-none origin-bottom object-bottom scale-110 md:scale-125"
+              className="relative z-10 max-h-[125%] max-w-[125%] w-auto object-contain select-none pointer-events-none origin-bottom object-bottom mix-blend-darken"
               width={768}
               height={768}
               loading="lazy"
@@ -251,7 +256,7 @@ function About() {
               {about.subtitle || "Hi there, I'm Riddhi!"}
             </p>
           </Reveal>
-          
+
           <div className="space-y-4 text-base md:text-lg leading-relaxed text-neutral-700 font-sans">
             {(about.bioParagraphs || []).map((p: string, idx: number) => (
               <Reveal key={idx} delay={0.3 + idx * 0.1}>
@@ -266,7 +271,7 @@ function About() {
                 <p className="font-display text-xl tracking-tighter text-black uppercase font-bold">
                   LET'S CONNECT!
                 </p>
-                
+
                 {contact.email && (
                   <div className="flex items-center gap-3 text-neutral-800 transition-colors">
                     <MailIcon className="w-5 h-5 flex-shrink-0" />
@@ -278,7 +283,7 @@ function About() {
                     </a>
                   </div>
                 )}
-                
+
                 {contact.phone && (
                   <div className="flex items-center gap-3 text-neutral-800 transition-colors">
                     <PhoneIcon className="w-5 h-5 flex-shrink-0" />
@@ -293,15 +298,15 @@ function About() {
               </div>
 
               <div className="flex items-center justify-start sm:justify-end gap-3.5 pt-4 sm:pt-0">
-                {contact.tiktok && (
+                {contact.github && (
                   <a
-                    href={contact.tiktok}
+                    href={contact.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="TikTok"
+                    aria-label="GitHub"
                     className="hover:opacity-75 transition-opacity"
                   >
-                    <TikTokIcon />
+                    <GithubIcon />
                   </a>
                 )}
                 {contact.instagram && (
@@ -462,7 +467,7 @@ function PhoneIcon({ className }: { className?: string }) {
   );
 }
 
-function TikTokIcon() {
+function GithubIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -471,10 +476,18 @@ function TikTokIcon() {
     >
       <rect width="24" height="24" rx="6" fill="black" />
       <path
-        d="M16.5 9h-1.5v4.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5.67-1.5 1.5-1.5c.17 0 .33.03.48.08v-1.63c-.15-.03-.31-.05-.48-.05-1.93 0-3.5 1.57-3.5 3.5s1.57 3.5 3.5 3.5 3.5-1.57 3.5-3.5V11c.7.47 1.53.75 2.43.78v-1.78c-.78-.05-1.48-.48-1.93-1.1v-.9z"
+        d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
         fill="white"
-        transform="scale(0.85) translate(1.8, 1.8)"
+        transform="scale(0.75) translate(4, 4)"
       />
+    </svg>
+  );
+}
+
+function TikTokIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 1 1-5.2-1.74 2.89 2.89 0 0 1 2.31-2.83V7.65a6.34 6.34 0 0 0-5.11 6.22 6.34 6.34 0 0 0 10.85 4.48 6.33 6.33 0 0 0 1.86-4.48V8.88a8.18 8.18 0 0 0 4.71 1.49V6.9a4.85 4.85 0 0 1-2.2-.21z" />
     </svg>
   );
 }
@@ -515,19 +528,13 @@ function LinkedInIcon() {
 
 function AwardIcon() {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      className="w-10 h-10 flex-shrink-0 text-black"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.25"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12" />
-      <path d="M12 15a7 7 0 1 0 0-14 7 7 0 0 0 0 14z" />
-      <polygon points="12 4.5 13.2 7 16 7.2 14 9 14.5 11.5 12 10.2 9.5 11.5 10 9 8 7.2 10.8 7" />
-    </svg>
+    <div className="w-9 h-9 overflow-hidden relative flex-shrink-0">
+      <img
+        src={awardBadge}
+        alt="Award"
+        className="absolute top-0 left-[50%] -translate-x-1/2 w-[115%] h-[320%] max-w-none object-cover object-top mix-blend-darken"
+      />
+    </div>
   );
 }
 
@@ -535,11 +542,6 @@ function Skills() {
   const data = Route.useLoaderData();
 
   const certs = [
-    {
-      title: "Manual Testing Certification",
-      provider: "QSpiders",
-      status: "Completed",
-    },
     {
       title: "Data Analytics Internship",
       provider: "BizTech IT",
@@ -550,79 +552,78 @@ function Skills() {
       provider: "Mumbai University",
       status: "Graduated",
     },
+    {
+      title: "Manual Testing Certification",
+      provider: "QSpiders",
+      status: "Completed",
+    },
   ];
 
   const tools = [
     {
-      name: "HTML5",
+      name: "CSS3",
       icon: (
-        <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="currentColor">
-          <path d="M1.5 0h21l-1.91 21.563L12 24l-8.59-2.437L1.5 0zm10.5 4.5v15h.007l5.63-1.562.61-6.938H12V9.375h6.375l.18-2.125H12V4.5z" fill="#E34F26"/>
-        </svg>
+        <svg viewBox="0 0 128 128" className="w-9 h-9 flex-shrink-0"><path fill="#1572B6" d="M18.814 114.123L8.76 1.352h110.48l-10.064 112.754-45.243 12.543-45.119-12.526z" /><path fill="#33A9DC" d="M64.001 117.062l36.559-10.136 8.601-96.354h-45.16v106.49z" /><path fill="#fff" d="M64.001 51.429h18.302l1.264-14.163H64.001V23.435h34.682l-.332 3.711-3.4 38.114h-30.95V51.429z" /><path fill="#EBEBEB" d="M64.083 87.349l-.061.018-15.403-4.159-.985-11.031H33.752l1.937 21.717 28.331 7.863.063-.018v-14.39z" /><path fill="#fff" d="M81.127 64.675l-1.666 18.522-15.426 4.164v14.39l28.354-7.858.208-2.337 2.406-26.881H81.127z" /><path fill="#EBEBEB" d="M64.048 23.435v13.831H30.64l-.277-3.108-.63-7.012-.331-3.711h34.646zm-.047 27.996v13.831H48.792l-.277-3.108-.631-7.012-.33-3.711h16.447z" /></svg>
       )
     },
     {
-      name: "CSS3",
+      name: "HTML5",
       icon: (
-        <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="currentColor">
-          <path d="M1.5 0h21l-1.91 21.563L12 24l-8.59-2.437L1.5 0zm10.5 4.5v2.75h4.125l-.18 2.125H12v2.75h3.765l-.36 4.125-3.405.938V24l5.63-1.562.61-6.938h.185l.18-2.125h-.365l.18-2.125H18.75V4.5H12z" fill="#1572B6"/>
-        </svg>
+        <svg viewBox="0 0 128 128" className="w-9 h-9 flex-shrink-0"><path fill="#E44D26" d="M19.037 113.876L9.032 1.661h109.936l-10.016 112.198-45.019 12.48z" /><path fill="#F16529" d="M64 116.8l36.378-10.086 8.559-95.878H64z" /><path fill="#EBEBEB" d="M64 52.455H45.788L44.53 38.361H64V24.599H29.489l.33 3.692 3.382 37.927H64zm0 35.743l-.061.017-15.327-4.14-.979-10.975H33.816l1.928 21.609 28.193 7.826.063-.017z" /><path fill="#fff" d="M63.952 52.455v13.763h16.947l-1.597 17.849-15.35 4.143v14.319l28.215-7.82.207-2.325 3.234-36.233.335-3.696h-3.708zm0-27.856v13.762h33.244l.276-3.092.628-6.978.329-3.692z" /></svg>
       )
     },
     {
       name: "JavaScript",
       icon: (
-        <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="currentColor">
-          <path d="M0 0h24v24H0V0zm20.008 15.65c-.15-.65-.6-1.15-1.5-1.5-1.05-.35-1.75-.5-2.65-.5-.9 0-1.55.25-1.55.9 0 .65.55.85 1.55 1.2.95.35 2 .75 2.75 1.35.85.65 1.15 1.45 1.15 2.4 0 1.95-1.55 3.15-3.85 3.15-2.05 0-3.35-.95-3.8-2.2l1.65-1c.25.55.6.85 1.25.95s1.25-.15 1.25-.75c0-.4-.25-.65-.95-.9-.65-.25-1.7-.6-2.45-.95-.75-.4-1.15-1.1-1.15-2 0-1.85 1.45-3 3.4-3 1.75 0 2.95.85 3.4 1.95l-1.65 1.05zM9.54 13h1.9v8.4h-.25c-1.35 0-2.3-.3-2.85-.95-.55-.65-.7-1.75-.7-3.15V13z" fill="#F7DF1E"/>
-        </svg>
+        <svg viewBox="0 0 128 128" className="w-9 h-9 flex-shrink-0"><path fill="#F0DB4F" d="M1.408 1.408h125.184v125.185H1.408z" /><path fill="#323330" d="M116.347 96.736c-.917-5.711-4.641-10.508-15.672-14.981-3.832-1.761-8.104-3.022-9.377-5.926-.452-1.69-.512-2.642-.226-3.665.821-3.32 4.784-4.355 7.925-3.403 2.023.678 3.938 2.237 5.093 4.724 5.402-3.498 5.391-3.475 9.163-5.879-1.381-2.141-2.118-3.129-3.022-4.045-3.249-3.629-7.676-5.498-14.756-5.355l-3.688.477c-3.534.893-6.902 2.748-8.877 5.235-5.926 6.724-4.236 18.492 2.975 23.335 7.104 5.332 17.54 6.545 18.873 11.531 1.297 6.104-4.486 8.08-10.234 7.378-4.236-.881-6.592-3.034-9.139-6.949-4.688 2.713-4.688 2.713-9.508 5.485 1.143 2.499 2.344 3.63 4.26 5.795 9.068 9.198 31.76 8.746 35.83-5.176.165-.478 1.261-3.666.38-8.581zM69.462 58.943H57.753l-.048 30.272c0 6.438.333 12.34-.714 14.149-1.713 3.558-6.152 3.117-8.175 2.427-2.059-1.012-3.106-2.451-4.319-4.485-.333-.584-.583-1.036-.667-1.071l-9.52 5.83c1.583 3.249 3.915 6.069 6.902 7.901 4.462 2.678 10.459 3.499 16.731 2.059 4.082-1.189 7.604-3.652 9.448-7.401 2.666-4.915 2.094-10.864 2.07-17.444.06-10.735.001-21.468.001-32.237z" /></svg>
       )
     },
     {
       name: "Java",
       icon: (
-        <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="currentColor">
-          <path d="M9.08 19.38c-1.62-.24-3-.61-3-.61v-.1s1.39-.12 2.87.16c1.62.3 3.3.43 4.88.24 1.16-.14 1.83-.55 1.83-1.07 0-.76-1.37-1.13-2.62-1.34-2.13-.37-4.9-.3-7.1-.98-1.52-.46-2.52-1.37-2.52-2.5 0-1.4 1.37-2.62 4.14-3.41 2.38-.67 5.61-.79 8.29-.46 2.38.3 4.39 1 4.39 2.07 0 1.28-2.19 1.77-3.84 2-1.49.21-3 .24-4.51.15-1.83-.09-3.72-.24-5.55.06-1.1.18-1.68.61-1.68 1 0 .61 1 1 2.47 1.25 2 .37 4.54.34 6.74.67 1.77.27 3 .85 3 2.07 0 1.71-2.22 2.75-5.91 3.05a18.8 18.8 0 0 1-5.16.03zM12 0s.5 2.5-1.5 4.5S9 9 11 11s2.5-1.5 2-3.5S11.5 4 12 0z" fill="#007396"/>
-        </svg>
+        <svg viewBox="0 0 128 128" className="w-9 h-9 flex-shrink-0"><path fill="#0074BD" d="M47.617 98.12s-4.767 2.774 3.397 3.71c9.892 1.13 14.947.968 25.845-1.092 0 0 2.871 1.795 6.873 3.351-24.439 10.47-55.308-.607-36.115-5.969zm-2.988-13.665s-5.348 3.959 2.823 4.805c10.567 1.091 18.91 1.18 33.354-1.6 0 0 1.993 2.025 5.132 3.131-29.542 8.64-62.446.68-41.309-6.336z" /><path fill="#EA2D2E" d="M69.802 61.271c6.025 6.935-1.58 13.17-1.58 13.17s15.289-7.891 8.269-17.777c-6.559-9.215-11.587-13.792 15.635-29.58 0 .001-42.731 10.67-22.324 34.187z" /><path fill="#0074BD" d="M102.123 108.229s3.529 2.91-3.888 5.159c-14.102 4.272-58.706 5.56-71.094.171-4.451-1.938 3.899-4.625 6.526-5.192 2.739-.593 4.303-.485 4.303-.485-4.953-3.487-32.013 6.85-13.743 9.815 49.821 8.076 90.817-3.637 77.896-9.468zM49.912 70.294s-22.686 5.389-8.033 7.348c6.188.828 18.518.638 30.011-.326 9.39-.789 18.813-2.474 18.813-2.474s-3.308 1.419-5.704 3.053c-23.042 6.061-67.544 3.238-54.731-2.958 10.832-5.239 19.644-4.643 19.644-4.643zm40.697 22.747c23.421-12.167 12.591-23.86 5.032-22.285-1.848.385-2.677.72-2.677.72s.688-1.079 2-1.543c14.953-5.255 26.451 15.503-4.823 23.725 0-.002.359-.327.468-.617z" /><path fill="#EA2D2E" d="M76.491 1.587S89.459 14.563 64.188 34.51c-20.266 16.006-4.621 25.13-.007 35.559-11.831-10.673-20.509-20.07-14.688-28.815C58.041 28.42 81.722 22.195 76.491 1.587z" /><path fill="#0074BD" d="M52.214 126.021c22.476 1.437 57-.8 57.817-11.436 0 0-1.571 4.032-18.577 7.231-19.186 3.612-42.854 3.191-56.887.874 0 .001 2.875 2.381 17.647 3.331z" /></svg>
       )
     },
     {
       name: "SQL DB",
       icon: (
-        <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="currentColor">
-          <path d="M12 0C5.373 0 0 1.79 0 4v3.5c0 2.21 5.373 4 12 4s12-1.79 12-4V4c0-2.21-5.373-4-12-4zm0 13.5c-6.627 0-12-1.79-12-4V13c0 2.21 5.373 4 12 4s12-1.79 12-4v-3.5c0 2.21-5.373 4-12 4zm0 6.5c-6.627 0-12-1.79-12-4V20c0 2.21 5.373 4 12 4s12-1.79 12-4v-3.5c0 2.21-5.373 4-12 4z" fill="#4479A1"/>
+        <svg viewBox="0 0 24 24" className="w-9 h-9 flex-shrink-0" fill="currentColor">
+          <path d="M12 0C5.373 0 0 1.79 0 4v3.5c0 2.21 5.373 4 12 4s12-1.79 12-4V4c0-2.21-5.373-4-12-4zm0 13.5c-6.627 0-12-1.79-12-4V13c0 2.21 5.373 4 12 4s12-1.79 12-4v-3.5c0 2.21-5.373 4-12 4zm0 6.5c-6.627 0-12-1.79-12-4V20c0 2.21 5.373 4 12 4s12-1.79 12-4v-3.5c0 2.21-5.373 4-12 4z" fill="#4479A1" />
         </svg>
       )
     },
     {
-      name: "Git",
+      name: "Bootstrap",
       icon: (
-        <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="currentColor">
-          <path d="M23.384 11.233L12.767.616a1.085 1.085 0 0 0-1.536 0L9.424 2.424l3.193 3.193a2.637 2.637 0 0 1 3.111 3.111l3.193 3.193a2.637 2.637 0 0 1 .15 3.228l3.193 3.193a1.085 1.085 0 0 0 1.318-1.748zM12.55 12.55a2.637 2.637 0 1 1-3.729-3.729 2.637 2.637 0 0 1 3.729 3.729zM1.085 12.767l10.617 10.617a1.085 1.085 0 0 0 1.536 0l2.617-2.617-3.193-3.193a2.637 2.637 0 0 1-3.111-3.111L6.36 11.27a2.637 2.637 0 0 1-.15-3.228L1.085 11.233a1.085 1.085 0 0 0 0 1.534z" fill="#F05032"/>
+        <svg viewBox="0 0 16 16" className="w-9 h-9 flex-shrink-0">
+          <path fill="#7952B3" d="M2.5 14.14V1.86A.86.86 0 0 1 3.36 1h9.28a.86.86 0 0 1 .86.86v12.28a.86.86 0 0 1-.86.86H3.36a.86.86 0 0 1-.86-.86z" />
+          <path fill="#FFF" d="M4.96 11.2h3.36c1.65 0 2.65-.92 2.65-2.27 0-1.12-.73-1.84-1.74-2.02v-.07c.8-.18 1.4-.92 1.4-1.92 0-1.25-.96-2.11-2.48-2.11H4.96v8.39zm2.59-5.85h1.22c.86 0 1.25.43 1.25 1.11 0 .73-.41 1.12-1.2 1.12h-1.27v-2.23zm.1 4.93v-2.17h1.34c.95 0 1.39.46 1.39 1.16 0 .75-.46 1.15-1.32 1.15H7.65z" />
         </svg>
       )
     },
     {
       name: "GitHub",
       icon: (
-        <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="currentColor">
-          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" fill="#181717"/>
+        <svg viewBox="0 0 24 24" className="w-9 h-9 flex-shrink-0" fill="currentColor">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" fill="#181717" />
         </svg>
       )
     },
     {
       name: "MS Excel",
       icon: (
-        <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="currentColor">
-          <path d="M23 1.5H8.5A1.5 1.5 0 0 0 7 3v3.5H3.5A1.5 1.5 0 0 0 2 8v8a1.5 1.5 0 0 0 1.5 1.5H7V21a1.5 1.5 0 0 0 1.5 1.5H23a1.5 1.5 0 0 0 1.5-1.5V3a1.5 1.5 0 0 0-1.5-1.5zm-1.5 18H8.5V4.5h13v15zM4 14.5l2.25-3L4 8.5h2l1.25 1.75L8.5 8.5h2l-2.25 3 2.25 3h-2L7.25 12.75 6 14.5H4z" fill="#107C41"/>
+        <svg viewBox="0 0 32 32" className="w-9 h-9 flex-shrink-0">
+          <defs><linearGradient id="SVGSuUii0pt" x1="4.494" x2="13.832" y1="-2092.086" y2="-2075.914" gradientTransform="translate(0 2100)" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#18884f" /><stop offset=".5" stopColor="#117e43" /><stop offset="1" stopColor="#0b6631" /></linearGradient></defs><path fill="#185c37" d="M19.581 15.35L8.512 13.4v14.409A1.19 1.19 0 0 0 9.705 29h19.1A1.19 1.19 0 0 0 30 27.809V22.5Z" /><path fill="#21a366" d="M19.581 3H9.705a1.19 1.19 0 0 0-1.193 1.191V9.5L19.581 16l5.861 1.95L30 16V9.5Z" /><path fill="#107c41" d="M8.512 9.5h11.069V16H8.512Z" /><path d="M16.434 8.2H8.512v16.25h7.922a1.2 1.2 0 0 0 1.194-1.191V9.391A1.2 1.2 0 0 0 16.434 8.2" opacity=".1" /><path d="M15.783 8.85H8.512V25.1h7.271a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191" opacity=".2" /><path d="M15.783 8.85H8.512V23.8h7.271a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191" opacity=".2" /><path d="M15.132 8.85h-6.62V23.8h6.62a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191" opacity=".2" /><path fill="url(#SVGSuUii0pt)" d="M3.194 8.85h11.938a1.193 1.193 0 0 1 1.194 1.191v11.918a1.193 1.193 0 0 1-1.194 1.191H3.194A1.19 1.19 0 0 1 2 21.959V10.041A1.19 1.19 0 0 1 3.194 8.85" /><path fill="#fff" d="m5.7 19.873l2.511-3.884l-2.3-3.862h1.847L9.013 14.6c.116.234.2.408.238.524h.017q.123-.281.26-.546l1.342-2.447h1.7l-2.359 3.84l2.419 3.905h-1.809l-1.45-2.711A2.4 2.4 0 0 1 9.2 16.8h-.024a1.7 1.7 0 0 1-.168.351l-1.493 2.722Z" /><path fill="#33c481" d="M28.806 3h-9.225v6.5H30V4.191A1.19 1.19 0 0 0 28.806 3" /><path fill="#107c41" d="M19.581 16H30v6.5H19.581Z" />
         </svg>
       )
     },
     {
-      name: "Postman",
+      name: "Power BI",
       icon: (
-        <svg viewBox="0 0 24 24" className="w-7 h-7 flex-shrink-0" fill="currentColor">
-          <path d="M22.75 11.25a.75.75 0 0 0-.75.75c0 5.25-4.25 9.5-9.5 9.5S3 17.25 3 12s4.25-9.5 9.5-9.5c1.83 0 3.56.51 5.06 1.41a.75.75 0 1 0 .78-1.28A10.932 10.932 0 0 0 12.5 1C6.15 1 1 6.15 1 12.5S6.15 24 12.5 24 24 18.85 24 12.5a.75.75 0 0 0-.75-.75z" fill="#FF6C37"/>
-          <circle cx="15.5" cy="8.5" r="4.5" fill="#FF6C37"/>
+        <svg viewBox="0 0 24 24" className="w-9 h-9 flex-shrink-0">
+          <path d="M4 14h4v10H4z" fill="#E6AD10" />
+          <path d="M10 7h4v17h-4z" fill="#F2C811" />
+          <path d="M16 0h4v24h-4z" fill="#F9E589" />
         </svg>
       )
     }
@@ -642,11 +643,11 @@ function Skills() {
           <div className="md:col-span-6 space-y-10 md:space-y-12">
             {certs.map((cert, i) => (
               <Reveal key={cert.title} delay={i * 0.1}>
-                <div className="flex gap-4 items-center">
+                <div className="flex gap-5 items-center">
                   <AwardIcon />
-                  <h4 className="font-sans text-[15px] md:text-[17px] leading-snug">
-                    <span className="font-black uppercase text-black tracking-tight">{cert.title}</span>
-                    <span className="font-medium text-black ml-1.5 whitespace-nowrap">by {cert.provider}</span>
+                  <h4 className="font-sans flex flex-col gap-1">
+                    <span className="font-black uppercase text-black tracking-tight text-[22px] md:text-[26px] leading-tight">{cert.title}</span>
+                    <span className="font-medium text-neutral-600 text-[18px] md:text-[20px]">by {cert.provider}</span>
                   </h4>
                 </div>
               </Reveal>
@@ -654,12 +655,12 @@ function Skills() {
           </div>
 
           {/* Right Column: Tools Grid */}
-          <div className="md:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4 mt-10 md:mt-0">
+          <div className="md:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-5 md:gap-6 mt-10 md:mt-0">
             {tools.map((tool, i) => (
               <Reveal key={tool.name} delay={i * 0.05}>
-                <div className="bg-[#f4f5f5] hover:bg-[#ebebeb] hover:scale-[1.02] transition-all py-5 px-3 rounded-2xl flex items-center justify-center gap-2.5 cursor-default select-none">
+                <div className="bg-[#f4f5f5] hover:bg-[#ebebeb] hover:scale-[1.05] transition-all py-8 px-5 rounded-3xl flex items-center justify-center gap-4 cursor-default select-none shadow-sm min-h-[90px]">
                   {tool.icon}
-                  <span className="font-sans font-semibold text-[15px] text-neutral-900 leading-none">
+                  <span className="font-sans font-extrabold text-[19px] md:text-[21px] text-neutral-900 leading-none tracking-tight">
                     {tool.name}
                   </span>
                 </div>
@@ -675,20 +676,20 @@ function Skills() {
 function FolderIcon() {
   return (
     <svg
-      viewBox="0 0 220 160"
+      viewBox="0 0 240 180"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-auto"
+      className="w-full h-auto drop-shadow-sm"
     >
       {/* Back Flap */}
       <path
-        d="M20 20 h50 q10 0 15 15 h115 q10 0 10 10 v95 q0 10 -10 10 h-180 q-10 0 -10 -10 v-110 q0 -10 10 -10 z"
+        d="M 0 40 Q 0 20 20 20 H 70 Q 80 20 85 25 L 100 40 Q 105 45 115 45 H 220 Q 240 45 240 65 V 160 Q 240 180 220 180 H 20 Q 0 180 0 160 Z"
         fill="#dcdcdc"
       />
       {/* Front Flap */}
       <path
-        d="M20 45 h180 q10 0 10 10 v85 q0 10 -10 10 h-180 q-10 0 -10 -10 v-85 q0 -10 10 -10 z"
-        fill="#eeeeee"
+        d="M 0 75 Q 0 55 20 55 H 220 Q 240 55 240 75 V 160 Q 240 180 220 180 H 20 Q 0 180 0 160 Z"
+        fill="#f2f2f2"
       />
     </svg>
   );
@@ -731,11 +732,11 @@ function Projects() {
                 <motion.div
                   whileHover={{ y: -15, rotate: -3, scale: 1.04 }}
                   transition={{ type: "spring", stiffness: 220, damping: 14 }}
-                  className="max-w-[220px] mx-auto"
+                  className="max-w-[280px] mx-auto"
                 >
                   <FolderIcon />
                 </motion.div>
-                <p className="font-sans font-black tracking-tighter mt-5 text-base md:text-lg text-black transition-colors duration-300 group-hover:text-neutral-600">
+                <p className="font-sans font-black tracking-tighter mt-5 text-base md:text-lg text-black transition-colors duration-300 group-hover:text-neutral-600 uppercase">
                   {p.name}
                 </p>
               </a>
@@ -782,74 +783,96 @@ function CaseStudy({
   image?: string;
 }) {
   return (
-    <section id={id} className="px-6 md:px-16 py-24" style={{ backgroundColor: color || "#f0efeb" }}>
-      <div className="max-w-6xl mx-auto">
-        <Reveal>
-          <h3 className="font-display text-4xl md:text-6xl tracking-tight leading-[0.95]">
+    <section id={id} className="px-6 md:px-12 py-6 lg:py-8 flex flex-col justify-center border-t border-black/5" style={{ backgroundColor: color || "#f0efeb" }}>
+      <div className="max-w-7xl mx-auto w-full">
+        <Reveal className="text-center mb-6 lg:mb-8">
+          <h3 className="font-display font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight text-black uppercase leading-none">
             {title}
           </h3>
         </Reveal>
 
-        <div className="grid md:grid-cols-2 gap-12 mt-12">
-          <Reveal>
-            <div className="space-y-6 text-sm md:text-base leading-relaxed">
-              <div>
-                <p className="font-display tracking-wide mb-2">DETAILS:</p>
-                <p>
-                  <span className="font-semibold">Client:</span> {client}
-                </p>
-                <p>
-                  <span className="font-semibold">Industry:</span> {industry}
-                </p>
-                <p>
-                  <span className="font-semibold">Location:</span> {location}
-                </p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+          
+          {/* Left Column: DETAILS & GOAL */}
+          <div className="lg:col-span-4 flex flex-col gap-4 lg:gap-6">
+            <Reveal delay={0.1}>
+              <div className="bg-white p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5">
+                <h4 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-2">DETAILS:</h4>
+                <div className="space-y-1 text-xs sm:text-sm lg:text-base text-neutral-700 font-sans">
+                  <p><span className="font-semibold text-black">Client:</span> {client}</p>
+                  <p><span className="font-semibold text-black">Industry:</span> {industry}</p>
+                  <p><span className="font-semibold text-black">Location:</span> {location}</p>
+                  <p><span className="font-semibold text-black">Platforms:</span> {platforms}</p>
+                </div>
               </div>
-              <div>
-                <p className="font-display tracking-wide mb-2">PLATFORMS:</p>
-                <p>{platforms}</p>
-              </div>
-              <div>
-                <p className="font-display tracking-wide mb-2">GOAL:</p>
-                <p className="text-neutral-800">{goal}</p>
-              </div>
-              <div>
-                <p className="font-display tracking-wide mb-2">APPROACH:</p>
-                <p className="text-neutral-800">{approach}</p>
-              </div>
-            </div>
-          </Reveal>
+            </Reveal>
 
-          <Reveal delay={0.2}>
-            {image ? (
-              <div className="relative aspect-video md:aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-black/10">
-                <img src={image} alt={title} className="w-full h-full object-cover" />
+            <Reveal delay={0.2}>
+              <div className="bg-white p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5">
+                <h4 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-2">GOAL:</h4>
+                <p className="font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed">{goal}</p>
               </div>
-            ) : (
-              <div className="grid grid-cols-3 gap-3 max-w-md mx-auto">
-                {[...Array(9)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    whileHover={{ scale: 1.05, rotate: i % 2 ? 2 : -2 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    className="aspect-[9/16] rounded-lg bg-gradient-to-br from-neutral-800 to-neutral-600 shadow-lg"
-                    style={{
-                      transform: `rotate(${(i % 3) - 1}deg)`,
-                    }}
-                  />
-                ))}
-              </div>
-            )}
-          </Reveal>
-        </div>
-
-        <Reveal>
-          <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 border-t border-black/15 pt-10">
-            {stats.map((s) => (
-              <Stat key={s.l} n={s.n} l={s.l} />
-            ))}
+            </Reveal>
           </div>
-        </Reveal>
+
+          {/* Center Column: Broad Cream Laptop Screen Mockup */}
+          <div className="lg:col-span-4 flex flex-col items-center justify-center my-3 lg:my-0">
+            <Reveal delay={0.15} className="w-full flex flex-col items-center">
+              <div className="relative w-full max-w-[380px] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[520px] flex flex-col items-center group hover:scale-[1.02] transition-transform duration-500">
+                <div className="relative w-full bg-[#FAF8F5] p-2 sm:p-3 rounded-t-[1.4rem] lg:rounded-t-[1.8rem] shadow-[0_15px_40px_rgba(0,0,0,0.1)] border-[5px] lg:border-[6px] border-[#E8E3DA] z-10">
+                  <div className="flex justify-center mb-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#3a3a3a] ring-1 ring-black/10" />
+                  </div>
+                  <div className="relative overflow-hidden rounded-[0.8rem] lg:rounded-[1rem] bg-black border border-neutral-300/40 flex flex-col aspect-[16/9.5]">
+                    <div className="bg-[#F4F0E8] px-3 py-1 flex items-center justify-between text-[10px] text-neutral-600 font-mono border-b border-neutral-300/50">
+                      <div className="flex items-center gap-1">
+                        <span className="w-2 h-2 rounded-full bg-[#ff5f56]" />
+                        <span className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
+                        <span className="w-2 h-2 rounded-full bg-[#27c93f]" />
+                      </div>
+                      <span className="text-[9.5px] text-neutral-700 font-bold uppercase truncate max-w-[180px]">{title}</span>
+                      <div className="w-3" />
+                    </div>
+                    <div className="relative w-full flex-1 overflow-hidden">
+                      {image ? (
+                        <img src={image} alt={title} className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-neutral-800 to-neutral-600 flex items-center justify-center text-white text-xs font-mono">
+                          {title}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="w-[104%] h-3 lg:h-3.5 bg-gradient-to-b from-[#F2EEE7] via-[#E6E0D5] to-[#D8D2C4] rounded-b-xl border-t border-[#D0C9BB] shadow-xl relative z-20 flex justify-center items-start -mt-0.5">
+                  <div className="w-12 h-1 bg-[#C8C1B2] rounded-b-sm mt-0.5" />
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Right Column: APPROACH & STATS */}
+          <div className="lg:col-span-4 flex">
+            <Reveal delay={0.3} className="w-full flex">
+              <div className="bg-white p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5 w-full flex flex-col justify-center">
+                <h4 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-2">APPROACH:</h4>
+                <p className="font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed mb-4">{approach}</p>
+
+                {stats && stats.length > 0 && (
+                  <div className="border-t border-black/10 pt-3 grid grid-cols-3 gap-2 text-center">
+                    {stats.map((s) => (
+                      <div key={s.l}>
+                        <div className="font-display text-base sm:text-lg lg:text-xl font-bold text-black">{s.n}</div>
+                        <div className="text-[10px] sm:text-xs text-neutral-500 mt-0.5 leading-tight">{s.l}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </Reveal>
+          </div>
+
+        </div>
       </div>
     </section>
   );
@@ -861,47 +884,137 @@ function Contact() {
   const contact = about.contact;
 
   return (
-    <section id="contact" className="px-4 sm:px-6 md:px-16 py-24 md:py-32 text-center bg-[#f0efeb]">
+    <section id="contact" className="relative w-full py-10 md:py-16 min-h-screen flex flex-col justify-between items-center bg-[#f4f4f2] font-sans border-t border-black/5">
+      
+      {/* Top Social Icons Bar (TikTok, Instagram, LinkedIn) */}
       <Reveal>
-        <div className="inline-block bg-white rounded-[2rem] sm:rounded-[3rem] px-6 sm:px-12 md:px-20 py-6 md:py-10 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.25)] max-w-full">
-          <h2
-            className="font-display tracking-tight leading-none break-words"
-            style={{ fontSize: "clamp(2rem, 8vw, 6.5rem)" }}
+        <div className="flex items-center justify-center gap-3.5 md:gap-5 mt-2 mb-6 md:mb-8">
+          {/* TikTok Icon */}
+          <a 
+            href={contact.tiktok || "#"} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            aria-label="TikTok" 
+            className="bg-black text-white w-9 h-9 md:w-11 md:h-11 flex items-center justify-center rounded-full hover:scale-110 transition-transform shadow-sm"
           >
-            GET IN TOUCH!
-          </h2>
+            <TikTokIcon className="w-4 h-4 md:w-5 md:h-5" />
+          </a>
+
+          {/* Instagram Icon */}
+          <a 
+            href={contact.instagram || "#"} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            aria-label="Instagram" 
+            className="border-[2px] md:border-[2.5px] border-black text-black w-9 h-9 md:w-11 md:h-11 flex items-center justify-center rounded-xl hover:scale-110 transition-transform bg-transparent shadow-sm"
+          >
+            <svg viewBox="0 0 24 24" className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+            </svg>
+          </a>
+
+          {/* LinkedIn Icon */}
+          <a 
+            href={contact.linkedin || "#"} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            aria-label="LinkedIn" 
+            className="bg-black text-white w-9 h-9 md:w-11 md:h-11 flex items-center justify-center rounded-xl hover:scale-110 transition-transform shadow-sm"
+          >
+            <svg viewBox="0 0 24 24" className="w-4 h-4 md:w-5 md:h-5" fill="currentColor">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+            </svg>
+          </a>
         </div>
       </Reveal>
-      <Reveal delay={0.2}>
-        <div className="mt-10 flex flex-col items-center gap-3">
-          <div className="w-24 h-28 rounded-md overflow-hidden shadow-lg rotate-[-4deg]">
-            <img
-              src={IMAGES[about.portrait] || about.portrait || portrait}
-              alt="Riddhi"
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </div>
-          {contact.email && <p className="text-neutral-800">✉ {contact.email}</p>}
-          {contact.phone && <p className="text-neutral-800">📞 {contact.phone}</p>}
-          {contact.linkedin && (
-            <p className="text-neutral-800">
-              🔗{" "}
-              <a
-                href={contact.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:opacity-75"
+
+      {/* Main White Pill Banner + Polaroid Stack Container */}
+      <Reveal delay={0.1} className="w-full flex justify-center px-4 my-auto">
+        <div className="w-[98%] max-w-[1100px] relative">
+          
+          <div className="w-full flex justify-center items-center relative">
+            
+            {/* Main White Pill Banner */}
+            <div className="relative z-10 bg-white rounded-[100px] md:rounded-[140px] w-full py-10 sm:py-14 md:py-20 px-8 sm:px-16 md:px-24 flex items-center justify-center shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-gray-100/50">
+              <h2 
+                className="font-display font-black tracking-tighter leading-none text-[#1b1b1b] text-center w-full uppercase select-none"
+                style={{ fontSize: "clamp(26px, 6.4vw, 92px)", letterSpacing: "-0.03em" }}
               >
-                {contact.linkedin.replace("https://www.", "").replace("https://", "")}
+                GET IN TOUCH!
+              </h2>
+            </div>
+
+            {/* Polaroids Stack - Anchored to bottom-left curve of white pill */}
+            <div className="absolute -left-2 sm:left-2 md:left-4 -bottom-10 sm:-bottom-14 md:-bottom-20 z-20 pointer-events-none drop-shadow-2xl w-[150px] sm:w-[210px] md:w-[270px] lg:w-[310px]">
+              <div className="relative w-full aspect-[4/4.6]">
+                
+                {/* Back Polaroid Card */}
+                <div className="absolute inset-0 bg-[#fdfdfd] p-2.5 md:p-4 shadow-md border border-gray-200/80 transform rotate-[7deg] translate-x-3 translate-y-3 md:translate-x-6 md:translate-y-5 rounded-sm flex flex-col">
+                  <div className="w-full flex-1 bg-gray-200/90 border border-gray-200/60" />
+                  <div className="h-6 md:h-12 bg-[#fdfdfd]" />
+                </div>
+                
+                {/* Front Polaroid Card */}
+                <div className="absolute inset-0 bg-[#fdfdfd] p-2.5 md:p-4 shadow-2xl border border-gray-100 transform rotate-[-9deg] rounded-sm flex flex-col">
+                  
+                  {/* Metallic Paperclip (Top-Right Edge of Front Polaroid) */}
+                  <svg className="absolute -top-6 right-2 md:-top-10 md:right-5 z-30 w-10 h-14 md:w-16 md:h-24 text-gray-400/90 drop-shadow-md rotate-[14deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
+                  </svg>
+
+                  <div className="w-full flex-1 bg-gray-200 overflow-hidden relative border border-gray-200/80 shadow-inner">
+                    <img
+                      src={IMAGES[about.portrait] || about.portrait || portrait}
+                      alt="Riddhi Mhatre Portrait"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                  {/* Polaroid White Margin at Bottom */}
+                  <div className="h-6 md:h-12 bg-[#fdfdfd]" />
+                </div>
+
+              </div>
+            </div>
+            
+          </div>
+
+        </div>
+      </Reveal>
+
+      {/* Contact Info Details (Email & Phone) */}
+      <Reveal delay={0.2}>
+        <div className="mt-12 md:mt-16 flex flex-col items-center gap-2.5 md:gap-3 z-10 relative">
+          {contact.email && (
+            <div className="flex items-center gap-3">
+              <MailIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1b1b1b]" />
+              <a 
+                href={`mailto:${contact.email}`} 
+                className="font-sans text-[16px] md:text-[20px] font-medium text-[#1b1b1b] tracking-wide hover:opacity-75 transition-opacity"
+              >
+                {contact.email}
               </a>
-            </p>
+            </div>
+          )}
+          {contact.phone && (
+            <div className="flex items-center gap-3">
+              <PhoneIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1b1b1b]" />
+              <a 
+                href={`tel:${contact.phone}`} 
+                className="font-sans text-[16px] md:text-[20px] font-medium text-[#1b1b1b] tracking-wide hover:opacity-75 transition-opacity"
+              >
+                {contact.phone}
+              </a>
+            </div>
           )}
         </div>
       </Reveal>
-      <Reveal delay={0.4}>
-        <div className="mt-16 inline-block">
-          <span className="font-display text-sm tracking-widest border border-black rounded-full px-6 py-2">
+
+      {/* Bottom Year Badge (2026) */}
+      <Reveal delay={0.3}>
+        <div className="mt-8 md:mt-12 mb-2 z-10 relative">
+          <span className="px-8 py-1.5 md:px-11 md:py-2 rounded-full border-[2.5px] border-black font-sans font-bold text-sm md:text-[17px] text-black bg-transparent tracking-widest shadow-sm">
             {data.hero.year || "2026"}
           </span>
         </div>
@@ -916,40 +1029,56 @@ function ExperienceAndEducation() {
   const education = data.education || [];
 
   return (
-    <section id="experience" className="px-6 md:px-16 py-24 bg-white/40">
-      <div className="max-w-6xl mx-auto">
+    <section id="experience" className="px-6 md:px-16 py-12 md:py-16 min-h-screen flex flex-col justify-center bg-[#faf9f6]">
+      <div className="max-w-7xl mx-auto w-full">
         <Reveal>
-          <h2 className="font-serif text-5xl md:text-7xl tracking-tight text-center mb-20">
+          <h2 className="font-display text-4xl md:text-6xl tracking-tight text-center mb-10 text-black font-extrabold leading-none">
             {data.experienceTitle || "EXPERIENCE & EDUCATION"}
           </h2>
         </Reveal>
 
-        <div className="grid md:grid-cols-2 gap-16 md:gap-24">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16">
           {/* Experience Column */}
           <div>
             <Reveal>
-              <h3 className="font-display tracking-widest text-lg border-b border-black pb-3 mb-8">
+              <h3 className="font-display tracking-widest text-lg md:text-xl border-b-2 border-black/10 pb-3 mb-6 text-neutral-900 flex items-center gap-3">
+                <span className="w-2 h-2 bg-black rounded-full" />
                 {data.experienceSub || "EXPERIENCE & COURSES"}
               </h3>
             </Reveal>
 
-            <div className="space-y-12">
+            <div className="space-y-3">
               {experiences.map((exp: any, i: number) => (
                 <Reveal key={i} delay={0.1 * (i + 1)}>
-                  <div className={`relative pl-6 border-l-2 ${i === experiences.length - 1 ? 'border-l-transparent' : 'border-black/20'}`}>
-                    <div className={`absolute w-3 h-3 rounded-full ${i === experiences.length - 1 ? 'bg-neutral-400 -left-[5px]' : 'bg-black -left-[7px]'} top-1.5`} />
-                    <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wider ${exp.type.toLowerCase() === 'internship' ? 'bg-black text-white' : 'bg-neutral-200 text-neutral-800'}`}>
-                      {exp.type}
-                    </span>
-                    <h4 className="font-serif text-2xl font-bold mt-3">{exp.title}</h4>
-                    <p className="text-neutral-500 font-medium text-sm mt-1">
-                      {exp.company} {exp.period ? `| ${exp.period}` : ""}
-                    </p>
-                    {exp.description && (
-                      <p className="text-neutral-700 text-sm mt-3 leading-relaxed">
-                        {exp.description}
-                      </p>
+                  <div className="group relative pl-8 pb-5 last:pb-0">
+                    {/* Line */}
+                    {i !== experiences.length - 1 && (
+                      <div className="absolute left-[9px] top-6 bottom-[-12px] w-[2px] bg-neutral-200 group-hover:bg-neutral-300 transition-colors" />
                     )}
+                    {/* Dot */}
+                    <div className="absolute left-0 top-0.5 w-5 h-5 rounded-full border-[4px] border-[#faf9f6] bg-black shadow-sm" />
+
+                    {/* Card */}
+                    <div className="bg-white p-5 rounded-2xl shadow-[0_2px_15px_rgba(0,0,0,0.03)] border border-neutral-100 hover:shadow-[0_6px_25px_rgba(0,0,0,0.06)] transition-all duration-300 group-hover:-translate-y-0.5">
+                      <span className={`inline-block text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-widest ${exp.type?.toLowerCase() === 'internship' ? 'bg-[#111] text-white' : 'bg-neutral-100 text-neutral-700'}`}>
+                        {exp.type}
+                      </span>
+                      <h4 className="font-sans text-xl font-black mt-3 text-neutral-900 tracking-tight leading-tight">{exp.title}</h4>
+                      <p className="text-neutral-500 font-medium text-sm mt-1.5 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                        <span className="text-neutral-900 font-bold">{exp.company}</span>
+                        {exp.period && (
+                          <>
+                            <span className="hidden sm:inline text-neutral-300">•</span>
+                            <span>{exp.period}</span>
+                          </>
+                        )}
+                      </p>
+                      {exp.description && (
+                        <p className="text-neutral-600 text-sm mt-2.5 leading-relaxed">
+                          {exp.description}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </Reveal>
               ))}
@@ -959,25 +1088,41 @@ function ExperienceAndEducation() {
           {/* Education Column */}
           <div>
             <Reveal>
-              <h3 className="font-display tracking-widest text-lg border-b border-black pb-3 mb-8">
+              <h3 className="font-display tracking-widest text-lg md:text-xl border-b-2 border-black/10 pb-3 mb-6 text-neutral-900 flex items-center gap-3">
+                <span className="w-2 h-2 bg-black rounded-full" />
                 {data.educationSub || "EDUCATION"}
               </h3>
             </Reveal>
 
-            <div className="space-y-12">
+            <div className="space-y-3">
               {education.map((edu: any, i: number) => (
                 <Reveal key={i} delay={0.1 * (i + 1)}>
-                  <div className={`relative pl-6 border-l-2 ${i === education.length - 1 ? 'border-l-transparent' : 'border-black/20'}`}>
-                    <div className={`absolute w-3 h-3 rounded-full ${i === education.length - 1 ? 'bg-neutral-400 -left-[5px]' : 'bg-black -left-[7px]'} top-1.5`} />
-                    <h4 className="font-serif text-2xl font-bold">{edu.title}</h4>
-                    <p className="text-neutral-500 font-medium text-sm mt-1">
-                      {edu.school} {edu.period ? `| ${edu.period}` : ""}
-                    </p>
-                    {edu.description && (
-                      <p className="text-neutral-700 text-sm mt-2 leading-relaxed">
-                        {edu.description}
-                      </p>
+                  <div className="group relative pl-8 pb-5 last:pb-0">
+                    {/* Line */}
+                    {i !== education.length - 1 && (
+                      <div className="absolute left-[9px] top-6 bottom-[-12px] w-[2px] bg-neutral-200 group-hover:bg-neutral-300 transition-colors" />
                     )}
+                    {/* Dot */}
+                    <div className="absolute left-0 top-0.5 w-5 h-5 rounded-full border-[4px] border-[#faf9f6] bg-black shadow-sm" />
+
+                    {/* Card */}
+                    <div className="bg-white p-5 rounded-2xl shadow-[0_2px_15px_rgba(0,0,0,0.03)] border border-neutral-100 hover:shadow-[0_6px_25px_rgba(0,0,0,0.06)] transition-all duration-300 group-hover:-translate-y-0.5">
+                      <h4 className="font-sans text-xl font-black text-neutral-900 tracking-tight leading-tight">{edu.title}</h4>
+                      <p className="text-neutral-500 font-medium text-sm mt-1.5 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                        <span className="text-neutral-900 font-bold">{edu.school}</span>
+                        {edu.period && (
+                          <>
+                            <span className="hidden sm:inline text-neutral-300">•</span>
+                            <span>{edu.period}</span>
+                          </>
+                        )}
+                      </p>
+                      {edu.description && (
+                        <p className="text-neutral-600 text-sm mt-2.5 leading-relaxed">
+                          {edu.description}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </Reveal>
               ))}
@@ -989,19 +1134,378 @@ function ExperienceAndEducation() {
   );
 }
 
+
+
+function ExerCoachProject() {
+  return (
+    <section id="exercoach-showcase" className="px-6 md:px-12 py-6 lg:py-8 bg-[#f5f4f0] font-sans border-t border-black/5 flex flex-col justify-center">
+      <div className="max-w-7xl mx-auto w-full">
+        
+        {/* Title & Subtitle */}
+        <Reveal className="text-center mb-6 lg:mb-8">
+          <h2 className="font-display font-black tracking-tight text-3xl sm:text-4xl lg:text-5xl text-[#111111] uppercase leading-none">
+            EXERCOACH GYM
+          </h2>
+          <p className="font-script text-xl sm:text-2xl lg:text-3xl text-neutral-800 mt-1 italic">
+            (freelance live project)
+          </p>
+        </Reveal>
+
+        {/* 3-Column Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+          
+          {/* Left Column (OBJECTIVE + DETAILS) */}
+          <div className="lg:col-span-4 flex flex-col gap-4 lg:gap-6">
+            
+            {/* OBJECTIVE Card */}
+            <Reveal delay={0.1}>
+              <div className="bg-white p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5">
+                <h3 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-2">
+                  OBJECTIVE:
+                </h3>
+                <p className="font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed">
+                  Develop a high-impact, modern, and fully responsive website to establish the gym's online presence, showcase training programs, and drive membership registrations.
+                </p>
+              </div>
+            </Reveal>
+
+            {/* DETAILS Card */}
+            <Reveal delay={0.2}>
+              <div className="bg-white p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5">
+                <h3 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-2">
+                  DETAILS:
+                </h3>
+                <p className="font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed">
+                  Designed and developed the live website <span className="font-semibold text-black">exercoachgym.com</span> from scratch as a freelance developer. Structured class directories, contact integrations, and coach rosters with a performance-first approach.
+                </p>
+              </div>
+            </Reveal>
+
+          </div>
+
+          {/* Center Column (Broad Classic White/Cream Laptop Mockup) */}
+          <div className="lg:col-span-4 flex flex-col items-center justify-center my-3 lg:my-0">
+            <Reveal delay={0.15} className="w-full flex flex-col items-center">
+              
+              {/* Broad Laptop Outer Group */}
+              <div className="relative w-full max-w-[380px] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[520px] flex flex-col items-center group hover:scale-[1.02] transition-transform duration-500">
+                
+                {/* Cream/White Laptop Screen Frame */}
+                <div className="relative w-full bg-[#FAF8F5] p-2 sm:p-3 rounded-t-[1.4rem] lg:rounded-t-[1.8rem] shadow-[0_15px_40px_rgba(0,0,0,0.1)] border-[5px] lg:border-[6px] border-[#E8E3DA] z-10">
+                  
+                  {/* Top Webcam Dot */}
+                  <div className="flex justify-center mb-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#3a3a3a] ring-1 ring-black/10" />
+                  </div>
+
+                  {/* Inner Screen Display */}
+                  <div className="relative overflow-hidden rounded-[0.8rem] lg:rounded-[1rem] bg-black border border-neutral-300/40 flex flex-col aspect-[16/9.5]">
+                    
+                    {/* Cream Browser Navigation Bar */}
+                    <div className="bg-[#F4F0E8] px-3 py-1 flex items-center justify-between text-[10px] text-neutral-600 font-mono border-b border-neutral-300/50">
+                      <div className="flex items-center gap-1">
+                        <span className="w-2 h-2 rounded-full bg-[#ff5f56]" />
+                        <span className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
+                        <span className="w-2 h-2 rounded-full bg-[#27c93f]" />
+                      </div>
+                      <div className="flex items-center gap-1 bg-[#FAF8F5] px-2.5 py-0.5 rounded-md text-[9.5px] text-neutral-700 border border-neutral-300/50 shadow-inner">
+                        <svg className="w-2 h-2 text-emerald-600" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+                        </svg>
+                        exercoachgym.com
+                      </div>
+                      <div className="w-3" />
+                    </div>
+
+                    {/* ExerCoach Website Screen Image */}
+                    <div className="relative w-full flex-1 overflow-hidden">
+                      <img
+                        src={exercoachgym}
+                        alt="ExerCoach Gym Live Website on Cream Laptop"
+                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                      />
+                      {/* Subtle Screen Reflection */}
+                      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none" />
+                    </div>
+
+                  </div>
+
+                </div>
+
+                {/* Laptop Hinge & Base Lip */}
+                <div className="w-[104%] h-3 lg:h-3.5 bg-gradient-to-b from-[#F2EEE7] via-[#E6E0D5] to-[#D8D2C4] rounded-b-xl border-t border-[#D0C9BB] shadow-xl relative z-20 flex justify-center items-start -mt-0.5">
+                  <div className="w-12 h-1 bg-[#C8C1B2] rounded-b-sm mt-0.5" />
+                </div>
+
+              </div>
+
+              {/* Live Status Badge Below Laptop */}
+              <a 
+                href="https://exercoachgym.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="mt-3.5 inline-flex items-center gap-2 bg-black text-white font-mono text-[11px] lg:text-xs px-3.5 py-1.5 rounded-full hover:bg-neutral-800 transition-colors shadow-md border border-white/10 group"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>LIVE • exercoachgym.com</span>
+                <svg className="w-3 h-3 opacity-60 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+
+            </Reveal>
+          </div>
+
+          {/* Right Column (MY ROLE) */}
+          <div className="lg:col-span-4 flex">
+            <Reveal delay={0.3} className="w-full flex">
+              <div className="bg-white p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5 w-full flex flex-col justify-center">
+                <h3 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-3">
+                  MY ROLE:
+                </h3>
+                <ul className="space-y-2.5 font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed">
+                  <li className="flex items-start gap-2">
+                    <span className="text-black font-bold text-base leading-none mt-1">•</span>
+                    <span>Designed & built custom UI/UX layouts from scratch</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-black font-bold text-base leading-none mt-1">•</span>
+                    <span>Implemented 100% mobile-first responsive web design</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-black font-bold text-base leading-none mt-1">•</span>
+                    <span>Optimized page performance and image asset loads</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-black font-bold text-base leading-none mt-1">•</span>
+                    <span>Integrated member inquiry & booking call-to-actions</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-black font-bold text-base leading-none mt-1">•</span>
+                    <span>Deployed & managed live domain & hosting configurations</span>
+                  </li>
+                </ul>
+              </div>
+            </Reveal>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+function UnlimitedDemocracy() {
+  return (
+    <section id="exercoach-showcase-mobile" className="px-6 md:px-12 py-6 lg:py-8 bg-[#fafafa] font-sans border-t border-black/5 flex flex-col justify-center">
+      <div className="max-w-7xl mx-auto w-full">
+        
+        {/* Title */}
+        <Reveal className="mb-4 lg:mb-6">
+          <h2 className="font-display font-black tracking-tighter text-4xl sm:text-5xl lg:text-6xl text-[#111111] uppercase leading-none">
+            EXERCOACH<br />GYM
+          </h2>
+        </Reveal>
+
+        {/* 3-Column Grid (Shifted up with tight gap) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+          
+          {/* Left Column (Details/Goal/Approach Card - Shifted Up, Logo Removed) */}
+          <div className="lg:col-span-4 flex flex-col gap-4">
+            
+            {/* DETAILS, PLANFORMS, GOAL, APPROACH Card */}
+            <Reveal delay={0.1}>
+              <div className="bg-[#f0efeb] p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5 flex flex-col gap-3.5">
+                
+                {/* DETAILS */}
+                <div>
+                  <h3 className="font-display font-black text-sm lg:text-base tracking-wider text-black uppercase mb-1">
+                    DETAILS:
+                  </h3>
+                  <div className="space-y-0.5 text-xs sm:text-sm text-neutral-700 font-sans">
+                    <p><span className="font-semibold text-black">Client:</span> Freelance Client</p>
+                    <p><span className="font-semibold text-black">Industry:</span> Fitness & Personal Coaching</p>
+                    <p><span className="font-semibold text-black">Location:</span> Remote</p>
+                  </div>
+                </div>
+
+                {/* PLANFORMS */}
+                <div>
+                  <h3 className="font-display font-black text-sm lg:text-base tracking-wider text-black uppercase mb-1">
+                    PLATFORMS:
+                  </h3>
+                  <p className="font-sans text-neutral-700 text-xs sm:text-sm">
+                    Web Technology, HTML5, CSS3, JavaScript, Live Website
+                  </p>
+                </div>
+
+                {/* GOAL */}
+                <div>
+                  <h3 className="font-display font-black text-sm lg:text-base tracking-wider text-black uppercase mb-1">
+                    GOAL:
+                  </h3>
+                  <p className="font-sans text-neutral-700 text-xs sm:text-sm leading-relaxed">
+                    Develop a high-impact, modern, and fully responsive website to establish the gym's online presence, showcase training programs, and drive membership registrations.
+                  </p>
+                </div>
+
+                {/* APPROACH */}
+                <div>
+                  <h3 className="font-display font-black text-sm lg:text-base tracking-wider text-black uppercase mb-1">
+                    APPROACH:
+                  </h3>
+                  <p className="font-sans text-neutral-700 text-xs sm:text-sm leading-relaxed">
+                    Designed and developed the live website exercoachgym.com from scratch as a freelance developer. Structured class directories, contact integrations, and coach rosters with a performance-first approach.
+                  </p>
+                </div>
+
+              </div>
+            </Reveal>
+
+          </div>
+
+          {/* Center Column (Single Smartphone ExerCoach Screen Mockup - Shifted Up) */}
+          <div className="lg:col-span-3 flex flex-col items-center justify-center my-3 lg:my-0">
+            <Reveal delay={0.15} className="w-full flex flex-col items-center">
+              <div className="relative w-full max-w-[240px] sm:max-w-[260px] md:max-w-[280px] bg-[#161616] p-2.5 rounded-[2.6rem] border-[5px] border-[#2c2c2e] shadow-2xl hover:scale-[1.02] transition-transform duration-500 overflow-hidden">
+                {/* Phone Top Speaker/Camera Notch */}
+                <div className="flex justify-center mb-1.5 relative z-10">
+                  <span className="w-20 h-3.5 bg-[#0a0a0a] rounded-full border border-white/10" />
+                </div>
+                {/* ExerCoach Mobile Screen */}
+                <div className="relative overflow-hidden rounded-[1.8rem] bg-black aspect-[9/18]">
+                  <img
+                    src={exercoachMobile}
+                    alt="ExerCoach Gym Mobile Screen"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                {/* Bottom Home Indicator Bar */}
+                <div className="mt-1.5 flex justify-center">
+                  <span className="w-16 h-1 bg-white/20 rounded-full" />
+                </div>
+              </div>
+
+              {/* Live Status Badge Below Phone */}
+              <a 
+                href="https://exercoachgym.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="mt-3.5 inline-flex items-center gap-2 bg-black text-white font-mono text-[11px] lg:text-xs px-3.5 py-1.5 rounded-full hover:bg-neutral-800 transition-colors shadow-md border border-white/10 group"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>LIVE • exercoachgym.com</span>
+              </a>
+            </Reveal>
+          </div>
+
+          {/* Right Column (ExerCoach Gym Masonry Photo Grid - Shifted Up) */}
+          <div className="lg:col-span-5 flex">
+            <Reveal delay={0.25} className="w-full">
+              <div className="grid grid-cols-3 gap-2.5 sm:gap-3 w-full">
+                
+                {/* Card 1 */}
+                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-black/10 group relative bg-neutral-900">
+                  <div className="w-full h-full bg-gradient-to-b from-red-900 via-neutral-900 to-black p-3 flex flex-col justify-end text-white">
+                    <span className="font-display font-bold text-xs uppercase tracking-tight text-red-400">EXERCOACH</span>
+                    <span className="text-[10px] text-white/80">Live Website</span>
+                  </div>
+                </div>
+
+                {/* Card 2 */}
+                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-black/10 group relative bg-neutral-900">
+                  <div className="w-full h-full bg-gradient-to-br from-neutral-800 via-neutral-900 to-red-950 p-3 flex flex-col justify-between text-white">
+                    <span className="text-right text-xs font-mono text-red-500">»</span>
+                    <div className="font-display font-black text-xs uppercase leading-tight">
+                      100%<br /><span className="text-[9px] font-normal text-white/70">Mobile Responsive</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Card 3 */}
+                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-black/10 group relative bg-neutral-900">
+                  <div className="w-full h-full bg-gradient-to-b from-stone-800 to-black p-3 flex flex-col justify-end text-white">
+                    <span className="font-sans text-[10px] text-red-400 font-medium">Class Programs</span>
+                  </div>
+                </div>
+
+                {/* Card 4 */}
+                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-black/10 group relative bg-neutral-800">
+                  <div className="w-full h-full bg-gradient-to-br from-red-950 to-neutral-900 p-3 flex flex-col justify-center items-center text-center text-white">
+                    <span className="text-[10px] font-display uppercase tracking-wider text-red-400 font-bold">Trainer Rosters</span>
+                  </div>
+                </div>
+
+                {/* Card 5 */}
+                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-black/10 group relative bg-neutral-900">
+                  <div className="w-full h-full bg-gradient-to-t from-black via-neutral-900 to-red-900 p-3 flex flex-col justify-end text-white">
+                    <span className="font-mono text-[9px] text-red-300">exercoachgym.com</span>
+                  </div>
+                </div>
+
+                {/* Card 6 */}
+                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-black/10 group relative bg-neutral-900">
+                  <div className="w-full h-full bg-gradient-to-tr from-neutral-800 to-red-900 p-3 flex flex-col justify-end text-white">
+                    <span className="font-display text-[10px] font-bold text-white">Fitness Community</span>
+                  </div>
+                </div>
+
+                {/* Card 7 */}
+                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-black/10 group relative bg-neutral-900">
+                  <div className="w-full h-full bg-gradient-to-b from-red-900 via-stone-900 to-black p-3 flex flex-col justify-center items-center text-center text-white">
+                    <span className="font-display font-black text-xs text-red-400 uppercase leading-tight">
+                      CUSTOM UI/UX
+                    </span>
+                    <span className="text-[9px] text-white/80 mt-1">HTML5 & CSS3</span>
+                  </div>
+                </div>
+
+                {/* Card 8 */}
+                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-black/10 group relative bg-neutral-800">
+                  <div className="w-full h-full bg-gradient-to-br from-neutral-800 to-black p-3 flex flex-col justify-end text-white">
+                    <span className="font-sans text-xs font-semibold text-red-300">Inquiry Forms</span>
+                  </div>
+                </div>
+
+                {/* Card 9 */}
+                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-black/10 group relative bg-neutral-900">
+                  <div className="w-full h-full bg-gradient-to-t from-black via-neutral-900 to-stone-800 p-3 flex flex-col justify-end text-white">
+                    <span className="font-sans text-[9px] text-white/90">Freelance Contract</span>
+                  </div>
+                </div>
+
+              </div>
+            </Reveal>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
 function Index() {
   const data = Route.useLoaderData();
   const caseStudies = data.caseStudies || [];
 
   return (
-    <div className="min-h-screen bg-white text-[#111111] font-sans overflow-x-hidden">
-      <Nav />
-      <main className="bg-[#f0efeb] rounded-t-[2.5rem] md:rounded-t-[3.5rem] overflow-hidden animate-fade-in">
+    <div className="min-h-screen bg-[#f0efeb] text-[#111111] font-sans overflow-x-hidden flex flex-col relative">
+      {/* Background block for top rounded corners */}
+      <div className="absolute top-0 left-0 right-0 h-[50vh] bg-white pointer-events-none z-0" />
+
+      <div className="relative z-10">
+        <Nav />
+      </div>
+      <main className="flex-1 bg-[#f0efeb] rounded-t-[2.5rem] md:rounded-t-[3.5rem] overflow-hidden animate-fade-in flex flex-col relative z-10">
         <Hero />
         <About />
         <Skills />
         <ExperienceAndEducation />
         <Projects />
+        <ExerCoachProject />
+        <UnlimitedDemocracy />
         {caseStudies.map((cs: any) => (
           <CaseStudy
             key={cs.id}

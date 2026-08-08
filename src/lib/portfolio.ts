@@ -17,9 +17,10 @@ export interface AboutData {
   contact: {
     email: string;
     phone: string;
-    tiktok: string;
+    github: string;
     instagram: string;
     linkedin: string;
+    tiktok?: string;
   };
 }
 

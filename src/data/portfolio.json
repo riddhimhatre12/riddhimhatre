@@ -15,9 +15,9 @@
     "contact": {
       "email": "riddhimhatre2004@gmail.com",
       "phone": "+91 9766379529",
-      "tiktok": "https://tiktok.com",
-      "instagram": "https://instagram.com",
-      "linkedin": "https://www.linkedin.com/in/riddhi-mhatre-909529342"
+      "github": "https://github.com/riddhimhatre12",
+      "instagram": "https://www.instagram.com/riddhi_mhatre12?igsh=MXI4eW1rdjI0a3BzMw==",
+      "linkedin": "https://www.linkedin.com/in/riddhi-mhatre-909529342/"
     }
   },
   "skillsTitle": "A toolkit for building reliable software.",
@@ -109,8 +109,8 @@
       "name": "AUTOMATED METER READING"
     },
     {
-      "key": "ecommerce",
-      "name": "E-COMMERCE HOMEPAGE"
+      "key": "dashboard",
+      "name": "REAL-TIME DASHBOARD"
     }
   ],
   "caseStudies": [
@@ -149,21 +149,21 @@
       "image": "meterReading"
     },
     {
-      "id": "ecommerce",
-      "title": "E-COMMERCE HOMEPAGE",
-      "client": "Personal Practice Project",
-      "industry": "Retail & Web Development",
-      "location": "Palghar, Maharashtra",
-      "platforms": "Web Technology, HTML5, CSS3, Bootstrap 5",
-      "goal": "Build a fully responsive and visually appealing homepage simulating real-world e-commerce features and product listings.",
-      "approach": "Designed a responsive storefront showcasing electronics and groceries. Utilized Bootstrap's grid and components for layout flexibility, added dynamic location mapping, navigation components, and robust media integrations.",
+      "id": "dashboard",
+      "title": "REAL-TIME DATA DASHBOARD",
+      "client": "BizTech IT Solutions",
+      "industry": "Data Analytics",
+      "location": "Remote",
+      "platforms": "Power BI, SQL, MS Excel",
+      "goal": "Develop an interactive real-time dashboard to monitor key performance indicators and provide actionable data-driven insights.",
+      "approach": "As a Data Analytics Intern, I cleaned and processed live datasets to build a dynamic dashboard. I utilized SQL for data extraction and Power BI for creating visually engaging, real-time reports that facilitated strategic decision-making.",
       "stats": [
-        { "n": "100%", "l": "responsive design" },
-        { "n": "10+", "l": "product categories" },
-        { "n": "Bootstrap 5", "l": "styling toolkit" }
+        { "n": "Real-time", "l": "data processing" },
+        { "n": "100%", "l": "data accuracy" },
+        { "n": "Power BI", "l": "visualization" }
       ],
       "color": "#eae7de",
-      "image": "ecommerce"
+      "image": "dashboard"
     }
   ]
 }
