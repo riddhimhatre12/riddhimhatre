@@ -13,6 +13,18 @@ import totebagCampaign from "@/assets/totebag_campaign.png";
 import unlimitedPhone from "@/assets/unlimited_phone.png";
 import unlimitedScreenFlat from "@/assets/unlimited_screen_flat.png";
 import exercoachMobile from "@/assets/exercoach_mobile.png";
+import exercoachMobileFlat from "@/assets/exercoach_mobile_flat.png";
+import retailWarehouseSales from "@/assets/retail_warehouse_sales.png";
+import healthcareAnalytics from "@/assets/healthcare_analytics.png";
+import consumerShoppingTrends from "@/assets/consumer_shopping_trends.png";
+import biztechCertificate from "@/assets/biztech_certificate.png";
+import exercoachMobileScreen1 from "@/assets/exercoach_mobile_screen1.png";
+import exercoachMobileScreen2 from "@/assets/exercoach_mobile_screen2.png";
+import exercoachMobileScreen3 from "@/assets/exercoach_mobile_screen3.png";
+import exercoachAdminDashboard from "@/assets/exercoach_admin_dashboard.png";
+import exercoachAdminMenu from "@/assets/exercoach_admin_menu.png";
+import exercoachAdminLeads from "@/assets/exercoach_admin_leads.png";
+import exercoachAdminGallery from "@/assets/exercoach_admin_gallery.png";
 import { getPortfolioData } from "@/lib/portfolio";
 
 export const Route = createFileRoute("/")({
@@ -29,6 +41,9 @@ const IMAGES: Record<string, string> = {
   meterReading,
   ecommerce,
   dashboard,
+  retailWarehouseSales,
+  healthcareAnalytics,
+  consumerShoppingTrends,
 };
 
 function Reveal({
@@ -225,10 +240,13 @@ function About() {
   const contact = about.contact;
 
   return (
-    <section id="about" className="px-6 md:px-16 py-24 bg-inherit">
-      <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center max-w-6xl mx-auto">
+    <section id="about" className="px-6 md:px-16 py-6 lg:py-8 min-h-screen flex flex-col justify-center scroll-mt-6 bg-white overflow-hidden rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10">
+      <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-center max-w-6xl mx-auto w-full">
         <div className="w-full relative">
-          <div className="relative aspect-square max-w-lg md:max-w-xl mx-auto flex items-end justify-center md:-ml-8 lg:-ml-12">
+          <div className="relative aspect-square max-w-md md:max-w-lg lg:max-w-xl mx-auto flex items-end justify-center md:-ml-8 lg:-ml-12">
+            {/* Perfect Dome Arch Backdrop Shape (Constrained to left column, never overlaps text) */}
+            <div className="absolute top-[18%] bottom-0 -left-16 sm:-left-24 lg:-left-32 right-0 bg-[#e6e5e0] rounded-t-[250px] sm:rounded-t-[350px] rounded-b-none z-0 pointer-events-none" />
+
             {/* Transparent Cutout Portrait with Slide-in from Left Animation */}
             <motion.img
               initial={{ x: -150, opacity: 0 }}
@@ -247,17 +265,17 @@ function About() {
 
         <div className="flex flex-col justify-center h-full">
           <Reveal>
-            <h2 className="font-display text-5xl md:text-6xl tracking-tight text-neutral-900 leading-none">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl tracking-tight text-neutral-900 leading-none">
               {about.title || "ABOUT ME"}
             </h2>
           </Reveal>
           <Reveal delay={0.15}>
-            <p className="font-script text-4xl md:text-5xl mt-2 mb-6 text-neutral-800">
+            <p className="font-script text-3xl md:text-4xl lg:text-5xl mt-1 mb-3 text-neutral-800">
               {about.subtitle || "Hi there, I'm Riddhi!"}
             </p>
           </Reveal>
 
-          <div className="space-y-4 text-base md:text-lg leading-relaxed text-neutral-700 font-sans">
+          <div className="space-y-2.5 text-xs sm:text-sm md:text-base leading-relaxed text-neutral-700 font-sans">
             {(about.bioParagraphs || []).map((p: string, idx: number) => (
               <Reveal key={idx} delay={0.3 + idx * 0.1}>
                 <p>{p}</p>
@@ -265,19 +283,19 @@ function About() {
             ))}
           </div>
 
-          <Reveal delay={0.5} className="mt-8 pt-4">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
-              <div className="space-y-3">
-                <p className="font-display text-xl tracking-tighter text-black uppercase font-bold">
+          <Reveal delay={0.5} className="mt-4 pt-1">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-6">
+              <div className="space-y-1.5">
+                <p className="font-display text-base sm:text-lg lg:text-xl tracking-tighter text-black uppercase font-bold">
                   LET'S CONNECT!
                 </p>
 
                 {contact.email && (
-                  <div className="flex items-center gap-3 text-neutral-800 transition-colors">
-                    <MailIcon className="w-5 h-5 flex-shrink-0" />
+                  <div className="flex items-center gap-2.5 text-neutral-800 transition-colors">
+                    <MailIcon className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
                     <a
                       href={`mailto:${contact.email}`}
-                      className="text-[15px] md:text-base font-medium hover:text-neutral-500 transition-colors break-all sm:break-normal"
+                      className="text-xs sm:text-sm md:text-base font-medium hover:text-neutral-500 transition-colors break-all sm:break-normal"
                     >
                       {contact.email}
                     </a>
@@ -285,11 +303,11 @@ function About() {
                 )}
 
                 {contact.phone && (
-                  <div className="flex items-center gap-3 text-neutral-800 transition-colors">
-                    <PhoneIcon className="w-5 h-5 flex-shrink-0" />
+                  <div className="flex items-center gap-2.5 text-neutral-800 transition-colors">
+                    <PhoneIcon className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
                     <a
                       href={`tel:${contact.phone}`}
-                      className="text-[15px] md:text-base font-medium hover:text-neutral-500 transition-colors"
+                      className="text-xs sm:text-sm md:text-base font-medium hover:text-neutral-500 transition-colors"
                     >
                       {contact.phone}
                     </a>
@@ -297,7 +315,7 @@ function About() {
                 )}
               </div>
 
-              <div className="flex items-center justify-start sm:justify-end gap-3.5 pt-4 sm:pt-0">
+              <div className="flex items-center justify-start sm:justify-end gap-3 pt-1 sm:pt-0">
                 {contact.github && (
                   <a
                     href={contact.github}
@@ -537,15 +555,80 @@ function AwardIcon() {
     </div>
   );
 }
+function CertificateModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm animate-fade-in"
+      onClick={onClose}
+    >
+      <div
+        className="relative max-w-4xl w-full bg-white rounded-2xl overflow-hidden shadow-xl border border-neutral-200"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Simple Header */}
+        <div className="flex items-center justify-between px-6 py-4 bg-white border-b border-neutral-100">
+          <div>
+            <h3 className="font-sans font-bold text-lg text-neutral-900 leading-tight">
+              Certificate of Internship — BizTech IT Solutions
+            </h3>
+            <p className="text-xs text-neutral-500 font-medium mt-0.5">
+              Data Analytics • ID: #PC-F16833
+            </p>
+          </div>
+          <button
+            onClick={onClose}
+            aria-label="Close modal"
+            className="w-8 h-8 rounded-full bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center text-neutral-600 font-bold transition-colors"
+          >
+            ✕
+          </button>
+        </div>
+
+        {/* Clean Light Background for Certificate */}
+        <div className="p-4 sm:p-6 bg-[#f9f9f9] flex items-center justify-center max-h-[75vh] overflow-y-auto">
+          <img
+            src={biztechCertificate}
+            alt="BizTech IT Solutions Data Analytics Internship Certificate - Riddhi Mhatre"
+            className="max-w-full h-auto rounded-lg shadow-md border border-neutral-200"
+          />
+        </div>
+
+        {/* Simple Footer */}
+        <div className="flex items-center justify-end gap-3 px-6 py-3.5 bg-white border-t border-neutral-100">
+          <a
+            href="/biztech_certificate.png"
+            download="Riddhi_Mhatre_Data_Analytics_Certificate_BizTech.png"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2 bg-neutral-900 text-white font-sans text-xs font-semibold rounded-lg hover:bg-black transition-colors"
+          >
+            Download
+          </a>
+          <button
+            onClick={onClose}
+            className="px-4 py-2 bg-neutral-100 text-neutral-700 font-sans text-xs font-semibold rounded-lg hover:bg-neutral-200 transition-colors"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function Skills() {
   const data = Route.useLoaderData();
+  const [showCertModal, setShowCertModal] = useState(false);
 
   const certs = [
     {
       title: "Data Analytics Internship",
-      provider: "BizTech IT",
+      provider: "BizTech IT Solutions",
       status: "Completed",
+      hasCertificate: true,
+      certId: "#PC-F16833",
     },
     {
       title: "BSc in Information Technology",
@@ -630,7 +713,8 @@ function Skills() {
   ];
 
   return (
-    <section id="skills" className="px-6 md:px-16 py-24 md:py-32 bg-white">
+    <section id="skills" className="px-6 md:px-16 py-20 md:py-28 bg-white rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6">
+      <CertificateModal isOpen={showCertModal} onClose={() => setShowCertModal(false)} />
       <div className="max-w-6xl mx-auto">
         <Reveal>
           <h2 className="font-display text-5xl md:text-7xl tracking-tight mb-20 text-black font-extrabold leading-none">
@@ -643,10 +727,20 @@ function Skills() {
           <div className="md:col-span-6 space-y-10 md:space-y-12">
             {certs.map((cert, i) => (
               <Reveal key={cert.title} delay={i * 0.1}>
-                <div className="flex gap-5 items-center">
+                <div 
+                  className={`flex gap-5 items-center ${'hasCertificate' in cert ? 'cursor-pointer group' : ''}`}
+                  onClick={() => 'hasCertificate' in cert && setShowCertModal(true)}
+                >
                   <AwardIcon />
                   <h4 className="font-sans flex flex-col gap-1">
-                    <span className="font-black uppercase text-black tracking-tight text-[22px] md:text-[26px] leading-tight">{cert.title}</span>
+                    <span className="font-black uppercase text-black tracking-tight text-[22px] md:text-[26px] leading-tight">
+                      {cert.title}
+                      {'hasCertificate' in cert && (
+                        <span className="ml-2 text-xs font-normal normal-case text-neutral-500 underline underline-offset-4 group-hover:text-black transition-colors">
+                          (View Certificate)
+                        </span>
+                      )}
+                    </span>
                     <span className="font-medium text-neutral-600 text-[18px] md:text-[20px]">by {cert.provider}</span>
                   </h4>
                 </div>
@@ -700,7 +794,7 @@ function Projects() {
   const projectsList = data.projects || [];
 
   return (
-    <section id="projects" className="px-6 md:px-16 py-24 bg-white">
+    <section id="projects" className="px-6 md:px-16 py-16 md:py-24 min-h-screen flex flex-col justify-center bg-white rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6">
       <Reveal>
         <h2 className="font-display text-5xl md:text-7xl tracking-tight text-center text-black font-extrabold">
           {data.projectsTitle || "PROJECTS"}
@@ -783,7 +877,7 @@ function CaseStudy({
   image?: string;
 }) {
   return (
-    <section id={id} className="px-6 md:px-12 py-6 lg:py-8 flex flex-col justify-center border-t border-black/5" style={{ backgroundColor: color || "#f0efeb" }}>
+    <section id={id} className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center border-t border-black/5 rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6" style={{ backgroundColor: color || "#f0efeb" }}>
       <div className="max-w-7xl mx-auto w-full">
         <Reveal className="text-center mb-6 lg:mb-8">
           <h3 className="font-display font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight text-black uppercase leading-none">
@@ -1027,9 +1121,11 @@ function ExperienceAndEducation() {
   const data = Route.useLoaderData();
   const experiences = data.experience || [];
   const education = data.education || [];
+  const [showCertModal, setShowCertModal] = useState(false);
 
   return (
-    <section id="experience" className="px-6 md:px-16 py-12 md:py-16 min-h-screen flex flex-col justify-center bg-[#faf9f6]">
+    <section id="experience" className="px-6 md:px-16 py-12 md:py-16 min-h-screen flex flex-col justify-center bg-[#faf9f6] rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6">
+      <CertificateModal isOpen={showCertModal} onClose={() => setShowCertModal(false)} />
       <div className="max-w-7xl mx-auto w-full">
         <Reveal>
           <h2 className="font-display text-4xl md:text-6xl tracking-tight text-center mb-10 text-black font-extrabold leading-none">
@@ -1077,6 +1173,15 @@ function ExperienceAndEducation() {
                         <p className="text-neutral-600 text-sm mt-2.5 leading-relaxed">
                           {exp.description}
                         </p>
+                      )}
+                      {exp.company?.includes("BizTech") && (
+                        <button
+                          onClick={() => setShowCertModal(true)}
+                          className="mt-3 text-xs font-medium text-neutral-600 hover:text-black underline underline-offset-4 transition-colors flex items-center gap-1"
+                        >
+                          <span>View Certificate</span>
+                          <span className="text-[10px]">↗</span>
+                        </button>
                       )}
                     </div>
                   </div>
@@ -1138,7 +1243,7 @@ function ExperienceAndEducation() {
 
 function ExerCoachProject() {
   return (
-    <section id="exercoach-showcase" className="px-6 md:px-12 py-6 lg:py-8 bg-[#f5f4f0] font-sans border-t border-black/5 flex flex-col justify-center">
+    <section id="exercoach" className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-[#f5f4f0] font-sans border-t border-black/5 rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6">
       <div className="max-w-7xl mx-auto w-full">
         
         {/* Title & Subtitle */}
@@ -1217,15 +1322,32 @@ function ExerCoachProject() {
                       <div className="w-3" />
                     </div>
 
-                    {/* ExerCoach Website Screen Image */}
-                    <div className="relative w-full flex-1 overflow-hidden">
-                      <img
-                        src={exercoachgym}
-                        alt="ExerCoach Gym Live Website on Cream Laptop"
-                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                      />
+                    {/* ExerCoach Website Screen Animated Video/Scroll Preview */}
+                    <div className="relative w-full flex-1 overflow-hidden bg-[#111111]">
+                      <motion.div
+                        className="w-full"
+                        animate={{ y: ["0%", "-58%", "-58%", "0%", "0%"] }}
+                        transition={{
+                          duration: 15,
+                          repeat: Infinity,
+                          repeatType: "loop",
+                          ease: [0.45, 0, 0.55, 1],
+                          times: [0, 0.42, 0.5, 0.92, 1]
+                        }}
+                      >
+                        <img
+                          src={exercoachgym}
+                          alt="ExerCoach Gym Live Website Animated Preview"
+                          className="w-full h-auto block select-none pointer-events-none"
+                        />
+                      </motion.div>
                       {/* Subtle Screen Reflection */}
-                      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none z-10" />
+                      {/* Live Auto-Scroll Tag */}
+                      <div className="absolute bottom-2 right-2 bg-black/85 backdrop-blur-sm px-2 py-0.5 rounded-full text-[8.5px] font-mono text-white/90 border border-white/15 z-20 flex items-center gap-1 shadow-sm">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <span>LIVE PREVIEW</span>
+                      </div>
                     </div>
 
                   </div>
@@ -1298,7 +1420,7 @@ function ExerCoachProject() {
 
 function UnlimitedDemocracy() {
   return (
-    <section id="exercoach-showcase-mobile" className="px-6 md:px-12 py-6 lg:py-8 bg-[#fafafa] font-sans border-t border-black/5 flex flex-col justify-center">
+    <section id="exercoach-mobile" className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-[#fafafa] font-sans border-t border-black/5 rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6">
       <div className="max-w-7xl mx-auto w-full">
         
         {/* Title */}
@@ -1365,26 +1487,79 @@ function UnlimitedDemocracy() {
 
           </div>
 
-          {/* Center Column (Single Smartphone ExerCoach Screen Mockup - Shifted Up) */}
+          {/* Center Column (Single Sleek iPhone 16 Pro Screen Mockup) */}
           <div className="lg:col-span-3 flex flex-col items-center justify-center my-3 lg:my-0">
             <Reveal delay={0.15} className="w-full flex flex-col items-center">
-              <div className="relative w-full max-w-[240px] sm:max-w-[260px] md:max-w-[280px] bg-[#161616] p-2.5 rounded-[2.6rem] border-[5px] border-[#2c2c2e] shadow-2xl hover:scale-[1.02] transition-transform duration-500 overflow-hidden">
-                {/* Phone Top Speaker/Camera Notch */}
-                <div className="flex justify-center mb-1.5 relative z-10">
-                  <span className="w-20 h-3.5 bg-[#0a0a0a] rounded-full border border-white/10" />
+              
+              {/* Sleek iPhone Outer Container */}
+              <div className="relative w-full max-w-[240px] sm:max-w-[260px] md:max-w-[275px] group hover:scale-[1.02] transition-transform duration-500">
+                
+                {/* Titanium Phone Body Frame */}
+                <div className="relative w-full bg-[#1c1c1e] p-[8px] sm:p-[9px] rounded-[2.8rem] sm:rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.22)] border-[2px] border-[#3a3a3c] ring-1 ring-black/50">
+                  
+                  {/* Outer Buttons (Volume & Power) */}
+                  <div className="absolute -left-[3px] top-16 w-[3px] h-6 bg-[#2c2c2e] rounded-l-sm" />
+                  <div className="absolute -left-[3px] top-24 w-[3px] h-6 bg-[#2c2c2e] rounded-l-sm" />
+                  <div className="absolute -right-[3px] top-20 w-[3px] h-9 bg-[#2c2c2e] rounded-r-sm" />
+
+                  {/* Inner Screen Display */}
+                  <div className="relative overflow-hidden rounded-[2.3rem] sm:rounded-[2.5rem] bg-black aspect-[9/19.2] border border-neutral-800">
+                    
+                    {/* Status Bar / Dynamic Island */}
+                    <div className="absolute top-0 inset-x-0 h-7 z-30 flex items-center justify-between px-5 pt-1 text-white font-mono text-[9px] pointer-events-none select-none">
+                      <span className="font-semibold text-white/90">9:41</span>
+                      {/* Dynamic Island */}
+                      <div className="w-16 h-3.5 bg-black rounded-full flex items-center justify-end px-1.5 gap-1 ring-1 ring-white/10">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#0c1524] ring-1 ring-blue-500/50" />
+                      </div>
+                      <div className="flex items-center gap-1 text-white/90">
+                        <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.2 19.54 10.55 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/></svg>
+                        <span className="w-2.5 h-1.5 bg-current rounded-xs" />
+                      </div>
+                    </div>
+
+                    {/* ExerCoach Mobile Website Screen Animated Image */}
+                    <div className="w-full h-full overflow-hidden bg-black">
+                      <motion.div
+                        className="w-full flex flex-col"
+                        animate={{ y: ["0%", "-66.6%", "-66.6%", "0%", "0%"] }}
+                        transition={{
+                          duration: 16,
+                          repeat: Infinity,
+                          repeatType: "loop",
+                          ease: [0.45, 0, 0.55, 1],
+                          times: [0, 0.45, 0.5, 0.95, 1]
+                        }}
+                      >
+                        <img
+                          src={exercoachMobileScreen1}
+                          alt="ExerCoach Gym Mobile Screen 1 - Hero & Trial"
+                          className="w-full h-auto block select-none pointer-events-none"
+                        />
+                        <img
+                          src={exercoachMobileScreen2}
+                          alt="ExerCoach Gym Mobile Screen 2 - Contact"
+                          className="w-full h-auto block select-none pointer-events-none"
+                        />
+                        <img
+                          src={exercoachMobileScreen3}
+                          alt="ExerCoach Gym Mobile Screen 3 - Plans"
+                          className="w-full h-auto block select-none pointer-events-none"
+                        />
+                      </motion.div>
+                    </div>
+
+                    {/* Glass Reflection Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none z-20" />
+
+                    {/* iPhone Home Indicator Bar */}
+                    <div className="absolute bottom-1 inset-x-0 flex justify-center z-30 pointer-events-none">
+                      <span className="w-24 h-1 bg-white/40 rounded-full" />
+                    </div>
+                  </div>
+
                 </div>
-                {/* ExerCoach Mobile Screen */}
-                <div className="relative overflow-hidden rounded-[1.8rem] bg-black aspect-[9/18]">
-                  <img
-                    src={exercoachMobile}
-                    alt="ExerCoach Gym Mobile Screen"
-                    className="w-full h-full object-cover object-top"
-                  />
-                </div>
-                {/* Bottom Home Indicator Bar */}
-                <div className="mt-1.5 flex justify-center">
-                  <span className="w-16 h-1 bg-white/20 rounded-full" />
-                </div>
+
               </div>
 
               {/* Live Status Badge Below Phone */}
@@ -1400,82 +1575,116 @@ function UnlimitedDemocracy() {
             </Reveal>
           </div>
 
-          {/* Right Column (ExerCoach Gym Masonry Photo Grid - Shifted Up) */}
-          <div className="lg:col-span-5 flex">
+          {/* Right Column (ExerCoach Gym Website & Admin Portal Showcase) */}
+          <div className="lg:col-span-5 flex flex-col gap-5">
             <Reveal delay={0.25} className="w-full">
-              <div className="grid grid-cols-3 gap-2.5 sm:gap-3 w-full">
-                
-                {/* Card 1 */}
-                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-black/10 group relative bg-neutral-900">
-                  <div className="w-full h-full bg-gradient-to-b from-red-900 via-neutral-900 to-black p-3 flex flex-col justify-end text-white">
-                    <span className="font-display font-bold text-xs uppercase tracking-tight text-red-400">EXERCOACH</span>
-                    <span className="text-[10px] text-white/80">Live Website</span>
-                  </div>
-                </div>
-
-                {/* Card 2 */}
-                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-black/10 group relative bg-neutral-900">
-                  <div className="w-full h-full bg-gradient-to-br from-neutral-800 via-neutral-900 to-red-950 p-3 flex flex-col justify-between text-white">
-                    <span className="text-right text-xs font-mono text-red-500">»</span>
-                    <div className="font-display font-black text-xs uppercase leading-tight">
-                      100%<br /><span className="text-[9px] font-normal text-white/70">Mobile Responsive</span>
+              
+              {/* Section 1: Client Website Mobile Screens */}
+              <div>
+                <h4 className="font-display font-black text-xs uppercase tracking-wider text-black mb-2 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <span>PUBLIC WEBSITE (MOBILE)</span>
+                </h4>
+                <div className="grid grid-cols-3 gap-2.5 sm:gap-3 w-full items-start">
+                  
+                  {/* Phone 1: Hero & Trial */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.4rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1.1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachMobileScreen1}
+                        alt="ExerCoach Mobile Screen 1 - Hero & Free Trial Session"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
                     </div>
+                    <span className="text-[9px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Hero & Trial</span>
                   </div>
-                </div>
 
-                {/* Card 3 */}
-                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-black/10 group relative bg-neutral-900">
-                  <div className="w-full h-full bg-gradient-to-b from-stone-800 to-black p-3 flex flex-col justify-end text-white">
-                    <span className="font-sans text-[10px] text-red-400 font-medium">Class Programs</span>
+                  {/* Phone 2: Contact & Info */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.4rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1.1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachMobileScreen2}
+                        alt="ExerCoach Mobile Screen 2 - Get in Touch & Contact"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[9px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Contact & Info</span>
                   </div>
-                </div>
 
-                {/* Card 4 */}
-                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-black/10 group relative bg-neutral-800">
-                  <div className="w-full h-full bg-gradient-to-br from-red-950 to-neutral-900 p-3 flex flex-col justify-center items-center text-center text-white">
-                    <span className="text-[10px] font-display uppercase tracking-wider text-red-400 font-bold">Trainer Rosters</span>
+                  {/* Phone 3: Membership Plans */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.4rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1.1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachMobileScreen3}
+                        alt="ExerCoach Mobile Screen 3 - Membership Plans"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[9px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Plans & Rates</span>
                   </div>
-                </div>
 
-                {/* Card 5 */}
-                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-black/10 group relative bg-neutral-900">
-                  <div className="w-full h-full bg-gradient-to-t from-black via-neutral-900 to-red-900 p-3 flex flex-col justify-end text-white">
-                    <span className="font-mono text-[9px] text-red-300">exercoachgym.com</span>
-                  </div>
                 </div>
-
-                {/* Card 6 */}
-                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-black/10 group relative bg-neutral-900">
-                  <div className="w-full h-full bg-gradient-to-tr from-neutral-800 to-red-900 p-3 flex flex-col justify-end text-white">
-                    <span className="font-display text-[10px] font-bold text-white">Fitness Community</span>
-                  </div>
-                </div>
-
-                {/* Card 7 */}
-                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-black/10 group relative bg-neutral-900">
-                  <div className="w-full h-full bg-gradient-to-b from-red-900 via-stone-900 to-black p-3 flex flex-col justify-center items-center text-center text-white">
-                    <span className="font-display font-black text-xs text-red-400 uppercase leading-tight">
-                      CUSTOM UI/UX
-                    </span>
-                    <span className="text-[9px] text-white/80 mt-1">HTML5 & CSS3</span>
-                  </div>
-                </div>
-
-                {/* Card 8 */}
-                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-black/10 group relative bg-neutral-800">
-                  <div className="w-full h-full bg-gradient-to-br from-neutral-800 to-black p-3 flex flex-col justify-end text-white">
-                    <span className="font-sans text-xs font-semibold text-red-300">Inquiry Forms</span>
-                  </div>
-                </div>
-
-                {/* Card 9 */}
-                <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-black/10 group relative bg-neutral-900">
-                  <div className="w-full h-full bg-gradient-to-t from-black via-neutral-900 to-stone-800 p-3 flex flex-col justify-end text-white">
-                    <span className="font-sans text-[9px] text-white/90">Freelance Contract</span>
-                  </div>
-                </div>
-
               </div>
+
+              {/* Section 2: Admin Dashboard & Portal Screens */}
+              <div className="mt-4 pt-4 border-t border-black/10">
+                <h4 className="font-display font-black text-xs uppercase tracking-wider text-black mb-2 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-600" />
+                  <span>ADMIN DASHBOARD & CMS PORTAL</span>
+                </h4>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 w-full items-start">
+                  
+                  {/* Admin Phone 1: Dashboard */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachAdminDashboard}
+                        alt="ExerCoach Admin Dashboard Overview"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Dashboard</span>
+                  </div>
+
+                  {/* Admin Phone 2: Navigation Menu */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachAdminMenu}
+                        alt="ExerCoach Admin Navigation Menu"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Nav Menu</span>
+                  </div>
+
+                  {/* Admin Phone 3: Leads Portal */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachAdminLeads}
+                        alt="ExerCoach Customer Leads Management"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Leads CMS</span>
+                  </div>
+
+                  {/* Admin Phone 4: Gallery Management */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachAdminGallery}
+                        alt="ExerCoach Gallery Media Management"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Gallery CMS</span>
+                  </div>
+
+                </div>
+              </div>
+
             </Reveal>
           </div>
 
@@ -1488,7 +1697,7 @@ function UnlimitedDemocracy() {
 
 function Index() {
   const data = Route.useLoaderData();
-  const caseStudies = data.caseStudies || [];
+  const caseStudies = (data.caseStudies || []).filter((cs: any) => cs.id !== "exercoach");
 
   return (
     <div className="min-h-screen bg-[#f0efeb] text-[#111111] font-sans overflow-x-hidden flex flex-col relative">
@@ -1498,7 +1707,7 @@ function Index() {
       <div className="relative z-10">
         <Nav />
       </div>
-      <main className="flex-1 bg-[#f0efeb] rounded-t-[2.5rem] md:rounded-t-[3.5rem] overflow-hidden animate-fade-in flex flex-col relative z-10">
+      <main className="flex-1 bg-[#f0efeb] rounded-t-[2.5rem] md:rounded-t-[3.5rem] overflow-hidden animate-fade-in flex flex-col relative z-10 space-y-6 md:space-y-10 py-4 px-2 sm:px-4 md:px-6">
         <Hero />
         <About />
         <Skills />
