@@ -72,40 +72,48 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=1024" },
-      { title: "Portfolio — Riddhi Girish Mhatre" },
+      { name: "viewport", content: "width=device-width, initial-scale=1.0" },
+      { title: "Riddhi Mhatre | Riddhimhatre Official Portfolio — Data Analyst & IT Graduate" },
       {
         name: "description",
         content:
-          "Portfolio of Riddhi Girish Mhatre — seeking an entry-level role in SQL, Web Development, Java, or Manual Testing.",
+          "Official Portfolio of Riddhi Mhatre (riddhimhatre) — B.Sc. in Information Technology graduate from Mumbai University. Specializing in Data Analytics, SQL, Web Development, Java, and Power BI.",
       },
-      { name: "author", content: "Riddhi Girish Mhatre" },
-      { property: "og:title", content: "Portfolio — Riddhi Girish Mhatre" },
+      {
+        name: "keywords",
+        content:
+          "Riddhi Mhatre, riddhimhatre, Riddhi Mhatre portfolio, riddhimhatre portfolio, Riddhi Mhatre Data Analyst, Riddhi Mhatre B.Sc IT, Riddhi Mhatre Mumbai, Riddhi Mhatre IT Graduate, Riddhi Mhatre Web Developer, Riddhi Mhatre SQL, Riddhi Mhatre BizTech",
+      },
+      { name: "author", content: "Riddhi Mhatre" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      { name: "googlebot", content: "index, follow" },
+
+      { property: "og:title", content: "Riddhi Mhatre | Riddhimhatre Portfolio" },
       {
         property: "og:description",
         content:
-          "Portfolio of Riddhi Girish Mhatre — seeking an entry-level role in SQL, Web Development, Java, or Manual Testing.",
+          "Explore Riddhi Mhatre's portfolio — Data Analytics, SQL, Web Development projects, and IT certifications.",
       },
-      { property: "og:type", content: "website" },
+      { property: "og:type", content: "profile" },
+      { property: "og:site_name", content: "Riddhi Mhatre Portfolio" },
+      { property: "profile:first_name", content: "Riddhi" },
+      { property: "profile:last_name", content: "Mhatre" },
+      { property: "profile:username", content: "riddhimhatre" },
+      { property: "og:image", content: "/biztech_certificate.png" },
+
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Portfolio — Riddhi Girish Mhatre" },
+      { name: "twitter:title", content: "Riddhi Mhatre | Riddhimhatre Portfolio" },
       {
         name: "twitter:description",
         content:
-          "Portfolio of Riddhi Girish Mhatre — seeking an entry-level role in SQL, Web Development, Java, or Manual Testing.",
+          "Explore Riddhi Mhatre's portfolio — Data Analytics, SQL, Web Development projects, and IT certifications.",
       },
-      {
-        property: "og:image",
-        content: "/favicon.svg",
-      },
-      {
-        name: "twitter:image",
-        content: "/favicon.svg",
-      },
+      { name: "twitter:image", content: "/biztech_certificate.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "canonical", href: "https://riddhimhatre.com" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -121,10 +129,46 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const jsonLdData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Riddhi Mhatre",
+    "alternateName": ["riddhimhatre", "Riddhi Girish Mhatre", "Riddhi Mhatre Portfolio"],
+    "url": "https://riddhimhatre.com",
+    "image": "https://riddhimhatre.com/biztech_certificate.png",
+    "jobTitle": "Data Analyst & Information Technology Graduate",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "BizTech IT Solutions"
+    },
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "University of Mumbai"
+    },
+    "knowsAbout": [
+      "Data Analytics",
+      "SQL",
+      "Web Development",
+      "Java",
+      "Manual Testing",
+      "Power BI",
+      "Information Technology"
+    ],
+    "sameAs": [
+      "https://github.com/riddhimhatre12",
+      "https://www.linkedin.com/in/riddhi-mhatre-909529342/",
+      "https://www.instagram.com/riddhi_mhatre12"
+    ]
+  };
+
   return (
     <html lang="en">
       <head>
         <HeadContent />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
+        />
       </head>
       <body>
         {children}

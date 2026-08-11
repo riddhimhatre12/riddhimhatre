@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import portrait from "@/assets/portrait.jpg";
 import portraitCutout from "@/assets/portrait_clean.jpg";
+import contactPortrait from "@/assets/contact_portrait.jpg";
 import awardBadge from "@/assets/award_badge.png";
 import exercoachgym from "@/assets/exercoachgym.png";
 import meterReading from "@/assets/meter_reading.png";
@@ -37,6 +38,7 @@ export const Route = createFileRoute("/")({
 const IMAGES: Record<string, string> = {
   portrait,
   portraitCutout,
+  contactPortrait,
   exercoachgym,
   meterReading,
   ecommerce,
@@ -63,7 +65,7 @@ function Reveal({
       className={className}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: false, amount: 0.1 }}
       variants={{
         hidden: { opacity: 0, y: 40 },
         show: {
@@ -86,7 +88,7 @@ function Nav() {
     "font-display tracking-widest text-lg text-black hover:text-neutral-500 py-3 block border-b border-black/5 text-center underline underline-offset-4 decoration-2";
 
   return (
-    <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/90 border-b border-black/5 px-6 md:px-16 py-6 transition-all duration-300">
+    <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/90 px-6 md:px-16 py-6 transition-all duration-300">
       <div className="max-w-6xl mx-auto flex items-center justify-between md:block">
         {/* Mobile Header Brand */}
         <div className="flex md:hidden items-center gap-1.5">
@@ -190,7 +192,7 @@ function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.2]);
 
   return (
-    <section ref={ref} className="relative px-4 md:px-8 pt-12 md:pt-20 pb-24">
+    <section ref={ref} className="relative px-4 md:px-8 pt-12 md:pt-20 pb-16 bg-gradient-to-b from-[#f7f6f2] via-[#faf9f6] to-white">
       <motion.div style={{ y, opacity }} className="relative w-full flex flex-col items-center">
         <div className="relative w-full">
           <motion.svg
@@ -225,7 +227,7 @@ function Hero() {
         </div>
       </motion.div>
 
-      <Reveal delay={1} className="flex justify-center mt-24">
+      <Reveal delay={1} className="flex justify-center mt-20 mb-8">
         <span className="font-display text-sm tracking-widest border border-black rounded-full px-6 py-2">
           {data.hero.year || "2026"}
         </span>
@@ -240,22 +242,22 @@ function About() {
   const contact = about.contact;
 
   return (
-    <section id="about" className="px-6 md:px-16 py-6 lg:py-8 min-h-screen flex flex-col justify-center scroll-mt-6 bg-white overflow-hidden rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10">
+    <section id="about" className="px-6 md:px-16 py-6 lg:py-8 min-h-screen lg:h-screen flex flex-col justify-center scroll-mt-0 bg-white overflow-hidden">
       <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-center max-w-6xl mx-auto w-full">
-        <div className="w-full relative">
-          <div className="relative aspect-square max-w-md md:max-w-lg lg:max-w-xl mx-auto flex items-end justify-center md:-ml-8 lg:-ml-12">
-            {/* Perfect Dome Arch Backdrop Shape (Constrained to left column, never overlaps text) */}
-            <div className="absolute top-[18%] bottom-0 -left-16 sm:-left-24 lg:-left-32 right-0 bg-[#e6e5e0] rounded-t-[250px] sm:rounded-t-[350px] rounded-b-none z-0 pointer-events-none" />
+        <div className="w-full relative pt-2 md:pt-4">
+          <div className="relative aspect-square max-w-lg md:max-w-xl lg:max-w-2xl mx-auto flex items-end justify-center md:-ml-8 lg:-ml-12">
+            {/* Lighter Soft Dome Arch Backdrop Shape */}
+            <div className="absolute top-[20%] bottom-0 -left-16 sm:-left-24 lg:-left-32 right-0 bg-[#efeee9] rounded-t-[250px] sm:rounded-t-[350px] rounded-b-none z-0 pointer-events-none" />
 
             {/* Transparent Cutout Portrait with Slide-in from Left Animation */}
             <motion.img
               initial={{ x: -150, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true, amount: 0.2 }}
+              viewport={{ once: false, amount: 0.1 }}
               transition={{ duration: 1.1, ease: [0.25, 1, 0.5, 1] }}
               src={IMAGES[about.portraitCutout] || about.portraitCutout || portraitCutout}
               alt="Riddhi Mhatre portrait"
-              className="relative z-10 max-h-[125%] max-w-[125%] w-auto object-contain select-none pointer-events-none origin-bottom object-bottom mix-blend-darken"
+              className="relative z-10 max-h-[118%] max-w-[118%] w-auto object-contain select-none pointer-events-none origin-bottom object-bottom mix-blend-darken"
               width={768}
               height={768}
               loading="lazy"
@@ -560,43 +562,38 @@ function CertificateModal({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/70 backdrop-blur-sm animate-fade-in"
       onClick={onClose}
     >
       <div
-        className="relative max-w-4xl w-full bg-white rounded-2xl overflow-hidden shadow-xl border border-neutral-200"
+        className="relative max-w-5xl w-full max-h-[92vh] bg-white rounded-2xl overflow-hidden shadow-2xl border border-neutral-200 flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Simple Header */}
-        <div className="flex items-center justify-between px-6 py-4 bg-white border-b border-neutral-100">
-          <div>
-            <h3 className="font-sans font-bold text-lg text-neutral-900 leading-tight">
-              Certificate of Internship — BizTech IT Solutions
-            </h3>
-            <p className="text-xs text-neutral-500 font-medium mt-0.5">
-              Data Analytics • ID: #PC-F16833
-            </p>
-          </div>
+        <div className="flex items-center justify-between px-5 py-3.5 bg-white border-b border-neutral-100 flex-shrink-0">
+          <h3 className="font-sans font-extrabold text-base sm:text-lg text-neutral-900 leading-tight">
+            Certificate of Internship — BizTech IT Solutions
+          </h3>
           <button
             onClick={onClose}
             aria-label="Close modal"
-            className="w-8 h-8 rounded-full bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center text-neutral-600 font-bold transition-colors"
+            className="w-8 h-8 rounded-full bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center text-neutral-600 font-bold transition-colors flex-shrink-0"
           >
             ✕
           </button>
         </div>
 
-        {/* Clean Light Background for Certificate */}
-        <div className="p-4 sm:p-6 bg-[#f9f9f9] flex items-center justify-center max-h-[75vh] overflow-y-auto">
+        {/* Clean Light Background for Certificate - Full Uncropped View */}
+        <div className="p-3 sm:p-6 bg-[#f4f4f4] overflow-y-auto flex-1 flex flex-col items-center justify-start">
           <img
             src={biztechCertificate}
             alt="BizTech IT Solutions Data Analytics Internship Certificate - Riddhi Mhatre"
-            className="max-w-full h-auto rounded-lg shadow-md border border-neutral-200"
+            className="w-full h-auto max-w-4xl rounded-lg shadow-md border border-neutral-200 object-top"
           />
         </div>
 
         {/* Simple Footer */}
-        <div className="flex items-center justify-end gap-3 px-6 py-3.5 bg-white border-t border-neutral-100">
+        <div className="flex items-center justify-end gap-2 px-5 py-3 bg-white border-t border-neutral-100 flex-shrink-0">
           <a
             href="/biztech_certificate.png"
             download="Riddhi_Mhatre_Data_Analytics_Certificate_BizTech.png"
@@ -604,7 +601,7 @@ function CertificateModal({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
             rel="noopener noreferrer"
             className="px-4 py-2 bg-neutral-900 text-white font-sans text-xs font-semibold rounded-lg hover:bg-black transition-colors"
           >
-            Download
+            Download PNG
           </a>
           <button
             onClick={onClose}
@@ -713,7 +710,7 @@ function Skills() {
   ];
 
   return (
-    <section id="skills" className="px-6 md:px-16 py-20 md:py-28 bg-white rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6">
+    <section id="skills" className="px-6 md:px-16 py-24 md:py-32 bg-white scroll-mt-6">
       <CertificateModal isOpen={showCertModal} onClose={() => setShowCertModal(false)} />
       <div className="max-w-6xl mx-auto">
         <Reveal>
@@ -794,7 +791,7 @@ function Projects() {
   const projectsList = data.projects || [];
 
   return (
-    <section id="projects" className="px-6 md:px-16 py-16 md:py-24 min-h-screen flex flex-col justify-center bg-white rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6">
+    <section id="projects" className="px-6 md:px-16 py-16 md:py-24 min-h-screen flex flex-col justify-center bg-white scroll-mt-6">
       <Reveal>
         <h2 className="font-display text-5xl md:text-7xl tracking-tight text-center text-black font-extrabold">
           {data.projectsTitle || "PROJECTS"}
@@ -877,7 +874,7 @@ function CaseStudy({
   image?: string;
 }) {
   return (
-    <section id={id} className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center border-t border-black/5 rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6" style={{ backgroundColor: color || "#f0efeb" }}>
+    <section id={id} className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center scroll-mt-6" style={{ backgroundColor: color || "#f0efeb" }}>
       <div className="max-w-7xl mx-auto w-full">
         <Reveal className="text-center mb-6 lg:mb-8">
           <h3 className="font-display font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight text-black uppercase leading-none">
@@ -978,31 +975,33 @@ function Contact() {
   const contact = about.contact;
 
   return (
-    <section id="contact" className="relative w-full py-10 md:py-16 min-h-screen flex flex-col justify-between items-center bg-[#f4f4f2] font-sans border-t border-black/5">
+    <section id="contact" className="relative w-full py-6 lg:py-8 min-h-screen lg:h-screen flex flex-col justify-between items-center bg-[#f2f1ed] font-sans scroll-mt-0 overflow-hidden">
       
-      {/* Top Social Icons Bar (TikTok, Instagram, LinkedIn) */}
+      {/* Top Social Icons Bar (GitHub, Instagram, LinkedIn - Exact Match to Screenshot) */}
       <Reveal>
-        <div className="flex items-center justify-center gap-3.5 md:gap-5 mt-2 mb-6 md:mb-8">
-          {/* TikTok Icon */}
+        <div className="flex items-center justify-center gap-3.5 md:gap-5 mt-2 mb-4">
+          {/* GitHub Icon */}
           <a 
-            href={contact.tiktok || "#"} 
+            href={contact.github || "https://github.com/riddhimhatre12"} 
             target="_blank" 
             rel="noopener noreferrer" 
-            aria-label="TikTok" 
-            className="bg-black text-white w-9 h-9 md:w-11 md:h-11 flex items-center justify-center rounded-full hover:scale-110 transition-transform shadow-sm"
+            aria-label="GitHub" 
+            className="bg-black text-white w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-[14px] md:rounded-[16px] hover:scale-110 transition-transform shadow-sm"
           >
-            <TikTokIcon className="w-4 h-4 md:w-5 md:h-5" />
+            <svg viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6" fill="currentColor">
+              <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1.0.07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+            </svg>
           </a>
 
           {/* Instagram Icon */}
           <a 
-            href={contact.instagram || "#"} 
+            href={contact.instagram || "https://www.instagram.com/riddhi_mhatre12?igsh=MXI4eW1rdjI0a3BzMw=="} 
             target="_blank" 
             rel="noopener noreferrer" 
             aria-label="Instagram" 
-            className="border-[2px] md:border-[2.5px] border-black text-black w-9 h-9 md:w-11 md:h-11 flex items-center justify-center rounded-xl hover:scale-110 transition-transform bg-transparent shadow-sm"
+            className="bg-black text-white w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-[14px] md:rounded-[16px] hover:scale-110 transition-transform shadow-sm"
           >
-            <svg viewBox="0 0 24 24" className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <svg viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
@@ -1011,13 +1010,13 @@ function Contact() {
 
           {/* LinkedIn Icon */}
           <a 
-            href={contact.linkedin || "#"} 
+            href={contact.linkedin || "https://www.linkedin.com/in/riddhi-mhatre-909529342/"} 
             target="_blank" 
             rel="noopener noreferrer" 
             aria-label="LinkedIn" 
-            className="bg-black text-white w-9 h-9 md:w-11 md:h-11 flex items-center justify-center rounded-xl hover:scale-110 transition-transform shadow-sm"
+            className="bg-black text-white w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-[14px] md:rounded-[16px] hover:scale-110 transition-transform shadow-sm"
           >
-            <svg viewBox="0 0 24 24" className="w-4 h-4 md:w-5 md:h-5" fill="currentColor">
+            <svg viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6" fill="currentColor">
               <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
             </svg>
           </a>
@@ -1025,48 +1024,56 @@ function Contact() {
       </Reveal>
 
       {/* Main White Pill Banner + Polaroid Stack Container */}
-      <Reveal delay={0.1} className="w-full flex justify-center px-4 my-auto">
-        <div className="w-[98%] max-w-[1100px] relative">
+      <Reveal delay={0.1} className="w-full flex justify-center px-4 sm:px-6 my-auto">
+        <div className="w-[96%] max-w-[1060px] relative">
           
           <div className="w-full flex justify-center items-center relative">
             
-            {/* Main White Pill Banner */}
-            <div className="relative z-10 bg-white rounded-[100px] md:rounded-[140px] w-full py-10 sm:py-14 md:py-20 px-8 sm:px-16 md:px-24 flex items-center justify-center shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-gray-100/50">
+            {/* Main White Pill Banner (Grand & Bold Box) */}
+            <div className="relative z-10 bg-white rounded-[100px] md:rounded-[140px] w-full py-8 sm:py-12 md:py-16 px-8 sm:px-16 md:px-24 flex items-center justify-center shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-gray-100/50">
               <h2 
                 className="font-display font-black tracking-tighter leading-none text-[#1b1b1b] text-center w-full uppercase select-none"
-                style={{ fontSize: "clamp(26px, 6.4vw, 92px)", letterSpacing: "-0.03em" }}
+                style={{ fontSize: "clamp(30px, 6.8vw, 92px)", letterSpacing: "-0.03em" }}
               >
                 GET IN TOUCH!
               </h2>
             </div>
 
-            {/* Polaroids Stack - Anchored to bottom-left curve of white pill */}
-            <div className="absolute -left-2 sm:left-2 md:left-4 -bottom-10 sm:-bottom-14 md:-bottom-20 z-20 pointer-events-none drop-shadow-2xl w-[150px] sm:w-[210px] md:w-[270px] lg:w-[310px]">
+            {/* Polaroids Stack - Positioned cleanly at lower-left curve (Shifted ~2cm left) */}
+            <div className="absolute -left-5 sm:-left-7 md:-left-10 lg:-left-12 top-[95%] sm:top-[90%] md:top-[85%] lg:top-[80%] z-20 pointer-events-none drop-shadow-2xl w-[110px] sm:w-[145px] md:w-[175px] lg:w-[200px]">
               <div className="relative w-full aspect-[4/4.6]">
                 
                 {/* Back Polaroid Card */}
-                <div className="absolute inset-0 bg-[#fdfdfd] p-2.5 md:p-4 shadow-md border border-gray-200/80 transform rotate-[7deg] translate-x-3 translate-y-3 md:translate-x-6 md:translate-y-5 rounded-sm flex flex-col">
+                <div className="absolute inset-0 bg-[#fdfdfd] p-2 md:p-3 shadow-md border border-gray-200/80 transform rotate-[7deg] translate-x-3 translate-y-3 md:translate-x-4 md:translate-y-3.5 rounded-sm flex flex-col">
                   <div className="w-full flex-1 bg-gray-200/90 border border-gray-200/60" />
-                  <div className="h-6 md:h-12 bg-[#fdfdfd]" />
+                  <div className="h-4 md:h-8 bg-[#fdfdfd]" />
                 </div>
                 
                 {/* Front Polaroid Card */}
-                <div className="absolute inset-0 bg-[#fdfdfd] p-2.5 md:p-4 shadow-2xl border border-gray-100 transform rotate-[-9deg] rounded-sm flex flex-col">
+                <div className="absolute inset-0 bg-[#fdfdfd] p-2 md:p-3 shadow-2xl border border-gray-100 transform rotate-[-9deg] rounded-sm flex flex-col">
                   
-                  {/* Metallic Paperclip (Top-Right Edge of Front Polaroid) */}
-                  <svg className="absolute -top-6 right-2 md:-top-10 md:right-5 z-30 w-10 h-14 md:w-16 md:h-24 text-gray-400/90 drop-shadow-md rotate-[14deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
+                  {/* Realistic Metallic Paperclip (Clasping perfectly over top-right corner of polaroid photo frame) */}
+                  <svg 
+                    className="absolute -top-4 right-3 sm:-top-5 sm:right-4 md:-top-6 md:right-5 z-30 w-6 sm:w-7.5 md:w-9 h-13 sm:h-16 md:h-20 text-[#7d695b] drop-shadow-md rotate-[14deg] pointer-events-none" 
+                    viewBox="0 0 24 54" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2.2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                  >
+                    <path d="M7 16V38C7 42.4 10.6 46 15 46C19.4 46 23 42.4 23 38V12C23 6.5 18.5 2 13 2C7.5 2 3 6.5 3 12V42" />
                   </svg>
 
                   <div className="w-full flex-1 bg-gray-200 overflow-hidden relative border border-gray-200/80 shadow-inner">
                     <img
-                      src={IMAGES[about.portrait] || about.portrait || portrait}
+                      src={contactPortrait}
                       alt="Riddhi Mhatre Portrait"
-                      className="w-full h-full object-cover object-top"
+                      className="w-full h-full object-cover object-[65%_25%]"
                     />
                   </div>
                   {/* Polaroid White Margin at Bottom */}
-                  <div className="h-6 md:h-12 bg-[#fdfdfd]" />
+                  <div className="h-4 md:h-8 bg-[#fdfdfd]" />
                 </div>
 
               </div>
@@ -1079,13 +1086,13 @@ function Contact() {
 
       {/* Contact Info Details (Email & Phone) */}
       <Reveal delay={0.2}>
-        <div className="mt-12 md:mt-16 flex flex-col items-center gap-2.5 md:gap-3 z-10 relative">
+        <div className="mt-6 md:mt-10 flex flex-col items-center gap-2 md:gap-2.5 z-10 relative">
           {contact.email && (
             <div className="flex items-center gap-3">
               <MailIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1b1b1b]" />
               <a 
                 href={`mailto:${contact.email}`} 
-                className="font-sans text-[16px] md:text-[20px] font-medium text-[#1b1b1b] tracking-wide hover:opacity-75 transition-opacity"
+                className="font-sans text-[15px] md:text-[19px] font-medium text-[#1b1b1b] tracking-wide hover:opacity-75 transition-opacity"
               >
                 {contact.email}
               </a>
@@ -1096,7 +1103,7 @@ function Contact() {
               <PhoneIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1b1b1b]" />
               <a 
                 href={`tel:${contact.phone}`} 
-                className="font-sans text-[16px] md:text-[20px] font-medium text-[#1b1b1b] tracking-wide hover:opacity-75 transition-opacity"
+                className="font-sans text-[15px] md:text-[19px] font-medium text-[#1b1b1b] tracking-wide hover:opacity-75 transition-opacity"
               >
                 {contact.phone}
               </a>
@@ -1105,12 +1112,15 @@ function Contact() {
         </div>
       </Reveal>
 
-      {/* Bottom Year Badge (2026) */}
+      {/* Bottom Year Badge & Copyright Footer */}
       <Reveal delay={0.3}>
-        <div className="mt-8 md:mt-12 mb-2 z-10 relative">
+        <div className="mt-4 sm:mt-6 mb-2 flex flex-col items-center gap-1.5 z-10 relative">
           <span className="px-8 py-1.5 md:px-11 md:py-2 rounded-full border-[2.5px] border-black font-sans font-bold text-sm md:text-[17px] text-black bg-transparent tracking-widest shadow-sm">
             {data.hero.year || "2026"}
           </span>
+          <p className="text-[11px] font-sans text-neutral-500 font-medium tracking-wide">
+            © {data.hero.year || "2026"} {data.hero.name || "Riddhi Mhatre"}
+          </p>
         </div>
       </Reveal>
     </section>
@@ -1124,66 +1134,98 @@ function ExperienceAndEducation() {
   const [showCertModal, setShowCertModal] = useState(false);
 
   return (
-    <section id="experience" className="px-6 md:px-16 py-12 md:py-16 min-h-screen flex flex-col justify-center bg-[#faf9f6] rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6">
+    <section id="experience" className="px-6 md:px-16 py-6 lg:py-8 min-h-screen lg:h-screen flex flex-col justify-center bg-[#faf9f6] scroll-mt-0 overflow-hidden">
       <CertificateModal isOpen={showCertModal} onClose={() => setShowCertModal(false)} />
       <div className="max-w-7xl mx-auto w-full">
-        <Reveal>
-          <h2 className="font-display text-4xl md:text-6xl tracking-tight text-center mb-10 text-black font-extrabold leading-none">
+        <Reveal className="text-center mb-6 lg:mb-8">
+          <h2 className="font-display text-3xl md:text-5xl lg:text-6xl tracking-tight text-black font-extrabold leading-none">
             {data.experienceTitle || "EXPERIENCE & EDUCATION"}
           </h2>
+          <motion.div
+            initial={{ width: 0, opacity: 0 }}
+            whileInView={{ width: "80px", opacity: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="h-1 bg-black mx-auto mt-2.5 rounded-full"
+          />
         </Reveal>
 
-        <div className="grid md:grid-cols-2 gap-10 md:gap-16">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12">
           {/* Experience Column */}
           <div>
             <Reveal>
-              <h3 className="font-display tracking-widest text-lg md:text-xl border-b-2 border-black/10 pb-3 mb-6 text-neutral-900 flex items-center gap-3">
-                <span className="w-2 h-2 bg-black rounded-full" />
-                {data.experienceSub || "EXPERIENCE & COURSES"}
+              <h3 className="font-display tracking-widest text-base md:text-lg border-b-2 border-black/10 pb-2 mb-5 text-neutral-900 flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2 h-2 bg-black rounded-full animate-pulse" />
+                  <span>{data.experienceSub || "EXPERIENCE & COURSES"}</span>
+                </div>
+                <span className="text-xs font-mono font-bold text-neutral-400">01</span>
               </h3>
             </Reveal>
 
-            <div className="space-y-3">
+            <div className="space-y-4 relative">
               {experiences.map((exp: any, i: number) => (
-                <Reveal key={i} delay={0.1 * (i + 1)}>
-                  <div className="group relative pl-8 pb-5 last:pb-0">
-                    {/* Line */}
+                <Reveal key={i} delay={0.15 * (i + 1)}>
+                  <div className="group relative pl-7">
+                    {/* Animated Timeline Line */}
                     {i !== experiences.length - 1 && (
-                      <div className="absolute left-[9px] top-6 bottom-[-12px] w-[2px] bg-neutral-200 group-hover:bg-neutral-300 transition-colors" />
+                      <motion.div
+                        initial={{ scaleY: 0 }}
+                        whileInView={{ scaleY: 1 }}
+                        viewport={{ once: false }}
+                        transition={{ duration: 0.8, delay: 0.2 * i }}
+                        className="absolute left-[9px] top-6 bottom-[-16px] w-[2px] bg-neutral-300 origin-top group-hover:bg-black transition-colors duration-300"
+                      />
                     )}
-                    {/* Dot */}
-                    <div className="absolute left-0 top-0.5 w-5 h-5 rounded-full border-[4px] border-[#faf9f6] bg-black shadow-sm" />
+                    {/* Glowing Node Dot */}
+                    <div className="absolute left-0 top-1 w-4.5 h-4.5 rounded-full border-[3px] border-[#faf9f6] bg-black shadow-md group-hover:scale-125 transition-transform duration-300" />
 
-                    {/* Card */}
-                    <div className="bg-white p-5 rounded-2xl shadow-[0_2px_15px_rgba(0,0,0,0.03)] border border-neutral-100 hover:shadow-[0_6px_25px_rgba(0,0,0,0.06)] transition-all duration-300 group-hover:-translate-y-0.5">
-                      <span className={`inline-block text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-widest ${exp.type?.toLowerCase() === 'internship' ? 'bg-[#111] text-white' : 'bg-neutral-100 text-neutral-700'}`}>
-                        {exp.type}
-                      </span>
-                      <h4 className="font-sans text-xl font-black mt-3 text-neutral-900 tracking-tight leading-tight">{exp.title}</h4>
-                      <p className="text-neutral-500 font-medium text-sm mt-1.5 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                        <span className="text-neutral-900 font-bold">{exp.company}</span>
+                    {/* Interactive Premium Card */}
+                    <motion.div
+                      whileHover={{ y: -4, scale: 1.005 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      className="bg-white p-4 sm:p-5 rounded-xl shadow-[0_3px_15px_rgba(0,0,0,0.03)] border border-neutral-200/80 hover:border-black/30 hover:shadow-[0_8px_25px_rgba(0,0,0,0.07)] transition-all duration-300 relative overflow-hidden"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className={`inline-flex items-center gap-1.5 text-[9px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-widest ${exp.type?.toLowerCase() === 'internship' ? 'bg-black text-white' : 'bg-neutral-100 text-neutral-800'}`}>
+                          {exp.type?.toLowerCase() === 'internship' && (
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                          )}
+                          <span>{exp.type}</span>
+                        </span>
                         {exp.period && (
-                          <>
-                            <span className="hidden sm:inline text-neutral-300">•</span>
-                            <span>{exp.period}</span>
-                          </>
+                          <span className="text-[11px] font-mono font-semibold text-neutral-500 bg-neutral-50 px-2 py-0.5 rounded border border-neutral-100">
+                            {exp.period}
+                          </span>
                         )}
+                      </div>
+
+                      <h4 className="font-sans text-lg md:text-xl font-black mt-2 text-neutral-900 tracking-tight leading-tight group-hover:text-black">
+                        {exp.title}
+                      </h4>
+                      <p className="text-neutral-600 font-bold text-xs sm:text-sm mt-0.5">
+                        {exp.company}
                       </p>
+
                       {exp.description && (
-                        <p className="text-neutral-600 text-sm mt-2.5 leading-relaxed">
+                        <p className="text-neutral-600 text-xs sm:text-sm mt-2 leading-relaxed">
                           {exp.description}
                         </p>
                       )}
+
                       {exp.company?.includes("BizTech") && (
-                        <button
-                          onClick={() => setShowCertModal(true)}
-                          className="mt-3 text-xs font-medium text-neutral-600 hover:text-black underline underline-offset-4 transition-colors flex items-center gap-1"
-                        >
-                          <span>View Certificate</span>
-                          <span className="text-[10px]">↗</span>
-                        </button>
+                        <div className="mt-3 pt-2.5 border-t border-neutral-100 flex items-center justify-between">
+                          <button
+                            onClick={() => setShowCertModal(true)}
+                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-neutral-900 text-white hover:bg-black font-sans text-xs font-semibold transition-all duration-200 shadow-sm hover:shadow"
+                          >
+                            <span>View Official Certificate</span>
+                            <span className="text-[10px]">↗</span>
+                          </button>
+                          <span className="text-[10px] font-mono text-neutral-400 font-medium">#PC-F16833</span>
+                        </div>
                       )}
-                    </div>
+                    </motion.div>
                   </div>
                 </Reveal>
               ))}
@@ -1193,41 +1235,62 @@ function ExperienceAndEducation() {
           {/* Education Column */}
           <div>
             <Reveal>
-              <h3 className="font-display tracking-widest text-lg md:text-xl border-b-2 border-black/10 pb-3 mb-6 text-neutral-900 flex items-center gap-3">
-                <span className="w-2 h-2 bg-black rounded-full" />
-                {data.educationSub || "EDUCATION"}
+              <h3 className="font-display tracking-widest text-base md:text-lg border-b-2 border-black/10 pb-2 mb-5 text-neutral-900 flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2 h-2 bg-black rounded-full animate-pulse" />
+                  <span>{data.educationSub || "EDUCATION"}</span>
+                </div>
+                <span className="text-xs font-mono font-bold text-neutral-400">02</span>
               </h3>
             </Reveal>
 
-            <div className="space-y-3">
+            <div className="space-y-4 relative">
               {education.map((edu: any, i: number) => (
-                <Reveal key={i} delay={0.1 * (i + 1)}>
-                  <div className="group relative pl-8 pb-5 last:pb-0">
-                    {/* Line */}
+                <Reveal key={i} delay={0.15 * (i + 1)}>
+                  <div className="group relative pl-7">
+                    {/* Animated Timeline Line */}
                     {i !== education.length - 1 && (
-                      <div className="absolute left-[9px] top-6 bottom-[-12px] w-[2px] bg-neutral-200 group-hover:bg-neutral-300 transition-colors" />
+                      <motion.div
+                        initial={{ scaleY: 0 }}
+                        whileInView={{ scaleY: 1 }}
+                        viewport={{ once: false }}
+                        transition={{ duration: 0.8, delay: 0.2 * i }}
+                        className="absolute left-[9px] top-6 bottom-[-16px] w-[2px] bg-neutral-300 origin-top group-hover:bg-black transition-colors duration-300"
+                      />
                     )}
-                    {/* Dot */}
-                    <div className="absolute left-0 top-0.5 w-5 h-5 rounded-full border-[4px] border-[#faf9f6] bg-black shadow-sm" />
+                    {/* Glowing Node Dot */}
+                    <div className="absolute left-0 top-1 w-4.5 h-4.5 rounded-full border-[3px] border-[#faf9f6] bg-black shadow-md group-hover:scale-125 transition-transform duration-300" />
 
-                    {/* Card */}
-                    <div className="bg-white p-5 rounded-2xl shadow-[0_2px_15px_rgba(0,0,0,0.03)] border border-neutral-100 hover:shadow-[0_6px_25px_rgba(0,0,0,0.06)] transition-all duration-300 group-hover:-translate-y-0.5">
-                      <h4 className="font-sans text-xl font-black text-neutral-900 tracking-tight leading-tight">{edu.title}</h4>
-                      <p className="text-neutral-500 font-medium text-sm mt-1.5 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                        <span className="text-neutral-900 font-bold">{edu.school}</span>
+                    {/* Interactive Premium Card */}
+                    <motion.div
+                      whileHover={{ y: -4, scale: 1.005 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      className="bg-white p-4 sm:p-5 rounded-xl shadow-[0_3px_15px_rgba(0,0,0,0.03)] border border-neutral-200/80 hover:border-black/30 hover:shadow-[0_8px_25px_rgba(0,0,0,0.07)] transition-all duration-300 relative overflow-hidden"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="inline-block text-[9px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-widest bg-neutral-100 text-neutral-800">
+                          Degree
+                        </span>
                         {edu.period && (
-                          <>
-                            <span className="hidden sm:inline text-neutral-300">•</span>
-                            <span>{edu.period}</span>
-                          </>
+                          <span className="text-[11px] font-mono font-semibold text-neutral-500 bg-neutral-50 px-2 py-0.5 rounded border border-neutral-100">
+                            {edu.period}
+                          </span>
                         )}
+                      </div>
+
+                      <h4 className="font-sans text-lg md:text-xl font-black mt-2 text-neutral-900 tracking-tight leading-tight group-hover:text-black">
+                        {edu.title}
+                      </h4>
+                      <p className="text-neutral-600 font-bold text-xs sm:text-sm mt-0.5">
+                        {edu.school}
                       </p>
+
                       {edu.description && (
-                        <p className="text-neutral-600 text-sm mt-2.5 leading-relaxed">
+                        <p className="text-neutral-600 text-xs sm:text-sm mt-2 leading-relaxed">
                           {edu.description}
                         </p>
                       )}
-                    </div>
+                    </motion.div>
                   </div>
                 </Reveal>
               ))}
@@ -1243,7 +1306,7 @@ function ExperienceAndEducation() {
 
 function ExerCoachProject() {
   return (
-    <section id="exercoach" className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-[#f5f4f0] font-sans border-t border-black/5 rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6">
+    <section id="exercoach" className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-[#f5f4f0] font-sans scroll-mt-6">
       <div className="max-w-7xl mx-auto w-full">
         
         {/* Title & Subtitle */}
@@ -1420,7 +1483,7 @@ function ExerCoachProject() {
 
 function UnlimitedDemocracy() {
   return (
-    <section id="exercoach-mobile" className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-[#fafafa] font-sans border-t border-black/5 rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6">
+    <section id="exercoach-mobile" className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-[#fafafa] font-sans scroll-mt-6">
       <div className="max-w-7xl mx-auto w-full">
         
         {/* Title */}
@@ -1707,7 +1770,7 @@ function Index() {
       <div className="relative z-10">
         <Nav />
       </div>
-      <main className="flex-1 bg-[#f0efeb] rounded-t-[2.5rem] md:rounded-t-[3.5rem] overflow-hidden animate-fade-in flex flex-col relative z-10 space-y-6 md:space-y-10 py-4 px-2 sm:px-4 md:px-6">
+      <main className="flex-1 bg-white rounded-t-[2.5rem] md:rounded-t-[3.5rem] overflow-hidden animate-fade-in flex flex-col relative z-10">
         <Hero />
         <About />
         <Skills />
@@ -1732,9 +1795,6 @@ function Index() {
           />
         ))}
         <Contact />
-        <footer className="text-center py-8 text-xs text-neutral-500 bg-[#f0efeb]">
-          © {data.hero.year || "2026"} {data.hero.name || "Riddhi Mhatre"}
-        </footer>
       </main>
     </div>
   );
