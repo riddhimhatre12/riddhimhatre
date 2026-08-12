@@ -27,35 +27,64 @@
       "num": "01",
       "title": "Data & Analytics",
       "icon": "DatabaseIcon",
-      "skills": ["Power BI", "SQL", "MySQL", "DAX", "Data Modeling", "Excel"],
+      "skills": [
+        "Power BI",
+        "SQL",
+        "MySQL",
+        "DAX",
+        "Data Modeling",
+        "Excel"
+      ],
       "span": "md:col-span-3"
     },
     {
       "num": "02",
       "title": "Web Technology",
       "icon": "CodeIcon",
-      "skills": ["HTML", "CSS", "JavaScript", "Bootstrap", "React Basics"],
+      "skills": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Bootstrap",
+        "React Basics"
+      ],
       "span": "md:col-span-3"
     },
     {
       "num": "03",
       "title": "Testing & QA",
       "icon": "WrenchIcon",
-      "skills": ["Manual Testing", "STLC", "Test Cases Design", "Bug Tracking"],
+      "skills": [
+        "Manual Testing",
+        "STLC",
+        "Test Cases Design",
+        "Bug Tracking"
+      ],
       "span": "md:col-span-2"
     },
     {
       "num": "04",
       "title": "Languages",
       "icon": "ServerIcon",
-      "skills": ["Java (Basics)", "SQL", "Python (Basic OCR)"],
+      "skills": [
+        "Java (Basics)",
+        "SQL",
+        "Python (Basic OCR)"
+      ],
       "span": "md:col-span-2"
     },
     {
       "num": "05",
       "title": "Tools",
       "icon": "ErpIcon",
-      "skills": ["Git", "GitHub", "MS Excel", "MS Word", "Postman", "Power BI Desktop"],
+      "skills": [
+        "Git",
+        "GitHub",
+        "MS Excel",
+        "MS Word",
+        "Postman",
+        "Power BI Desktop"
+      ],
       "span": "md:col-span-2"
     }
   ],
@@ -85,14 +114,25 @@
       "school": "University of Mumbai",
       "period": "Apr 2025",
       "description": "Focused on databases, software engineering, programming methodologies, data analytics, and web technologies.",
-      "highlights": ["Databases", "Software Eng.", "Web Tech", "Data Analytics", "SQL"]
+      "highlights": [
+        "Databases",
+        "Software Eng.",
+        "Web Tech",
+        "Data Analytics",
+        "SQL"
+      ]
     },
     {
       "title": "Higher Secondary Certificate (H.S.C)",
       "school": "Sonopant Dandekar College, Palghar",
       "period": "Mar 2022",
       "description": "Completed Higher Secondary education in Science stream with focus on Physics, Mathematics, and Computer Science foundation.",
-      "highlights": ["Science Stream", "Mathematics", "Physics & Chem", "Computer Basics"]
+      "highlights": [
+        "Science Stream",
+        "Mathematics",
+        "Physics & Chem",
+        "Computer Basics"
+      ]
     },
     {
       "title": "Secondary School Certificate (S.S.C)",
@@ -105,7 +145,7 @@
   "projects": [
     {
       "key": "exercoach",
-      "name": "EXERCOACH GYM"
+      "name": "EXER COACH GYM"
     },
     {
       "key": "meter-reading",
@@ -118,6 +158,19 @@
   ],
   "caseStudies": [
     {
+      "id": "exercoachgym",
+      "title": "EXER COACH GYM",
+      "client": "Personal Project",
+      "industry": "Fitness & Health",
+      "location": "Remote",
+      "platforms": "Web Application, React, Node.js",
+      "goal": "Build a comprehensive gym management system for coaches to track member progress, create workout plans, and manage leads.",
+      "approach": "Developed a full-stack web application with role-based access control. Implemented lead management, member progress tracking, and gallery features.",
+      "stats": [],
+      "color": "#f0efeb",
+      "image": "exercoachgym"
+    },
+    {
       "id": "retail-warehouse",
       "title": "RETAIL & WAREHOUSE SALES DASHBOARD",
       "client": "BizTech IT Solutions (Interview Project)",
@@ -127,9 +180,18 @@
       "goal": "Analyze retail vs. warehouse sales performance, track category transfers (Liquor, Wine, Beer, Non-Alcohol, Store Supplies), and evaluate monthly sales trends across 30K dataset records.",
       "approach": "Built a dynamic Power BI analytics dashboard featuring key KPI summaries ($822.93K Warehouse Sales, $197.82K Retail Transfers, $208.19K Retail Sales), category bar & donut charts, detailed product matrix values, and monthly trend line comparisons. Implemented multi-slicer filtering for Year, Month, Item Type, Supplier, and Item Code.",
       "stats": [
-        { "n": "822.93K", "l": "Warehouse Sales" },
-        { "n": "208.19K", "l": "Retail Sales" },
-        { "n": "197.82K", "l": "Retail Transfers" }
+        {
+          "n": "822.93K",
+          "l": "Warehouse Sales"
+        },
+        {
+          "n": "208.19K",
+          "l": "Retail Sales"
+        },
+        {
+          "n": "197.82K",
+          "l": "Retail Transfers"
+        }
       ],
       "color": "#f0efeb",
       "image": "retailWarehouseSales"
@@ -144,9 +206,18 @@
       "goal": "Provide a comprehensive overview of hospital patient admission metrics, department referral counts, satisfaction scores, demographic distributions, and admission flags.",
       "approach": "Processed patient record datasets and built interactive Power BI visualizations including department referral horizontal bar charts, gender & admission donut charts, monthly admission volume timeline graphs, and a patient race treemap. Added key insights callouts and slicers for Department, Gender, and Date Range.",
       "stats": [
-        { "n": "9.199K", "l": "Patient Admissions" },
-        { "n": "8", "l": "Department Referrals" },
-        { "n": "12", "l": "Satisfaction Score" }
+        {
+          "n": "9.199K",
+          "l": "Patient Admissions"
+        },
+        {
+          "n": "8",
+          "l": "Department Referrals"
+        },
+        {
+          "n": "12",
+          "l": "Satisfaction Score"
+        }
       ],
       "color": "#f0efeb",
       "image": "healthcareAnalytics"
@@ -161,29 +232,21 @@
       "goal": "Uncover consumer spending behaviors, comparing online vs in-store order metrics across demographic age groups (Senior, Adult, Young), gender segments, and city tiers.",
       "approach": "Structured multi-channel retail data into a Power BI interactive dashboard ($2Bn total spend, $879M online spend, $892M store spend). Visualized online vs store spend by age group with clustered bar charts, online order frequency trends, age group spend donut charts, gender breakdown, and interactive city tier button slicers.",
       "stats": [
-        { "n": "$2Bn", "l": "Total Spend" },
-        { "n": "$879M", "l": "Online Spend" },
-        { "n": "$892M", "l": "Store Spend" }
+        {
+          "n": "$2Bn",
+          "l": "Total Spend"
+        },
+        {
+          "n": "$879M",
+          "l": "Online Spend"
+        },
+        {
+          "n": "$892M",
+          "l": "Store Spend"
+        }
       ],
       "color": "#eae7de",
       "image": "consumerShoppingTrends"
-    },
-    {
-      "id": "exercoach",
-      "title": "EXERCOACH GYM",
-      "client": "Freelance Client",
-      "industry": "Fitness & Personal Coaching",
-      "location": "Remote",
-      "platforms": "Web Technology, HTML5, CSS3, JavaScript, Live Website",
-      "goal": "Develop a high-impact, modern, and fully responsive website to establish the gym's online presence, showcase training programs, and drive membership registrations.",
-      "approach": "Designed and developed the live website exercoachgym.com from scratch as a freelance developer. Structured class directories, contact integrations, and coach rosters with a performance-first approach for instantaneous page loads.",
-      "stats": [
-        { "n": "Live", "l": "exercoachgym.com" },
-        { "n": "100%", "l": "custom mobile responsive" },
-        { "n": "Freelance", "l": "contract delivery" }
-      ],
-      "color": "#f0efeb",
-      "image": "exercoachgym"
     },
     {
       "id": "meter-reading",
@@ -195,9 +258,18 @@
       "goal": "Automate utility meter reading to eliminate manual entry errors, reduce processing time, and speed up billing operations.",
       "approach": "Developed a web-based application that integrates a webcam to capture real-time images of analog/digital utility meters. Implemented Tesseract OCR (Optical Character Recognition) to extract numerical digits from the images and store them in a database.",
       "stats": [
-        { "n": "98%", "l": "digit recognition accuracy" },
-        { "n": "< 2s", "l": "processing speed" },
-        { "n": "100%", "l": "automated digit extraction" }
+        {
+          "n": "98%",
+          "l": "digit recognition accuracy"
+        },
+        {
+          "n": "< 2s",
+          "l": "processing speed"
+        },
+        {
+          "n": "100%",
+          "l": "automated digit extraction"
+        }
       ],
       "color": "#f0efeb",
       "image": "meterReading"

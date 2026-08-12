@@ -6,19 +6,17 @@ import portrait from "@/assets/portrait.jpg";
 import portraitCutout from "@/assets/portrait_clean.jpg";
 import contactPortrait from "@/assets/contact_portrait.jpg";
 import awardBadge from "@/assets/award_badge.png";
-import exercoachgym from "@/assets/exercoachgym.png";
 import meterReading from "@/assets/meter_reading.png";
 import ecommerce from "@/assets/ecommerce.png";
 import dashboard from "@/assets/dashboard.png";
 import totebagCampaign from "@/assets/totebag_campaign.png";
 import unlimitedPhone from "@/assets/unlimited_phone.png";
 import unlimitedScreenFlat from "@/assets/unlimited_screen_flat.png";
-import exercoachMobile from "@/assets/exercoach_mobile.png";
-import exercoachMobileFlat from "@/assets/exercoach_mobile_flat.png";
 import retailWarehouseSales from "@/assets/retail_warehouse_sales.png";
 import healthcareAnalytics from "@/assets/healthcare_analytics.png";
 import consumerShoppingTrends from "@/assets/consumer_shopping_trends.png";
 import biztechCertificate from "@/assets/biztech_certificate.png";
+import exercoachgym from "@/assets/exercoachgym.png";
 import exercoachMobileScreen1 from "@/assets/exercoach_mobile_screen1.png";
 import exercoachMobileScreen2 from "@/assets/exercoach_mobile_screen2.png";
 import exercoachMobileScreen3 from "@/assets/exercoach_mobile_screen3.png";
@@ -39,13 +37,13 @@ const IMAGES: Record<string, string> = {
   portrait,
   portraitCutout,
   contactPortrait,
-  exercoachgym,
   meterReading,
   ecommerce,
   dashboard,
   retailWarehouseSales,
   healthcareAnalytics,
   consumerShoppingTrends,
+  exercoachgym,
 };
 
 function Reveal({
@@ -1394,6 +1392,460 @@ function ExperienceAndEducation() {
   );
 }
 
+function ExerCoachProject() {
+  return (
+    <section id="exercoach" className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-[#f5f4f0] font-sans border-t border-black/5 rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6">
+      <div className="max-w-7xl mx-auto w-full">
+        
+        {/* Title & Subtitle */}
+        <Reveal className="text-center mb-6 lg:mb-8">
+          <h2 className="font-display font-black tracking-tight text-3xl sm:text-4xl lg:text-5xl text-[#111111] uppercase leading-none">
+            EXERCOACH GYM
+          </h2>
+          <p className="font-script text-xl sm:text-2xl lg:text-3xl text-neutral-800 mt-1 italic">
+            (freelance live project)
+          </p>
+        </Reveal>
+
+        {/* 3-Column Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+          
+          {/* Left Column (OBJECTIVE + DETAILS) */}
+          <div className="lg:col-span-4 flex flex-col gap-4 lg:gap-6">
+            
+            {/* OBJECTIVE Card */}
+            <Reveal delay={0.1}>
+              <div className="bg-white p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5">
+                <h3 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-2">
+                  OBJECTIVE:
+                </h3>
+                <p className="font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed">
+                  Develop a high-impact, modern, and fully responsive website to establish the gym's online presence, showcase training programs, and drive membership registrations.
+                </p>
+              </div>
+            </Reveal>
+
+            {/* DETAILS Card */}
+            <Reveal delay={0.2}>
+              <div className="bg-white p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5">
+                <h3 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-2">
+                  DETAILS:
+                </h3>
+                <p className="font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed">
+                  Designed and developed the live website <span className="font-semibold text-black">exercoachgym.com</span> from scratch as a freelance developer. Structured class directories, contact integrations, and coach rosters with a performance-first approach.
+                </p>
+              </div>
+            </Reveal>
+
+          </div>
+
+          {/* Center Column (Broad Classic White/Cream Laptop Mockup) */}
+          <div className="lg:col-span-4 flex flex-col items-center justify-center my-3 lg:my-0">
+            <Reveal delay={0.15} className="w-full flex flex-col items-center">
+              
+              {/* Broad Laptop Outer Group */}
+              <div className="relative w-full max-w-[380px] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[520px] flex flex-col items-center group hover:scale-[1.02] transition-transform duration-500">
+                
+                {/* Cream/White Laptop Screen Frame */}
+                <div className="relative w-full bg-[#FAF8F5] p-2 sm:p-3 rounded-t-[1.4rem] lg:rounded-t-[1.8rem] shadow-[0_15px_40px_rgba(0,0,0,0.1)] border-[5px] lg:border-[6px] border-[#E8E3DA] z-10">
+                  
+                  {/* Top Webcam Dot */}
+                  <div className="flex justify-center mb-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#3a3a3a] ring-1 ring-black/10" />
+                  </div>
+
+                  {/* Inner Screen Display */}
+                  <div className="relative overflow-hidden rounded-[0.8rem] lg:rounded-[1rem] bg-black border border-neutral-300/40 flex flex-col aspect-[16/9.5]">
+                    
+                    {/* Cream Browser Navigation Bar */}
+                    <div className="bg-[#F4F0E8] px-3 py-1 flex items-center justify-between text-[10px] text-neutral-600 font-mono border-b border-neutral-300/50">
+                      <div className="flex items-center gap-1">
+                        <span className="w-2 h-2 rounded-full bg-[#ff5f56]" />
+                        <span className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
+                        <span className="w-2 h-2 rounded-full bg-[#27c93f]" />
+                      </div>
+                      <div className="flex items-center gap-1 bg-[#FAF8F5] px-2.5 py-0.5 rounded-md text-[9.5px] text-neutral-700 border border-neutral-300/50 shadow-inner">
+                        <svg className="w-2 h-2 text-emerald-600" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+                        </svg>
+                        exercoachgym.com
+                      </div>
+                      <div className="w-3" />
+                    </div>
+
+                    {/* ExerCoach Website Screen Animated Video/Scroll Preview */}
+                    <div className="relative w-full flex-1 overflow-hidden bg-[#111111]">
+                      <motion.div
+                        className="w-full"
+                        animate={{ y: ["0%", "-58%", "-58%", "0%", "0%"] }}
+                        transition={{
+                          duration: 15,
+                          repeat: Infinity,
+                          repeatType: "loop",
+                          ease: [0.45, 0, 0.55, 1],
+                          times: [0, 0.42, 0.5, 0.92, 1]
+                        }}
+                      >
+                        <img
+                          src={exercoachgym}
+                          alt="ExerCoach Gym Live Website Animated Preview"
+                          className="w-full h-auto block select-none pointer-events-none"
+                        />
+                      </motion.div>
+                      {/* Subtle Screen Reflection */}
+                      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none z-10" />
+                      {/* Live Auto-Scroll Tag */}
+                      <div className="absolute bottom-2 right-2 bg-black/85 backdrop-blur-sm px-2 py-0.5 rounded-full text-[8.5px] font-mono text-white/90 border border-white/15 z-20 flex items-center gap-1 shadow-sm">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <span>LIVE PREVIEW</span>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                {/* Laptop Hinge & Base Lip */}
+                <div className="w-[104%] h-3 lg:h-3.5 bg-gradient-to-b from-[#F2EEE7] via-[#E6E0D5] to-[#D8D2C4] rounded-b-xl border-t border-[#D0C9BB] shadow-xl relative z-20 flex justify-center items-start -mt-0.5">
+                  <div className="w-12 h-1 bg-[#C8C1B2] rounded-b-sm mt-0.5" />
+                </div>
+
+              </div>
+
+              {/* Live Status Badge Below Laptop */}
+              <a 
+                href="https://exercoachgym.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="mt-3.5 inline-flex items-center gap-2 bg-black text-white font-mono text-[11px] lg:text-xs px-3.5 py-1.5 rounded-full hover:bg-neutral-800 transition-colors shadow-md border border-white/10 group"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>LIVE • exercoachgym.com</span>
+                <svg className="w-3 h-3 opacity-60 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+
+            </Reveal>
+          </div>
+
+          {/* Right Column (MY ROLE) */}
+          <div className="lg:col-span-4 flex">
+            <Reveal delay={0.3} className="w-full flex">
+              <div className="bg-white p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5 w-full flex flex-col justify-center">
+                <h3 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-3">
+                  MY ROLE:
+                </h3>
+                <ul className="space-y-2.5 font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed">
+                  <li className="flex items-start gap-2">
+                    <span className="text-black font-bold text-base leading-none mt-1">•</span>
+                    <span>Designed & built custom UI/UX layouts from scratch</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-black font-bold text-base leading-none mt-1">•</span>
+                    <span>Implemented 100% mobile-first responsive web design</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-black font-bold text-base leading-none mt-1">•</span>
+                    <span>Optimized page performance and image asset loads</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-black font-bold text-base leading-none mt-1">•</span>
+                    <span>Integrated member inquiry & booking call-to-actions</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-black font-bold text-base leading-none mt-1">•</span>
+                    <span>Deployed & managed live domain & hosting configurations</span>
+                  </li>
+                </ul>
+              </div>
+            </Reveal>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+function UnlimitedDemocracy() {
+  return (
+    <section id="exercoach-mobile" className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-[#fafafa] font-sans border-t border-black/5 rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6">
+      <div className="max-w-7xl mx-auto w-full">
+        
+        {/* Title */}
+        <Reveal className="mb-4 lg:mb-6">
+          <h2 className="font-display font-black tracking-tighter text-4xl sm:text-5xl lg:text-6xl text-[#111111] uppercase leading-none">
+            EXERCOACH<br />GYM
+          </h2>
+        </Reveal>
+
+        {/* 3-Column Grid (Shifted up with tight gap) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+          
+          {/* Left Column (Details/Goal/Approach Card - Shifted Up, Logo Removed) */}
+          <div className="lg:col-span-4 flex flex-col gap-4">
+            
+            {/* DETAILS, PLANFORMS, GOAL, APPROACH Card */}
+            <Reveal delay={0.1}>
+              <div className="bg-[#f0efeb] p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5 flex flex-col gap-3.5">
+                
+                {/* DETAILS */}
+                <div>
+                  <h3 className="font-display font-black text-sm lg:text-base tracking-wider text-black uppercase mb-1">
+                    DETAILS:
+                  </h3>
+                  <div className="space-y-0.5 text-xs sm:text-sm text-neutral-700 font-sans">
+                    <p><span className="font-semibold text-black">Client:</span> Freelance Client</p>
+                    <p><span className="font-semibold text-black">Industry:</span> Fitness & Personal Coaching</p>
+                    <p><span className="font-semibold text-black">Location:</span> Remote</p>
+                  </div>
+                </div>
+
+                {/* PLANFORMS */}
+                <div>
+                  <h3 className="font-display font-black text-sm lg:text-base tracking-wider text-black uppercase mb-1">
+                    PLATFORMS:
+                  </h3>
+                  <p className="font-sans text-neutral-700 text-xs sm:text-sm">
+                    Web Technology, HTML5, CSS3, JavaScript, Live Website
+                  </p>
+                </div>
+
+                {/* GOAL */}
+                <div>
+                  <h3 className="font-display font-black text-sm lg:text-base tracking-wider text-black uppercase mb-1">
+                    GOAL:
+                  </h3>
+                  <p className="font-sans text-neutral-700 text-xs sm:text-sm leading-relaxed">
+                    Develop a high-impact, modern, and fully responsive website to establish the gym's online presence, showcase training programs, and drive membership registrations.
+                  </p>
+                </div>
+
+                {/* APPROACH */}
+                <div>
+                  <h3 className="font-display font-black text-sm lg:text-base tracking-wider text-black uppercase mb-1">
+                    APPROACH:
+                  </h3>
+                  <p className="font-sans text-neutral-700 text-xs sm:text-sm leading-relaxed">
+                    Designed and developed the live website exercoachgym.com from scratch as a freelance developer. Structured class directories, contact integrations, and coach rosters with a performance-first approach.
+                  </p>
+                </div>
+
+              </div>
+            </Reveal>
+
+          </div>
+
+          {/* Center Column (Single Sleek iPhone 16 Pro Screen Mockup) */}
+          <div className="lg:col-span-3 flex flex-col items-center justify-center my-3 lg:my-0">
+            <Reveal delay={0.15} className="w-full flex flex-col items-center">
+              
+              {/* Sleek iPhone Outer Container */}
+              <div className="relative w-full max-w-[240px] sm:max-w-[260px] md:max-w-[275px] group hover:scale-[1.02] transition-transform duration-500">
+                
+                {/* Titanium Phone Body Frame */}
+                <div className="relative w-full bg-[#1c1c1e] p-[8px] sm:p-[9px] rounded-[2.8rem] sm:rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.22)] border-[2px] border-[#3a3a3c] ring-1 ring-black/50">
+                  
+                  {/* Outer Buttons (Volume & Power) */}
+                  <div className="absolute -left-[3px] top-16 w-[3px] h-6 bg-[#2c2c2e] rounded-l-sm" />
+                  <div className="absolute -left-[3px] top-24 w-[3px] h-6 bg-[#2c2c2e] rounded-l-sm" />
+                  <div className="absolute -right-[3px] top-20 w-[3px] h-9 bg-[#2c2c2e] rounded-r-sm" />
+
+                  {/* Inner Screen Display */}
+                  <div className="relative overflow-hidden rounded-[2.3rem] sm:rounded-[2.5rem] bg-black aspect-[9/19.2] border border-neutral-800">
+                    
+                    {/* Status Bar / Dynamic Island */}
+                    <div className="absolute top-0 inset-x-0 h-7 z-30 flex items-center justify-between px-5 pt-1 text-white font-mono text-[9px] pointer-events-none select-none">
+                      <span className="font-semibold text-white/90">9:41</span>
+                      {/* Dynamic Island */}
+                      <div className="w-16 h-3.5 bg-black rounded-full flex items-center justify-end px-1.5 gap-1 ring-1 ring-white/10">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#0c1524] ring-1 ring-blue-500/50" />
+                      </div>
+                      <div className="flex items-center gap-1 text-white/90">
+                        <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.2 19.54 10.55 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/></svg>
+                        <span className="w-2.5 h-1.5 bg-current rounded-xs" />
+                      </div>
+                    </div>
+
+                    {/* ExerCoach Mobile Website Screen Animated Image */}
+                    <div className="w-full h-full overflow-hidden bg-black">
+                      <motion.div
+                        className="w-full flex flex-col"
+                        animate={{ y: ["0%", "-66.6%", "-66.6%", "0%", "0%"] }}
+                        transition={{
+                          duration: 16,
+                          repeat: Infinity,
+                          repeatType: "loop",
+                          ease: [0.45, 0, 0.55, 1],
+                          times: [0, 0.45, 0.5, 0.95, 1]
+                        }}
+                      >
+                        <img
+                          src={exercoachMobileScreen1}
+                          alt="ExerCoach Gym Mobile Screen 1 - Hero & Trial"
+                          className="w-full h-auto block select-none pointer-events-none"
+                        />
+                        <img
+                          src={exercoachMobileScreen2}
+                          alt="ExerCoach Gym Mobile Screen 2 - Contact"
+                          className="w-full h-auto block select-none pointer-events-none"
+                        />
+                        <img
+                          src={exercoachMobileScreen3}
+                          alt="ExerCoach Gym Mobile Screen 3 - Plans"
+                          className="w-full h-auto block select-none pointer-events-none"
+                        />
+                      </motion.div>
+                    </div>
+
+                    {/* Glass Reflection Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none z-20" />
+
+                    {/* iPhone Home Indicator Bar */}
+                    <div className="absolute bottom-1 inset-x-0 flex justify-center z-30 pointer-events-none">
+                      <span className="w-24 h-1 bg-white/40 rounded-full" />
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+              {/* Live Status Badge Below Phone */}
+              <a 
+                href="https://exercoachgym.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="mt-3.5 inline-flex items-center gap-2 bg-black text-white font-mono text-[11px] lg:text-xs px-3.5 py-1.5 rounded-full hover:bg-neutral-800 transition-colors shadow-md border border-white/10 group"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>LIVE • exercoachgym.com</span>
+              </a>
+            </Reveal>
+          </div>
+
+          {/* Right Column (ExerCoach Gym Website & Admin Portal Showcase) */}
+          <div className="lg:col-span-5 flex flex-col gap-5">
+            <Reveal delay={0.25} className="w-full">
+              
+              {/* Section 1: Client Website Mobile Screens */}
+              <div>
+                <h4 className="font-display font-black text-xs uppercase tracking-wider text-black mb-2 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <span>PUBLIC WEBSITE (MOBILE)</span>
+                </h4>
+                <div className="grid grid-cols-3 gap-2.5 sm:gap-3 w-full items-start">
+                  
+                  {/* Phone 1: Hero & Trial */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.4rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1.1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachMobileScreen1}
+                        alt="ExerCoach Mobile Screen 1 - Hero & Free Trial Session"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[9px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Hero & Trial</span>
+                  </div>
+
+                  {/* Phone 2: Contact & Info */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.4rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1.1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachMobileScreen2}
+                        alt="ExerCoach Mobile Screen 2 - Get in Touch & Contact"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[9px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Contact & Info</span>
+                  </div>
+
+                  {/* Phone 3: Membership Plans */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.4rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1.1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachMobileScreen3}
+                        alt="ExerCoach Mobile Screen 3 - Membership Plans"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[9px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Plans & Rates</span>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* Section 2: Admin Dashboard & Portal Screens */}
+              <div className="mt-4 pt-4 border-t border-black/10">
+                <h4 className="font-display font-black text-xs uppercase tracking-wider text-black mb-2 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-600" />
+                  <span>ADMIN DASHBOARD & CMS PORTAL</span>
+                </h4>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 w-full items-start">
+                  
+                  {/* Admin Phone 1: Dashboard */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachAdminDashboard}
+                        alt="ExerCoach Admin Dashboard Overview"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Dashboard</span>
+                  </div>
+
+                  {/* Admin Phone 2: Navigation Menu */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachAdminMenu}
+                        alt="ExerCoach Admin Navigation Menu"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Nav Menu</span>
+                  </div>
+
+                  {/* Admin Phone 3: Leads Portal */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachAdminLeads}
+                        alt="ExerCoach Customer Leads Management"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Leads CMS</span>
+                  </div>
+
+                  {/* Admin Phone 4: Gallery Management */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachAdminGallery}
+                        alt="ExerCoach Gallery Media Management"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Gallery CMS</span>
+                  </div>
+
+                </div>
+              </div>
+
+            </Reveal>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
 function Index() {
   const data = Route.useLoaderData();
   const caseStudies = (data.caseStudies || []).filter((cs: any) => cs.id !== "exercoach");
@@ -1406,12 +1858,14 @@ function Index() {
       <div className="relative z-10">
         <Nav />
       </div>
-      <main className="flex-1 bg-white rounded-t-[2.5rem] md:rounded-t-[3.5rem] overflow-hidden animate-fade-in flex flex-col relative z-10">
+      <main className="flex-1 bg-[#f0efeb] rounded-t-[2.5rem] md:rounded-t-[3.5rem] overflow-hidden animate-fade-in flex flex-col relative z-10 space-y-6 md:space-y-10 py-4 px-2 sm:px-4 md:px-6">
         <Hero />
         <About />
         <Skills />
         <ExperienceAndEducation />
         <Projects />
+        <ExerCoachProject />
+        <UnlimitedDemocracy />
         {caseStudies.map((cs: any) => (
           <CaseStudy
             key={cs.id}
@@ -1429,6 +1883,9 @@ function Index() {
           />
         ))}
         <Contact />
+        <footer className="text-center py-8 text-xs text-neutral-500 bg-[#f0efeb]">
+          © {data.hero.year || "2026"} {data.hero.name || "Riddhi Mhatre"}
+        </footer>
       </main>
     </div>
   );
