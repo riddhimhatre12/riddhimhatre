@@ -72,11 +72,11 @@
       "description": "Successfully completed a one-month internship in Data Analytics at BizTech IT Solutions. Built interactive Power BI dashboards for Retail Sales, Healthcare Analytics, and Consumer Shopping Trends to enable data-driven business decisions."
     },
     {
-      "type": "Course",
-      "title": "Manual Testing Certification",
+      "type": "1 Year Course",
+      "title": "Manual Testing Course",
       "company": "QSpiders Vasai-Virar",
-      "period": "",
-      "description": "Completed comprehensive manual testing training covering software testing life cycle (STLC), bug reporting, test execution, and test cases design."
+      "period": "1 Year Course",
+      "description": "Completed an intensive 1-year manual testing course covering software testing life cycle (STLC), bug reporting, test execution, and test case design methodologies."
     }
   ],
   "education": [
@@ -84,19 +84,21 @@
       "title": "Bachelor of Science in Information Technology",
       "school": "University of Mumbai",
       "period": "Apr 2025",
-      "description": "Focused on databases, software engineering, programming methodologies, data analytics, and web technologies."
+      "description": "Focused on databases, software engineering, programming methodologies, data analytics, and web technologies.",
+      "highlights": ["Databases", "Software Eng.", "Web Tech", "Data Analytics", "SQL"]
     },
     {
       "title": "Higher Secondary Certificate (H.S.C)",
       "school": "Sonopant Dandekar College, Palghar",
       "period": "Mar 2022",
-      "description": ""
+      "description": "Completed Higher Secondary education in Science stream with focus on Physics, Mathematics, and Computer Science foundation.",
+      "highlights": ["Science Stream", "Mathematics", "Physics & Chem", "Computer Basics"]
     },
     {
       "title": "Secondary School Certificate (S.S.C)",
       "school": "Tarapur Vidya Mandir, Boisar",
       "period": "Mar 2020",
-      "description": ""
+      "description": "Completed secondary education with strong academic foundation in Mathematics, General Science, and English."
     }
   ],
   "projectsTitle": "PROJECTS",

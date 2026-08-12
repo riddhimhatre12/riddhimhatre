@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+﻿import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
@@ -572,14 +572,14 @@ function CertificateModal({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
         {/* Simple Header */}
         <div className="flex items-center justify-between px-5 py-3.5 bg-white border-b border-neutral-100 flex-shrink-0">
           <h3 className="font-sans font-extrabold text-base sm:text-lg text-neutral-900 leading-tight">
-            Certificate of Internship — BizTech IT Solutions
+            Certificate of Internship ΓÇö BizTech IT Solutions
           </h3>
           <button
             onClick={onClose}
             aria-label="Close modal"
             className="w-8 h-8 rounded-full bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center text-neutral-600 font-bold transition-colors flex-shrink-0"
           >
-            ✕
+            Γ£ò
           </button>
         </div>
 
@@ -1039,14 +1039,8 @@ function Contact() {
               </h2>
             </div>
 
-            {/* Polaroids Stack - Animated Slide-in FROM LEFT SIDE on Scroll */}
-            <motion.div 
-              initial={{ x: -140, opacity: 0, rotate: -20 }}
-              whileInView={{ x: 0, opacity: 1, rotate: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ type: "spring", stiffness: 65, damping: 14, delay: 0.25 }}
-              className="absolute -left-5 sm:-left-7 md:-left-10 lg:-left-12 top-[95%] sm:top-[90%] md:top-[85%] lg:top-[80%] z-20 pointer-events-none drop-shadow-2xl w-[110px] sm:w-[145px] md:w-[175px] lg:w-[200px]"
-            >
+            {/* Polaroids Stack - Positioned cleanly at lower-left curve (Shifted ~2cm left) */}
+            <div className="absolute -left-5 sm:-left-7 md:-left-10 lg:-left-12 top-[95%] sm:top-[90%] md:top-[85%] lg:top-[80%] z-20 pointer-events-none drop-shadow-2xl w-[110px] sm:w-[145px] md:w-[175px] lg:w-[200px]">
               <div className="relative w-full aspect-[4/4.6]">
                 
                 {/* Back Polaroid Card */}
@@ -1075,7 +1069,7 @@ function Contact() {
                     <img
                       src={contactPortrait}
                       alt="Riddhi Mhatre Portrait"
-                      className="w-full h-full object-cover object-[50%_30%]"
+                      className="w-full h-full object-cover object-[65%_25%]"
                     />
                   </div>
                   {/* Polaroid White Margin at Bottom */}
@@ -1083,7 +1077,7 @@ function Contact() {
                 </div>
 
               </div>
-            </motion.div>
+            </div>
             
           </div>
 
@@ -1125,7 +1119,7 @@ function Contact() {
             {data.hero.year || "2026"}
           </span>
           <p className="text-[11px] font-sans text-neutral-500 font-medium tracking-wide">
-            © {data.hero.year || "2026"} {data.hero.name || "Riddhi Mhatre"}
+            ┬⌐ {data.hero.year || "2026"} {data.hero.name || "Riddhi Mhatre"}
           </p>
         </div>
       </Reveal>
@@ -1137,256 +1131,626 @@ function ExperienceAndEducation() {
   const data = Route.useLoaderData();
   const experiences = data.experience || [];
   const education = data.education || [];
-  const [activeTab, setActiveTab] = useState<"experience" | "education">("experience");
   const [showCertModal, setShowCertModal] = useState(false);
 
   return (
-    <section id="experience" className="px-5 md:px-12 py-6 lg:py-10 min-h-screen lg:h-screen flex flex-col justify-center bg-[#FAF9F6] font-sans scroll-mt-0 overflow-hidden relative">
+    <section id="experience" className="px-6 md:px-16 py-6 lg:py-8 min-h-screen lg:h-screen flex flex-col justify-center bg-[#faf9f6] scroll-mt-0 overflow-hidden">
       <CertificateModal isOpen={showCertModal} onClose={() => setShowCertModal(false)} />
-
-      {/* Decorative Subtle Background Pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(#e5e3dc_1px,transparent_1px)] [background-size:24px_24px] opacity-35 pointer-events-none" />
-
-      <div className="max-w-6xl mx-auto w-full relative z-10 flex flex-col items-center">
-        
-        {/* Main Section Header */}
+      <div className="max-w-7xl mx-auto w-full">
         <Reveal className="text-center mb-6 lg:mb-8">
-          <span className="inline-block text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.25em] text-neutral-500 uppercase bg-neutral-200/70 px-3.5 py-1 rounded-full mb-2.5 border border-neutral-300/40">
-            CAREER & ACADEMIC ARCHITECTURE
-          </span>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-5xl tracking-tight text-[#111111] font-black uppercase leading-none select-none">
+          <h2 className="font-display text-3xl md:text-5xl lg:text-6xl tracking-tight text-black font-extrabold leading-none">
             {data.experienceTitle || "EXPERIENCE & EDUCATION"}
+          </h2>
+          <motion.div
+            initial={{ width: 0, opacity: 0 }}
+            whileInView={{ width: "80px", opacity: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="h-1 bg-black mx-auto mt-2.5 rounded-full"
+          />
+        </Reveal>
+
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+          {/* Experience Column */}
+          <div>
+            <Reveal>
+              <h3 className="font-display tracking-widest text-base md:text-lg border-b-2 border-black/10 pb-2 mb-5 text-neutral-900 flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2 h-2 bg-black rounded-full animate-pulse" />
+                  <span>{data.experienceSub || "EXPERIENCE & COURSES"}</span>
+                </div>
+                <span className="text-xs font-mono font-bold text-neutral-400">01</span>
+              </h3>
+            </Reveal>
+
+            <div className="space-y-4 relative">
+              {experiences.map((exp: any, i: number) => (
+                <Reveal key={i} delay={0.15 * (i + 1)}>
+                  <div className="group relative pl-7">
+                    {/* Animated Timeline Line */}
+                    {i !== experiences.length - 1 && (
+                      <motion.div
+                        initial={{ scaleY: 0 }}
+                        whileInView={{ scaleY: 1 }}
+                        viewport={{ once: false }}
+                        transition={{ duration: 0.8, delay: 0.2 * i }}
+                        className="absolute left-[9px] top-6 bottom-[-16px] w-[2px] bg-neutral-300 origin-top group-hover:bg-black transition-colors duration-300"
+                      />
+                    )}
+                    {/* Glowing Node Dot */}
+                    <div className="absolute left-0 top-1 w-4.5 h-4.5 rounded-full border-[3px] border-[#faf9f6] bg-black shadow-md group-hover:scale-125 transition-transform duration-300" />
+
+                    {/* Interactive Premium Card */}
+                    <motion.div
+                      whileHover={{ y: -4, scale: 1.005 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      className="bg-white p-4 sm:p-5 rounded-xl shadow-[0_3px_15px_rgba(0,0,0,0.03)] border border-neutral-200/80 hover:border-black/30 hover:shadow-[0_8px_25px_rgba(0,0,0,0.07)] transition-all duration-300 relative overflow-hidden"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className={`inline-flex items-center gap-1.5 text-[9px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-widest ${exp.type?.toLowerCase() === 'internship' ? 'bg-black text-white' : 'bg-neutral-100 text-neutral-800'}`}>
+                          {exp.type?.toLowerCase() === 'internship' && (
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                          )}
+                          <span>{exp.type}</span>
+                        </span>
+                        {exp.period && (
+                          <span className="text-[11px] font-mono font-semibold text-neutral-500 bg-neutral-50 px-2 py-0.5 rounded border border-neutral-100">
+                            {exp.period}
+                          </span>
+                        )}
+                      </div>
+
+                      <h4 className="font-sans text-lg md:text-xl font-black mt-2 text-neutral-900 tracking-tight leading-tight group-hover:text-black">
+                        {exp.title}
+                      </h4>
+                      <p className="text-neutral-600 font-bold text-xs sm:text-sm mt-0.5">
+                        {exp.company}
+                      </p>
+
+                      {exp.description && (
+                        <p className="text-neutral-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                          {exp.description}
+                        </p>
+                      )}
+
+                      {exp.company?.includes("BizTech") && (
+                        <div className="mt-3 pt-2.5 border-t border-neutral-100 flex items-center justify-between">
+                          <button
+                            onClick={() => setShowCertModal(true)}
+                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-neutral-900 text-white hover:bg-black font-sans text-xs font-semibold transition-all duration-200 shadow-sm hover:shadow"
+                          >
+                            <span>View Official Certificate</span>
+                            <span className="text-[10px]">Γåù</span>
+                          </button>
+                          <span className="text-[10px] font-mono text-neutral-400 font-medium">#PC-F16833</span>
+                        </div>
+                      )}
+                    </motion.div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+
+          {/* Education Column */}
+          <div>
+            <Reveal>
+              <h3 className="font-display tracking-widest text-base md:text-lg border-b-2 border-black/10 pb-2 mb-5 text-neutral-900 flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2 h-2 bg-black rounded-full animate-pulse" />
+                  <span>{data.educationSub || "EDUCATION"}</span>
+                </div>
+                <span className="text-xs font-mono font-bold text-neutral-400">02</span>
+              </h3>
+            </Reveal>
+
+            <div className="space-y-4 relative">
+              {education.map((edu: any, i: number) => (
+                <Reveal key={i} delay={0.15 * (i + 1)}>
+                  <div className="group relative pl-7">
+                    {/* Animated Timeline Line */}
+                    {i !== education.length - 1 && (
+                      <motion.div
+                        initial={{ scaleY: 0 }}
+                        whileInView={{ scaleY: 1 }}
+                        viewport={{ once: false }}
+                        transition={{ duration: 0.8, delay: 0.2 * i }}
+                        className="absolute left-[9px] top-6 bottom-[-16px] w-[2px] bg-neutral-300 origin-top group-hover:bg-black transition-colors duration-300"
+                      />
+                    )}
+                    {/* Glowing Node Dot */}
+                    <div className="absolute left-0 top-1 w-4.5 h-4.5 rounded-full border-[3px] border-[#faf9f6] bg-black shadow-md group-hover:scale-125 transition-transform duration-300" />
+
+                    {/* Interactive Premium Card */}
+                    <motion.div
+                      whileHover={{ y: -4, scale: 1.005 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      className="bg-white p-4 sm:p-5 rounded-xl shadow-[0_3px_15px_rgba(0,0,0,0.03)] border border-neutral-200/80 hover:border-black/30 hover:shadow-[0_8px_25px_rgba(0,0,0,0.07)] transition-all duration-300 relative overflow-hidden"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="inline-block text-[9px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-widest bg-neutral-100 text-neutral-800">
+                          Degree
+                        </span>
+                        {edu.period && (
+                          <span className="text-[11px] font-mono font-semibold text-neutral-500 bg-neutral-50 px-2 py-0.5 rounded border border-neutral-100">
+                            {edu.period}
+                          </span>
+                        )}
+                      </div>
+
+                      <h4 className="font-sans text-lg md:text-xl font-black mt-2 text-neutral-900 tracking-tight leading-tight group-hover:text-black">
+                        {edu.title}
+                      </h4>
+                      <p className="text-neutral-600 font-bold text-xs sm:text-sm mt-0.5">
+                        {edu.school}
+                      </p>
+
+                      {edu.description && (
+                        <p className="text-neutral-600 text-xs sm:text-sm mt-2 leading-relaxed">
+                          {edu.description}
+                        </p>
+                      )}
+                    </motion.div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+
+function ExerCoachProject() {
+  return (
+    <section id="exercoach" className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-[#f5f4f0] font-sans scroll-mt-6">
+      <div className="max-w-7xl mx-auto w-full">
+        
+        {/* Title & Subtitle */}
+        <Reveal className="text-center mb-6 lg:mb-8">
+          <h2 className="font-display font-black tracking-tight text-3xl sm:text-4xl lg:text-5xl text-[#111111] uppercase leading-none">
+            EXERCOACH GYM
+          </h2>
+          <p className="font-script text-xl sm:text-2xl lg:text-3xl text-neutral-800 mt-1 italic">
+            (freelance live project)
+          </p>
+        </Reveal>
+
+        {/* 3-Column Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+          
+          {/* Left Column (OBJECTIVE + DETAILS) */}
+          <div className="lg:col-span-4 flex flex-col gap-4 lg:gap-6">
+            
+            {/* OBJECTIVE Card */}
+            <Reveal delay={0.1}>
+              <div className="bg-white p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5">
+                <h3 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-2">
+                  OBJECTIVE:
+                </h3>
+                <p className="font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed">
+                  Develop a high-impact, modern, and fully responsive website to establish the gym's online presence, showcase training programs, and drive membership registrations.
+                </p>
+              </div>
+            </Reveal>
+
+            {/* DETAILS Card */}
+            <Reveal delay={0.2}>
+              <div className="bg-white p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5">
+                <h3 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-2">
+                  DETAILS:
+                </h3>
+                <p className="font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed">
+                  Designed and developed the live website <span className="font-semibold text-black">exercoachgym.com</span> from scratch as a freelance developer. Structured class directories, contact integrations, and coach rosters with a performance-first approach.
+                </p>
+              </div>
+            </Reveal>
+
+          </div>
+
+          {/* Center Column (Broad Classic White/Cream Laptop Mockup) */}
+          <div className="lg:col-span-4 flex flex-col items-center justify-center my-3 lg:my-0">
+            <Reveal delay={0.15} className="w-full flex flex-col items-center">
+              
+              {/* Broad Laptop Outer Group */}
+              <div className="relative w-full max-w-[380px] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[520px] flex flex-col items-center group hover:scale-[1.02] transition-transform duration-500">
+                
+                {/* Cream/White Laptop Screen Frame */}
+                <div className="relative w-full bg-[#FAF8F5] p-2 sm:p-3 rounded-t-[1.4rem] lg:rounded-t-[1.8rem] shadow-[0_15px_40px_rgba(0,0,0,0.1)] border-[5px] lg:border-[6px] border-[#E8E3DA] z-10">
+                  
+                  {/* Top Webcam Dot */}
+                  <div className="flex justify-center mb-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#3a3a3a] ring-1 ring-black/10" />
+                  </div>
+
+                  {/* Inner Screen Display */}
+                  <div className="relative overflow-hidden rounded-[0.8rem] lg:rounded-[1rem] bg-black border border-neutral-300/40 flex flex-col aspect-[16/9.5]">
+                    
+                    {/* Cream Browser Navigation Bar */}
+                    <div className="bg-[#F4F0E8] px-3 py-1 flex items-center justify-between text-[10px] text-neutral-600 font-mono border-b border-neutral-300/50">
+                      <div className="flex items-center gap-1">
+                        <span className="w-2 h-2 rounded-full bg-[#ff5f56]" />
+                        <span className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
+                        <span className="w-2 h-2 rounded-full bg-[#27c93f]" />
+                      </div>
+                      <div className="flex items-center gap-1 bg-[#FAF8F5] px-2.5 py-0.5 rounded-md text-[9.5px] text-neutral-700 border border-neutral-300/50 shadow-inner">
+                        <svg className="w-2 h-2 text-emerald-600" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+                        </svg>
+                        exercoachgym.com
+                      </div>
+                      <div className="w-3" />
+                    </div>
+
+                    {/* ExerCoach Website Screen Animated Video/Scroll Preview */}
+                    <div className="relative w-full flex-1 overflow-hidden bg-[#111111]">
+                      <motion.div
+                        className="w-full"
+                        animate={{ y: ["0%", "-58%", "-58%", "0%", "0%"] }}
+                        transition={{
+                          duration: 15,
+                          repeat: Infinity,
+                          repeatType: "loop",
+                          ease: [0.45, 0, 0.55, 1],
+                          times: [0, 0.42, 0.5, 0.92, 1]
+                        }}
+                      >
+                        <img
+                          src={exercoachgym}
+                          alt="ExerCoach Gym Live Website Animated Preview"
+                          className="w-full h-auto block select-none pointer-events-none"
+                        />
+                      </motion.div>
+                      {/* Subtle Screen Reflection */}
+                      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none z-10" />
+                      {/* Live Auto-Scroll Tag */}
+                      <div className="absolute bottom-2 right-2 bg-black/85 backdrop-blur-sm px-2 py-0.5 rounded-full text-[8.5px] font-mono text-white/90 border border-white/15 z-20 flex items-center gap-1 shadow-sm">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <span>LIVE PREVIEW</span>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                {/* Laptop Hinge & Base Lip */}
+                <div className="w-[104%] h-3 lg:h-3.5 bg-gradient-to-b from-[#F2EEE7] via-[#E6E0D5] to-[#D8D2C4] rounded-b-xl border-t border-[#D0C9BB] shadow-xl relative z-20 flex justify-center items-start -mt-0.5">
+                  <div className="w-12 h-1 bg-[#C8C1B2] rounded-b-sm mt-0.5" />
+                </div>
+
+              </div>
+
+              {/* Live Status Badge Below Laptop */}
+              <a 
+                href="https://exercoachgym.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="mt-3.5 inline-flex items-center gap-2 bg-black text-white font-mono text-[11px] lg:text-xs px-3.5 py-1.5 rounded-full hover:bg-neutral-800 transition-colors shadow-md border border-white/10 group"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>LIVE ΓÇó exercoachgym.com</span>
+                <svg className="w-3 h-3 opacity-60 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+
+            </Reveal>
+          </div>
+
+          {/* Right Column (MY ROLE) */}
+          <div className="lg:col-span-4 flex">
+            <Reveal delay={0.3} className="w-full flex">
+              <div className="bg-white p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5 w-full flex flex-col justify-center">
+                <h3 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-3">
+                  MY ROLE:
+                </h3>
+                <ul className="space-y-2.5 font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed">
+                  <li className="flex items-start gap-2">
+                    <span className="text-black font-bold text-base leading-none mt-1">ΓÇó</span>
+                    <span>Designed & built custom UI/UX layouts from scratch</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-black font-bold text-base leading-none mt-1">ΓÇó</span>
+                    <span>Implemented 100% mobile-first responsive web design</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-black font-bold text-base leading-none mt-1">ΓÇó</span>
+                    <span>Optimized page performance and image asset loads</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-black font-bold text-base leading-none mt-1">ΓÇó</span>
+                    <span>Integrated member inquiry & booking call-to-actions</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-black font-bold text-base leading-none mt-1">ΓÇó</span>
+                    <span>Deployed & managed live domain & hosting configurations</span>
+                  </li>
+                </ul>
+              </div>
+            </Reveal>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+function UnlimitedDemocracy() {
+  return (
+    <section id="exercoach-mobile" className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-[#fafafa] font-sans scroll-mt-6">
+      <div className="max-w-7xl mx-auto w-full">
+        
+        {/* Title */}
+        <Reveal className="mb-4 lg:mb-6">
+          <h2 className="font-display font-black tracking-tighter text-4xl sm:text-5xl lg:text-6xl text-[#111111] uppercase leading-none">
+            EXERCOACH<br />GYM
           </h2>
         </Reveal>
 
-        {/* Interactive Luxury Tab Switcher */}
-        <Reveal delay={0.1} className="mb-8 sm:mb-10">
-          <div className="bg-neutral-200/70 p-1.5 rounded-full border border-neutral-300/50 flex items-center gap-1.5 shadow-inner">
-            <button
-              onClick={() => setActiveTab("experience")}
-              className={`relative px-5 py-2.5 sm:px-7 sm:py-3 rounded-full font-display text-xs sm:text-sm font-black tracking-widest uppercase transition-colors duration-300 z-10 flex items-center gap-2 ${
-                activeTab === "experience" ? "text-white" : "text-neutral-700 hover:text-black"
-              }`}
-            >
-              {activeTab === "experience" && (
-                <motion.div
-                  layoutId="activeTabBg"
-                  className="absolute inset-0 bg-black rounded-full z-[-1] shadow-md"
-                  transition={{ type: "spring", stiffness: 380, damping: 28 }}
-                />
-              )}
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>EXPERIENCE & COURSES</span>
-              <span className="text-[10px] font-mono opacity-75">({experiences.length})</span>
-            </button>
-
-            <button
-              onClick={() => setActiveTab("education")}
-              className={`relative px-5 py-2.5 sm:px-7 sm:py-3 rounded-full font-display text-xs sm:text-sm font-black tracking-widest uppercase transition-colors duration-300 z-10 flex items-center gap-2 ${
-                activeTab === "education" ? "text-white" : "text-neutral-700 hover:text-black"
-              }`}
-            >
-              {activeTab === "education" && (
-                <motion.div
-                  layoutId="activeTabBg"
-                  className="absolute inset-0 bg-black rounded-full z-[-1] shadow-md"
-                  transition={{ type: "spring", stiffness: 380, damping: 28 }}
-                />
-              )}
-              <span>🎓 EDUCATION</span>
-              <span className="text-[10px] font-mono opacity-75">({education.length})</span>
-            </button>
-          </div>
-        </Reveal>
-
-        {/* Tab Content Display */}
-        <div className="w-full max-w-4xl min-h-[340px] flex flex-col justify-center">
-          <AnimatePresence mode="wait">
+        {/* 3-Column Grid (Shifted up with tight gap) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+          
+          {/* Left Column (Details/Goal/Approach Card - Shifted Up, Logo Removed) */}
+          <div className="lg:col-span-4 flex flex-col gap-4">
             
-            {/* TAB 1: EXPERIENCE & COURSES */}
-            {activeTab === "experience" && (
-              <motion.div
-                key="tab-experience"
-                initial={{ opacity: 0, y: 15, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -15, scale: 0.98 }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
-                className="grid md:grid-cols-2 gap-5 lg:gap-6 items-stretch w-full"
+            {/* DETAILS, PLANFORMS, GOAL, APPROACH Card */}
+            <Reveal delay={0.1}>
+              <div className="bg-[#f0efeb] p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5 flex flex-col gap-3.5">
+                
+                {/* DETAILS */}
+                <div>
+                  <h3 className="font-display font-black text-sm lg:text-base tracking-wider text-black uppercase mb-1">
+                    DETAILS:
+                  </h3>
+                  <div className="space-y-0.5 text-xs sm:text-sm text-neutral-700 font-sans">
+                    <p><span className="font-semibold text-black">Client:</span> Freelance Client</p>
+                    <p><span className="font-semibold text-black">Industry:</span> Fitness & Personal Coaching</p>
+                    <p><span className="font-semibold text-black">Location:</span> Remote</p>
+                  </div>
+                </div>
+
+                {/* PLANFORMS */}
+                <div>
+                  <h3 className="font-display font-black text-sm lg:text-base tracking-wider text-black uppercase mb-1">
+                    PLATFORMS:
+                  </h3>
+                  <p className="font-sans text-neutral-700 text-xs sm:text-sm">
+                    Web Technology, HTML5, CSS3, JavaScript, Live Website
+                  </p>
+                </div>
+
+                {/* GOAL */}
+                <div>
+                  <h3 className="font-display font-black text-sm lg:text-base tracking-wider text-black uppercase mb-1">
+                    GOAL:
+                  </h3>
+                  <p className="font-sans text-neutral-700 text-xs sm:text-sm leading-relaxed">
+                    Develop a high-impact, modern, and fully responsive website to establish the gym's online presence, showcase training programs, and drive membership registrations.
+                  </p>
+                </div>
+
+                {/* APPROACH */}
+                <div>
+                  <h3 className="font-display font-black text-sm lg:text-base tracking-wider text-black uppercase mb-1">
+                    APPROACH:
+                  </h3>
+                  <p className="font-sans text-neutral-700 text-xs sm:text-sm leading-relaxed">
+                    Designed and developed the live website exercoachgym.com from scratch as a freelance developer. Structured class directories, contact integrations, and coach rosters with a performance-first approach.
+                  </p>
+                </div>
+
+              </div>
+            </Reveal>
+
+          </div>
+
+          {/* Center Column (Single Sleek iPhone 16 Pro Screen Mockup) */}
+          <div className="lg:col-span-3 flex flex-col items-center justify-center my-3 lg:my-0">
+            <Reveal delay={0.15} className="w-full flex flex-col items-center">
+              
+              {/* Sleek iPhone Outer Container */}
+              <div className="relative w-full max-w-[240px] sm:max-w-[260px] md:max-w-[275px] group hover:scale-[1.02] transition-transform duration-500">
+                
+                {/* Titanium Phone Body Frame */}
+                <div className="relative w-full bg-[#1c1c1e] p-[8px] sm:p-[9px] rounded-[2.8rem] sm:rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.22)] border-[2px] border-[#3a3a3c] ring-1 ring-black/50">
+                  
+                  {/* Outer Buttons (Volume & Power) */}
+                  <div className="absolute -left-[3px] top-16 w-[3px] h-6 bg-[#2c2c2e] rounded-l-sm" />
+                  <div className="absolute -left-[3px] top-24 w-[3px] h-6 bg-[#2c2c2e] rounded-l-sm" />
+                  <div className="absolute -right-[3px] top-20 w-[3px] h-9 bg-[#2c2c2e] rounded-r-sm" />
+
+                  {/* Inner Screen Display */}
+                  <div className="relative overflow-hidden rounded-[2.3rem] sm:rounded-[2.5rem] bg-black aspect-[9/19.2] border border-neutral-800">
+                    
+                    {/* Status Bar / Dynamic Island */}
+                    <div className="absolute top-0 inset-x-0 h-7 z-30 flex items-center justify-between px-5 pt-1 text-white font-mono text-[9px] pointer-events-none select-none">
+                      <span className="font-semibold text-white/90">9:41</span>
+                      {/* Dynamic Island */}
+                      <div className="w-16 h-3.5 bg-black rounded-full flex items-center justify-end px-1.5 gap-1 ring-1 ring-white/10">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#0c1524] ring-1 ring-blue-500/50" />
+                      </div>
+                      <div className="flex items-center gap-1 text-white/90">
+                        <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.2 19.54 10.55 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/></svg>
+                        <span className="w-2.5 h-1.5 bg-current rounded-xs" />
+                      </div>
+                    </div>
+
+                    {/* ExerCoach Mobile Website Screen Animated Image */}
+                    <div className="w-full h-full overflow-hidden bg-black">
+                      <motion.div
+                        className="w-full flex flex-col"
+                        animate={{ y: ["0%", "-66.6%", "-66.6%", "0%", "0%"] }}
+                        transition={{
+                          duration: 16,
+                          repeat: Infinity,
+                          repeatType: "loop",
+                          ease: [0.45, 0, 0.55, 1],
+                          times: [0, 0.45, 0.5, 0.95, 1]
+                        }}
+                      >
+                        <img
+                          src={exercoachMobileScreen1}
+                          alt="ExerCoach Gym Mobile Screen 1 - Hero & Trial"
+                          className="w-full h-auto block select-none pointer-events-none"
+                        />
+                        <img
+                          src={exercoachMobileScreen2}
+                          alt="ExerCoach Gym Mobile Screen 2 - Contact"
+                          className="w-full h-auto block select-none pointer-events-none"
+                        />
+                        <img
+                          src={exercoachMobileScreen3}
+                          alt="ExerCoach Gym Mobile Screen 3 - Plans"
+                          className="w-full h-auto block select-none pointer-events-none"
+                        />
+                      </motion.div>
+                    </div>
+
+                    {/* Glass Reflection Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none z-20" />
+
+                    {/* iPhone Home Indicator Bar */}
+                    <div className="absolute bottom-1 inset-x-0 flex justify-center z-30 pointer-events-none">
+                      <span className="w-24 h-1 bg-white/40 rounded-full" />
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+              {/* Live Status Badge Below Phone */}
+              <a 
+                href="https://exercoachgym.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="mt-3.5 inline-flex items-center gap-2 bg-black text-white font-mono text-[11px] lg:text-xs px-3.5 py-1.5 rounded-full hover:bg-neutral-800 transition-colors shadow-md border border-white/10 group"
               >
-                {experiences.map((exp: any, i: number) => {
-                  const isBizTech = exp.company?.includes("BizTech");
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>LIVE ΓÇó exercoachgym.com</span>
+              </a>
+            </Reveal>
+          </div>
 
-                  return isBizTech ? (
-                    /* Featured Matte Dark Executive Card */
-                    <motion.div
-                      key={i}
-                      whileHover={{ y: -5, scale: 1.01 }}
-                      transition={{ type: "spring", stiffness: 280, damping: 20 }}
-                      className="bg-[#141414] text-white p-6 sm:p-7 rounded-[24px] shadow-2xl border border-white/10 flex flex-col justify-between relative overflow-hidden group"
-                    >
-                      <div className="absolute -right-12 -top-12 w-36 h-36 bg-white/5 rounded-full blur-2xl group-hover:bg-white/10 transition-colors pointer-events-none" />
+          {/* Right Column (ExerCoach Gym Website & Admin Portal Showcase) */}
+          <div className="lg:col-span-5 flex flex-col gap-5">
+            <Reveal delay={0.25} className="w-full">
+              
+              {/* Section 1: Client Website Mobile Screens */}
+              <div>
+                <h4 className="font-display font-black text-xs uppercase tracking-wider text-black mb-2 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <span>PUBLIC WEBSITE (MOBILE)</span>
+                </h4>
+                <div className="grid grid-cols-3 gap-2.5 sm:gap-3 w-full items-start">
+                  
+                  {/* Phone 1: Hero & Trial */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.4rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1.1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachMobileScreen1}
+                        alt="ExerCoach Mobile Screen 1 - Hero & Free Trial Session"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[9px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Hero & Trial</span>
+                  </div>
 
-                      <div>
-                        <div className="flex items-center justify-between gap-2 flex-wrap">
-                          <span className="inline-flex items-center gap-1.5 bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                            <span>VERIFIED INTERNSHIP</span>
-                          </span>
-                          {exp.period && (
-                            <span className="text-[11px] font-mono font-semibold text-neutral-300 bg-white/10 px-3 py-0.5 rounded-full border border-white/15">
-                              {exp.period}
-                            </span>
-                          )}
-                        </div>
+                  {/* Phone 2: Contact & Info */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.4rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1.1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachMobileScreen2}
+                        alt="ExerCoach Mobile Screen 2 - Get in Touch & Contact"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[9px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Contact & Info</span>
+                  </div>
 
-                        <h4 className="font-sans text-xl sm:text-2xl font-black tracking-tight text-white mt-4 leading-snug">
-                          {exp.title}
-                        </h4>
-                        <p className="text-neutral-300 font-bold text-sm mt-1">
-                          {exp.company}
-                        </p>
+                  {/* Phone 3: Membership Plans */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.4rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1.1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachMobileScreen3}
+                        alt="ExerCoach Mobile Screen 3 - Membership Plans"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[9px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Plans & Rates</span>
+                  </div>
 
-                        {exp.description && (
-                          <p className="text-neutral-300 text-xs sm:text-sm mt-3 leading-relaxed font-sans">
-                            {exp.description}
-                          </p>
-                        )}
-                      </div>
+                </div>
+              </div>
 
-                      <div className="mt-6 pt-4 border-t border-white/15 flex items-center justify-between gap-2 flex-wrap">
-                        <motion.button
-                          whileHover={{ scale: 1.04 }}
-                          whileTap={{ scale: 0.96 }}
-                          onClick={() => setShowCertModal(true)}
-                          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-black hover:bg-neutral-100 font-sans text-xs font-extrabold transition-all duration-200 shadow-md hover:shadow-lg group/btn"
-                        >
-                          <span>View Official Certificate</span>
-                          <span className="text-[12px] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform">↗</span>
-                        </motion.button>
-                        <span className="text-[10.5px] font-mono font-bold text-neutral-400 bg-white/5 px-2.5 py-1 rounded-lg border border-white/10">
-                          #PC-F16833
-                        </span>
-                      </div>
-                    </motion.div>
-                  ) : (
-                    /* Crisp Cream Classic Card */
-                    <motion.div
-                      key={i}
-                      whileHover={{ y: -5, scale: 1.01 }}
-                      transition={{ type: "spring", stiffness: 280, damping: 20 }}
-                      className="bg-white text-black p-6 sm:p-7 rounded-[24px] shadow-[0_4px_25px_rgba(0,0,0,0.03)] border border-neutral-200/90 hover:border-black/30 hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
-                    >
-                      <div>
-                        <div className="flex items-center justify-between gap-2 flex-wrap">
-                          <span className="inline-block text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider bg-neutral-100 text-neutral-800 border border-neutral-200/60">
-                            {exp.type || "1 YEAR COURSE"}
-                          </span>
-                          {exp.period && (
-                            <span className="text-[11px] font-mono font-bold text-neutral-700 bg-[#F4F2ED] px-3 py-0.5 rounded-full border border-neutral-200">
-                              {exp.period}
-                            </span>
-                          )}
-                        </div>
+              {/* Section 2: Admin Dashboard & Portal Screens */}
+              <div className="mt-4 pt-4 border-t border-black/10">
+                <h4 className="font-display font-black text-xs uppercase tracking-wider text-black mb-2 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-600" />
+                  <span>ADMIN DASHBOARD & CMS PORTAL</span>
+                </h4>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 w-full items-start">
+                  
+                  {/* Admin Phone 1: Dashboard */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachAdminDashboard}
+                        alt="ExerCoach Admin Dashboard Overview"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Dashboard</span>
+                  </div>
 
-                        <h4 className="font-sans text-xl font-black mt-4 text-[#111111] tracking-tight leading-snug">
-                          {exp.title}
-                        </h4>
-                        <p className="text-neutral-700 font-bold text-sm mt-1">
-                          {exp.company}
-                        </p>
+                  {/* Admin Phone 2: Navigation Menu */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachAdminMenu}
+                        alt="ExerCoach Admin Navigation Menu"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Nav Menu</span>
+                  </div>
 
-                        {exp.description && (
-                          <p className="text-neutral-600 text-xs sm:text-sm mt-3 leading-relaxed font-sans">
-                            {exp.description}
-                          </p>
-                        )}
-                      </div>
+                  {/* Admin Phone 3: Leads Portal */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachAdminLeads}
+                        alt="ExerCoach Customer Leads Management"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Leads CMS</span>
+                  </div>
 
-                      <div className="mt-6 pt-4 border-t border-neutral-150 flex items-center gap-1.5 flex-wrap">
-                        {["STLC", "Bug Reporting", "Test Cases", "Quality Assurance"].map((skill, skIdx) => (
-                          <span key={skIdx} className="text-[10px] font-mono font-bold bg-neutral-100 text-neutral-700 px-2.5 py-1 rounded-md border border-neutral-200/60">
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
-            )}
+                  {/* Admin Phone 4: Gallery Management */}
+                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                      <img
+                        src={exercoachAdminGallery}
+                        alt="ExerCoach Gallery Media Management"
+                        className="w-full h-full object-cover object-top select-none"
+                      />
+                    </div>
+                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Gallery CMS</span>
+                  </div>
 
-            {/* TAB 2: ACADEMIC EDUCATION */}
-            {activeTab === "education" && (
-              <motion.div
-                key="tab-education"
-                initial={{ opacity: 0, y: 15, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -15, scale: 0.98 }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
-                className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 items-stretch w-full"
-              >
-                {education.map((edu: any, i: number) => {
-                  const isDegree = i === 0;
+                </div>
+              </div>
 
-                  return (
-                    <motion.div
-                      key={i}
-                      whileHover={{ y: -5, scale: 1.015 }}
-                      transition={{ type: "spring", stiffness: 280, damping: 20 }}
-                      className={`p-5 sm:p-5 rounded-[22px] transition-all duration-300 flex flex-col justify-between relative overflow-hidden ${
-                        isDegree
-                          ? "bg-white shadow-lg border-2 border-black col-span-1"
-                          : "bg-white shadow-sm border border-neutral-200/90 hover:border-black/30 hover:shadow-md col-span-1"
-                      }`}
-                    >
-                      {isDegree && (
-                        <div className="absolute top-0 left-0 right-0 h-1.5 bg-black" />
-                      )}
+            </Reveal>
+          </div>
 
-                      <div>
-                        <div className="flex items-center justify-between gap-1.5 flex-wrap">
-                          <span className={`inline-block text-[9.5px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider ${
-                            isDegree ? "bg-black text-white" : "bg-neutral-100 text-neutral-700 border border-neutral-200/60"
-                          }`}>
-                            {isDegree ? "Bachelor Degree" : "Schooling"}
-                          </span>
-                          {edu.period && (
-                            <span className="text-[10px] font-mono font-bold text-neutral-700 bg-[#F4F2ED] px-2 py-0.5 rounded-full border border-neutral-200">
-                              {edu.period}
-                            </span>
-                          )}
-                        </div>
-
-                        <h4 className="font-sans text-base sm:text-lg lg:text-xl font-black mt-3 text-[#111111] tracking-tight leading-snug">
-                          {edu.title}
-                        </h4>
-                        <p className="text-neutral-700 font-bold text-xs sm:text-sm mt-0.5">
-                          {edu.school}
-                        </p>
-
-                        {edu.description && (
-                          <p className="text-neutral-600 text-xs sm:text-xs lg:text-[13px] mt-2 leading-relaxed font-sans">
-                            {edu.description}
-                          </p>
-                        )}
-                      </div>
-
-                      {edu.highlights && edu.highlights.length > 0 && (
-                        <div className="mt-3.5 pt-2.5 border-t border-neutral-150 flex items-center gap-1.5 flex-wrap">
-                          {edu.highlights.map((tag: string, tagIdx: number) => (
-                            <span key={tagIdx} className="text-[9.5px] font-mono font-extrabold bg-neutral-100 text-[#111111] px-2 py-0.5 rounded border border-neutral-200">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
-            )}
-
-          </AnimatePresence>
         </div>
 
       </div>
@@ -1412,6 +1776,8 @@ function Index() {
         <Skills />
         <ExperienceAndEducation />
         <Projects />
+        <ExerCoachProject />
+        <UnlimitedDemocracy />
         {caseStudies.map((cs: any) => (
           <CaseStudy
             key={cs.id}
