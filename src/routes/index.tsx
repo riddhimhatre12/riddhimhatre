@@ -190,7 +190,7 @@ function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.2]);
 
   return (
-    <section ref={ref} className="relative px-4 md:px-8 pt-12 md:pt-20 pb-16 bg-gradient-to-b from-[#f7f6f2] via-[#faf9f6] to-white">
+    <section ref={ref} className="relative px-4 md:px-8 pt-12 md:pt-20 pb-16 bg-gradient-to-b from-[#f7f6f2] via-[#faf9f6] to-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden">
       <motion.div style={{ y, opacity }} className="relative w-full flex flex-col items-center">
         <div className="relative w-full">
           <motion.svg
@@ -240,7 +240,7 @@ function About() {
   const contact = about.contact;
 
   return (
-    <section id="about" className="px-6 md:px-16 py-6 lg:py-8 min-h-screen lg:h-screen flex flex-col justify-center scroll-mt-0 bg-white overflow-hidden">
+    <section id="about" className="px-6 md:px-16 py-6 lg:py-8 min-h-screen lg:h-screen flex flex-col justify-center scroll-mt-0 bg-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden">
       <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-center max-w-6xl mx-auto w-full">
         <div className="w-full relative pt-2 md:pt-4">
           <div className="relative aspect-square max-w-lg md:max-w-xl lg:max-w-2xl mx-auto flex items-end justify-center md:-ml-8 lg:-ml-12">
@@ -708,7 +708,7 @@ function Skills() {
   ];
 
   return (
-    <section id="skills" className="px-6 md:px-16 py-24 md:py-32 bg-white scroll-mt-6">
+    <section id="skills" className="px-6 md:px-16 py-24 md:py-32 bg-white scroll-mt-6 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden">
       <CertificateModal isOpen={showCertModal} onClose={() => setShowCertModal(false)} />
       <div className="max-w-6xl mx-auto">
         <Reveal>
@@ -789,7 +789,7 @@ function Projects() {
   const projectsList = data.projects || [];
 
   return (
-    <section id="projects" className="px-6 md:px-16 py-16 md:py-24 min-h-screen flex flex-col justify-center bg-white scroll-mt-6">
+    <section id="projects" className="px-6 md:px-16 py-16 md:py-24 min-h-screen flex flex-col justify-center bg-white scroll-mt-6 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden">
       <Reveal>
         <h2 className="font-display text-5xl md:text-7xl tracking-tight text-center text-black font-extrabold">
           {data.projectsTitle || "PROJECTS"}
@@ -973,7 +973,7 @@ function Contact() {
   const contact = about.contact;
 
   return (
-    <section id="contact" className="relative w-full py-6 lg:py-8 min-h-screen lg:h-screen flex flex-col justify-between items-center bg-[#f2f1ed] font-sans scroll-mt-0 overflow-hidden">
+    <section id="contact" className="relative w-full py-6 lg:py-8 min-h-screen lg:h-screen flex flex-col justify-between items-center bg-[#f2f1ed] font-sans scroll-mt-0 overflow-hidden rounded-[2rem] md:rounded-[2.5rem]">
       
       {/* Top Social Icons Bar (GitHub, Instagram, LinkedIn - Exact Match to Screenshot) */}
       <Reveal>
@@ -1139,7 +1139,7 @@ function ExperienceAndEducation() {
   const [showCertModal, setShowCertModal] = useState(false);
 
   return (
-    <section id="experience" className="px-5 md:px-12 py-6 lg:py-10 min-h-screen lg:h-screen flex flex-col justify-center bg-[#FAF9F6] font-sans scroll-mt-0 overflow-hidden relative">
+    <section id="experience" className="px-5 md:px-12 py-6 lg:py-10 min-h-screen lg:h-screen flex flex-col justify-center bg-[#FAF9F6] font-sans scroll-mt-0 overflow-hidden relative rounded-[2rem] md:rounded-[2.5rem]">
       <CertificateModal isOpen={showCertModal} onClose={() => setShowCertModal(false)} />
 
       {/* Decorative Subtle Background Pattern */}
@@ -1883,9 +1883,6 @@ function Index() {
           />
         ))}
         <Contact />
-        <footer className="text-center py-8 text-xs text-neutral-500 bg-[#f0efeb]">
-          © {data.hero.year || "2026"} {data.hero.name || "Riddhi Mhatre"}
-        </footer>
       </main>
     </div>
   );
