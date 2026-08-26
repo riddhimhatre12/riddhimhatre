@@ -1220,7 +1220,7 @@ function ExperienceAndEducation() {
                       key={i}
                       whileHover={{ y: -5, scale: 1.01 }}
                       transition={{ type: "spring", stiffness: 280, damping: 20 }}
-                      className="bg-[#141414] text-white p-6 sm:p-7 rounded-[24px] shadow-2xl border border-white/10 flex flex-col justify-between relative overflow-hidden group"
+                      className="bg-[#27272a] text-white p-6 sm:p-7 rounded-[24px] shadow-xl border border-white/10 flex flex-col justify-between relative overflow-hidden group"
                     >
                       <div className="absolute -right-12 -top-12 w-36 h-36 bg-white/5 rounded-full blur-2xl group-hover:bg-white/10 transition-colors pointer-events-none" />
 
@@ -1852,13 +1852,10 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-[#f0efeb] text-[#111111] font-sans overflow-x-hidden flex flex-col relative">
-      {/* Background block for top rounded corners */}
-      <div className="absolute top-0 left-0 right-0 h-[50vh] bg-white pointer-events-none z-0" />
-
       <div className="relative z-10">
         <Nav />
       </div>
-      <main className="flex-1 bg-[#f0efeb] rounded-t-[2.5rem] md:rounded-t-[3.5rem] overflow-hidden animate-fade-in flex flex-col relative z-10 space-y-6 md:space-y-10 py-4 px-2 sm:px-4 md:px-6">
+      <main className="flex-1 bg-[#f0efeb] animate-fade-in flex flex-col relative z-10 space-y-6 md:space-y-10 py-4 px-2 sm:px-4 md:px-6">
         <Hero />
         <About />
         <Skills />
