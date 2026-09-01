@@ -82,17 +82,37 @@ export interface PortfolioData {
   caseStudies: CaseStudyItem[];
 }
 
+import * as crypto from "crypto";
+
 const SESSION_COOKIE_NAME = "portfolio_admin_session";
-// In real apps, change this to a secure random string or use an environment variable
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin123";
-const SESSION_SECRET = "portfolio-secret-token-2026";
+
+function getAdminPassword(): string {
+  return process.env.ADMIN_PASSWORD || "admin123";
+}
+
+function getSessionSecret(): string {
+  const secretBase = process.env.SESSION_SECRET || getAdminPassword();
+  return crypto.createHash("sha256").update(`portfolio_sec_salt_2026_${secretBase}`).digest("hex");
+}
+
+function safeCompare(a: string, b: string): boolean {
+  try {
+    const bufA = Buffer.from(a, "utf-8");
+    const bufB = Buffer.from(b, "utf-8");
+    if (bufA.length !== bufB.length) return false;
+    return crypto.timingSafeEqual(bufA, bufB);
+  } catch {
+    return false;
+  }
+}
 
 // Path to data file
 const getFilePath = () => path.join(process.cwd(), "src", "data", "portfolio.json");
 
 // Helper to check session
 function isSessionValid(sessionToken: string | undefined): boolean {
-  return sessionToken === SESSION_SECRET;
+  if (!sessionToken || typeof sessionToken !== "string") return false;
+  return safeCompare(sessionToken, getSessionSecret());
 }
 
 // 1. Get Portfolio Data
@@ -110,7 +130,12 @@ export const getPortfolioData = createServerFn({ method: "GET" })
 
 // 2. Save Portfolio Data (requires auth verification)
 export const savePortfolioData = createServerFn({ method: "POST" })
-  .validator((data: PortfolioData) => data)
+  .validator((data: PortfolioData) => {
+    if (!data || typeof data !== "object") {
+      throw new Error("Invalid payload data");
+    }
+    return data;
+  })
   .handler(async ({ data }) => {
     const { getCookie } = await import("@tanstack/react-start/server");
     // Verify session
@@ -121,7 +146,11 @@ export const savePortfolioData = createServerFn({ method: "POST" })
 
     const filePath = getFilePath();
     try {
-      await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf-8");
+      const jsonContent = JSON.stringify(data, null, 2);
+      if (jsonContent.length > 5 * 1024 * 1024) {
+        throw new Error("Payload size exceeds limit");
+      }
+      await fs.writeFile(filePath, jsonContent, "utf-8");
       return { success: true, message: "Portfolio updated successfully." };
     } catch (error) {
       console.error("Error writing portfolio data:", error);
@@ -131,20 +160,28 @@ export const savePortfolioData = createServerFn({ method: "POST" })
 
 // 3. Login Admin
 export const loginAdmin = createServerFn({ method: "POST" })
-  .validator((password: string) => password)
+  .validator((password: string) => {
+    if (typeof password !== "string" || password.length > 256) {
+      throw new Error("Invalid password submission.");
+    }
+    return password;
+  })
   .handler(async ({ data: password }) => {
-    if (password === ADMIN_PASSWORD) {
+    const targetPassword = getAdminPassword();
+    if (safeCompare(password, targetPassword)) {
       const { setCookie } = await import("@tanstack/react-start/server");
-      // Set the session cookie (expires in 7 days)
-      setCookie(SESSION_COOKIE_NAME, SESSION_SECRET, {
+      // Set the secure session cookie (expires in 7 days)
+      setCookie(SESSION_COOKIE_NAME, getSessionSecret(), {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
+        sameSite: "strict",
         maxAge: 60 * 60 * 24 * 7,
         path: "/",
       });
       return { success: true, message: "Logged in successfully." };
     }
+    // Prevent fast brute-force enumeration attacks
+    await new Promise((resolve) => setTimeout(resolve, 350));
     throw new Error("Incorrect password. Please try again.");
   });
 

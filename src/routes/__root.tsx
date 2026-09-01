@@ -101,6 +101,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "profile:username", content: "riddhimhatre" },
       { property: "og:image", content: "/biztech_certificate.png" },
 
+      { name: "referrer", content: "strict-origin-when-cross-origin" },
+      { httpEquiv: "X-Content-Type-Options", content: "nosniff" },
+      { httpEquiv: "X-Frame-Options", content: "DENY" },
+      {
+        httpEquiv: "Content-Security-Policy",
+        content:
+          "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https:;",
+      },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Riddhi Mhatre | Riddhimhatre Portfolio" },
       {
@@ -167,7 +175,9 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLdData).replace(/</g, "\\u003c"),
+          }}
         />
       </head>
       <body>
