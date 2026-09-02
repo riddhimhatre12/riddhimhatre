@@ -708,35 +708,37 @@ function Skills() {
   ];
 
   return (
-    <section id="skills" className="px-6 md:px-16 py-24 md:py-32 bg-white scroll-mt-6 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden">
+    <section id="skills" className="px-6 md:px-16 py-6 lg:py-10 min-h-screen lg:h-screen flex flex-col justify-center scroll-mt-0 bg-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden">
       <CertificateModal isOpen={showCertModal} onClose={() => setShowCertModal(false)} />
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto w-full flex flex-col justify-center">
         <Reveal>
-          <h2 className="font-display text-5xl md:text-7xl tracking-tight mb-20 text-black font-extrabold leading-none">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight mb-8 lg:mb-12 text-black font-extrabold leading-none">
             SKILLS &<br />CERTIFICATES
           </h2>
         </Reveal>
 
-        <div className="grid md:grid-cols-12 gap-12 md:gap-16 items-start">
+        <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
           {/* Left Column: Certifications */}
-          <div className="md:col-span-6 space-y-10 md:space-y-12">
+          <div className="md:col-span-5 space-y-6 md:space-y-8 flex flex-col justify-center">
             {certs.map((cert, i) => (
               <Reveal key={cert.title} delay={i * 0.1}>
                 <div 
-                  className={`flex gap-5 items-center ${'hasCertificate' in cert ? 'cursor-pointer group' : ''}`}
+                  className={`flex gap-4 sm:gap-5 items-center ${'hasCertificate' in cert ? 'cursor-pointer group' : ''}`}
                   onClick={() => 'hasCertificate' in cert && setShowCertModal(true)}
                 >
                   <AwardIcon />
-                  <h4 className="font-sans flex flex-col gap-1">
-                    <span className="font-black uppercase text-black tracking-tight text-[22px] md:text-[26px] leading-tight">
+                  <h4 className="font-sans flex flex-col gap-0.5">
+                    <span className="font-black uppercase text-black tracking-tight text-lg sm:text-xl lg:text-2xl leading-tight">
                       {cert.title}
+                    </span>
+                    <span className="font-medium text-neutral-600 text-sm sm:text-base flex items-center gap-2 flex-wrap">
+                      <span>by {cert.provider}</span>
                       {'hasCertificate' in cert && (
-                        <span className="ml-2 text-xs font-normal normal-case text-neutral-500 underline underline-offset-4 group-hover:text-black transition-colors">
+                        <span className="text-xs font-normal normal-case text-neutral-500 underline underline-offset-4 group-hover:text-black transition-colors whitespace-nowrap">
                           (View Certificate)
                         </span>
                       )}
                     </span>
-                    <span className="font-medium text-neutral-600 text-[18px] md:text-[20px]">by {cert.provider}</span>
                   </h4>
                 </div>
               </Reveal>
@@ -744,12 +746,12 @@ function Skills() {
           </div>
 
           {/* Right Column: Tools Grid */}
-          <div className="md:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-5 md:gap-6 mt-10 md:mt-0">
+          <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-5 mt-6 md:mt-0">
             {tools.map((tool, i) => (
               <Reveal key={tool.name} delay={i * 0.05}>
-                <div className="bg-[#f4f5f5] hover:bg-[#ebebeb] hover:scale-[1.05] transition-all py-8 px-5 rounded-3xl flex items-center justify-center gap-4 cursor-default select-none shadow-sm min-h-[90px]">
+                <div className="bg-[#f4f5f5] hover:bg-[#ebebeb] hover:scale-[1.04] transition-all py-4 px-3.5 sm:py-5 sm:px-4 rounded-2xl flex items-center justify-center gap-3 cursor-default select-none shadow-sm min-h-[68px] sm:min-h-[76px]">
                   {tool.icon}
-                  <span className="font-sans font-extrabold text-[19px] md:text-[21px] text-neutral-900 leading-none tracking-tight">
+                  <span className="font-sans font-extrabold text-sm sm:text-base md:text-lg text-neutral-900 leading-none tracking-tight">
                     {tool.name}
                   </span>
                 </div>
@@ -1215,53 +1217,51 @@ function ExperienceAndEducation() {
                   const isBizTech = exp.company?.includes("BizTech");
 
                   return isBizTech ? (
-                    /* Featured Matte Dark Executive Card */
+                    /* Featured Verified Internship Light Card */
                     <motion.div
                       key={i}
                       whileHover={{ y: -5, scale: 1.01 }}
                       transition={{ type: "spring", stiffness: 280, damping: 20 }}
-                      className="bg-[#27272a] text-white p-6 sm:p-7 rounded-[24px] shadow-xl border border-white/10 flex flex-col justify-between relative overflow-hidden group"
+                      className="bg-white text-black p-6 sm:p-7 rounded-[24px] shadow-[0_4px_25px_rgba(0,0,0,0.03)] border border-neutral-200/90 hover:border-black/30 hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
                     >
-                      <div className="absolute -right-12 -top-12 w-36 h-36 bg-white/5 rounded-full blur-2xl group-hover:bg-white/10 transition-colors pointer-events-none" />
-
                       <div>
                         <div className="flex items-center justify-between gap-2 flex-wrap">
-                          <span className="inline-flex items-center gap-1.5 bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          <span className="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                             <span>VERIFIED INTERNSHIP</span>
                           </span>
                           {exp.period && (
-                            <span className="text-[11px] font-mono font-semibold text-neutral-300 bg-white/10 px-3 py-0.5 rounded-full border border-white/15">
+                            <span className="text-[11px] font-mono font-bold text-neutral-700 bg-[#F4F2ED] px-3 py-0.5 rounded-full border border-neutral-200">
                               {exp.period}
                             </span>
                           )}
                         </div>
 
-                        <h4 className="font-sans text-xl sm:text-2xl font-black tracking-tight text-white mt-4 leading-snug">
+                        <h4 className="font-sans text-xl sm:text-2xl font-black mt-4 text-[#111111] tracking-tight leading-snug">
                           {exp.title}
                         </h4>
-                        <p className="text-neutral-300 font-bold text-sm mt-1">
+                        <p className="text-neutral-700 font-bold text-sm mt-1">
                           {exp.company}
                         </p>
 
                         {exp.description && (
-                          <p className="text-neutral-300 text-xs sm:text-sm mt-3 leading-relaxed font-sans">
+                          <p className="text-neutral-600 text-xs sm:text-sm mt-3 leading-relaxed font-sans">
                             {exp.description}
                           </p>
                         )}
                       </div>
 
-                      <div className="mt-6 pt-4 border-t border-white/15 flex items-center justify-between gap-2 flex-wrap">
+                      <div className="mt-6 pt-4 border-t border-neutral-200/80 flex items-center justify-between gap-2 flex-wrap">
                         <motion.button
                           whileHover={{ scale: 1.04 }}
                           whileTap={{ scale: 0.96 }}
                           onClick={() => setShowCertModal(true)}
-                          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-black hover:bg-neutral-100 font-sans text-xs font-extrabold transition-all duration-200 shadow-md hover:shadow-lg group/btn"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-black text-white hover:bg-neutral-800 font-sans text-xs font-extrabold transition-all duration-200 shadow-md hover:shadow-lg group/btn"
                         >
                           <span>View Official Certificate</span>
                           <span className="text-[12px] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform">↗</span>
                         </motion.button>
-                        <span className="text-[10.5px] font-mono font-bold text-neutral-400 bg-white/5 px-2.5 py-1 rounded-lg border border-white/10">
+                        <span className="text-[10.5px] font-mono font-bold text-neutral-600 bg-neutral-100 px-2.5 py-1 rounded-lg border border-neutral-200">
                           #PC-F16833
                         </span>
                       </div>
@@ -1331,15 +1331,8 @@ function ExperienceAndEducation() {
                       key={i}
                       whileHover={{ y: -5, scale: 1.015 }}
                       transition={{ type: "spring", stiffness: 280, damping: 20 }}
-                      className={`p-5 sm:p-5 rounded-[22px] transition-all duration-300 flex flex-col justify-between relative overflow-hidden ${
-                        isDegree
-                          ? "bg-white shadow-lg border-2 border-black col-span-1"
-                          : "bg-white shadow-sm border border-neutral-200/90 hover:border-black/30 hover:shadow-md col-span-1"
-                      }`}
+                      className="bg-white text-black p-5 sm:p-6 rounded-[22px] shadow-[0_4px_25px_rgba(0,0,0,0.03)] border border-neutral-200/90 hover:border-black/30 hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
                     >
-                      {isDegree && (
-                        <div className="absolute top-0 left-0 right-0 h-1.5 bg-black" />
-                      )}
 
                       <div>
                         <div className="flex items-center justify-between gap-1.5 flex-wrap">
@@ -1394,7 +1387,7 @@ function ExperienceAndEducation() {
 
 function ExerCoachProject() {
   return (
-    <section id="exercoach" className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-[#f5f4f0] font-sans border-t border-black/5 rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6">
+    <section id="exercoach" className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-white font-sans border-t border-black/5 rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6">
       <div className="max-w-7xl mx-auto w-full">
         
         {/* Title & Subtitle */}
@@ -1571,7 +1564,7 @@ function ExerCoachProject() {
 
 function UnlimitedDemocracy() {
   return (
-    <section id="exercoach-mobile" className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-[#fafafa] font-sans border-t border-black/5 rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6">
+    <section id="exercoach-mobile" className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-white font-sans border-t border-black/5 rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6">
       <div className="max-w-7xl mx-auto w-full">
         
         {/* Title */}
