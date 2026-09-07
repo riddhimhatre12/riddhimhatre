@@ -25,6 +25,8 @@ import exercoachAdminMenu from "@/assets/exercoach_admin_menu.png";
 import exercoachAdminLeads from "@/assets/exercoach_admin_leads.png";
 import exercoachAdminGallery from "@/assets/exercoach_admin_gallery.png";
 import { getPortfolioData } from "@/lib/portfolio";
+import { useSendContactMessage } from "@/lib/convex";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/")({
   loader: async () => {
@@ -45,6 +47,81 @@ const IMAGES: Record<string, string> = {
   consumerShoppingTrends,
   exercoachgym,
 };
+
+function ContactForm() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+  const { sendMessage, isSubmitting } = useSendContactMessage();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      toast.error("Please fill in all required fields.");
+      return;
+    }
+    const res = await sendMessage({ name, email, phone, message });
+    if (res.success) {
+      setName("");
+      setEmail("");
+      setPhone("");
+      setMessage("");
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="w-full max-w-lg mx-auto my-4 px-4 flex flex-col gap-2.5 z-10 relative">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+        <input
+          type="text"
+          placeholder="Your Name *"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+          className="w-full px-3.5 py-2 rounded-xl border border-gray-300/80 bg-white/90 focus:bg-white focus:outline-none focus:ring-2 focus:ring-black text-xs md:text-sm font-sans placeholder:text-gray-400 shadow-sm transition-all"
+        />
+        <input
+          type="email"
+          placeholder="Your Email *"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          className="w-full px-3.5 py-2 rounded-xl border border-gray-300/80 bg-white/90 focus:bg-white focus:outline-none focus:ring-2 focus:ring-black text-xs md:text-sm font-sans placeholder:text-gray-400 shadow-sm transition-all"
+        />
+      </div>
+      <input
+        type="tel"
+        placeholder="Phone Number (Optional)"
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+        className="w-full px-3.5 py-2 rounded-xl border border-gray-300/80 bg-white/90 focus:bg-white focus:outline-none focus:ring-2 focus:ring-black text-xs md:text-sm font-sans placeholder:text-gray-400 shadow-sm transition-all"
+      />
+      <textarea
+        placeholder="Your Message *"
+        rows={2}
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        required
+        className="w-full px-3.5 py-2 rounded-xl border border-gray-300/80 bg-white/90 focus:bg-white focus:outline-none focus:ring-2 focus:ring-black text-xs md:text-sm font-sans placeholder:text-gray-400 shadow-sm transition-all resize-none"
+      />
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="w-full py-2.5 px-5 rounded-xl bg-black text-white font-sans font-semibold text-xs md:text-sm hover:bg-neutral-800 disabled:opacity-50 transition-all shadow-md flex items-center justify-center gap-2"
+      >
+        {isSubmitting ? (
+          <>
+            <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+            <span>Sending message...</span>
+          </>
+        ) : (
+          <span>Send Message</span>
+        )}
+      </button>
+    </form>
+  );
+}
 
 function Reveal({
   children,
@@ -1088,6 +1165,11 @@ function Contact() {
           </div>
 
         </div>
+      </Reveal>
+
+      {/* Contact Form Connected to Convex Database */}
+      <Reveal delay={0.15} className="w-full">
+        <ContactForm />
       </Reveal>
 
       {/* Contact Info Details (Email & Phone) */}
