@@ -39,7 +39,7 @@ export const save = mutation({
         icon: v.string(),
         skills: v.array(v.string()),
         span: v.string(),
-      })
+      }),
     ),
     experienceTitle: v.string(),
     experienceSub: v.string(),
@@ -52,7 +52,7 @@ export const save = mutation({
         period: v.string(),
         certificateId: v.optional(v.string()),
         description: v.string(),
-      })
+      }),
     ),
     education: v.array(
       v.object({
@@ -61,14 +61,14 @@ export const save = mutation({
         period: v.string(),
         description: v.string(),
         highlights: v.optional(v.array(v.string())),
-      })
+      }),
     ),
     projectsTitle: v.string(),
     projects: v.array(
       v.object({
         key: v.string(),
         name: v.string(),
-      })
+      }),
     ),
     caseStudies: v.array(
       v.object({
@@ -83,7 +83,7 @@ export const save = mutation({
         stats: v.array(v.object({ n: v.string(), l: v.string() })),
         color: v.string(),
         image: v.string(),
-      })
+      }),
     ),
   },
   handler: async (ctx, args) => {

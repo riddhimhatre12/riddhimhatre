@@ -24,9 +24,13 @@ import exercoachAdminDashboard from "@/assets/exercoach_admin_dashboard.png";
 import exercoachAdminMenu from "@/assets/exercoach_admin_menu.png";
 import exercoachAdminLeads from "@/assets/exercoach_admin_leads.png";
 import exercoachAdminGallery from "@/assets/exercoach_admin_gallery.png";
-import { getPortfolioData } from "@/lib/portfolio";
-import { useSendContactMessage } from "@/lib/convex";
-import { toast } from "sonner";
+import {
+  getPortfolioData,
+  ProjectItem,
+  CaseStudyItem,
+  ExperienceItem,
+  EducationItem,
+} from "@/lib/portfolio";
 
 export const Route = createFileRoute("/")({
   loader: async () => {
@@ -47,81 +51,6 @@ const IMAGES: Record<string, string> = {
   consumerShoppingTrends,
   exercoachgym,
 };
-
-function ContactForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [message, setMessage] = useState("");
-  const { sendMessage, isSubmitting } = useSendContactMessage();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name.trim() || !email.trim() || !message.trim()) {
-      toast.error("Please fill in all required fields.");
-      return;
-    }
-    const res = await sendMessage({ name, email, phone, message });
-    if (res.success) {
-      setName("");
-      setEmail("");
-      setPhone("");
-      setMessage("");
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="w-full max-w-lg mx-auto my-4 px-4 flex flex-col gap-2.5 z-10 relative">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-        <input
-          type="text"
-          placeholder="Your Name *"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-          className="w-full px-3.5 py-2 rounded-xl border border-gray-300/80 bg-white/90 focus:bg-white focus:outline-none focus:ring-2 focus:ring-black text-xs md:text-sm font-sans placeholder:text-gray-400 shadow-sm transition-all"
-        />
-        <input
-          type="email"
-          placeholder="Your Email *"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="w-full px-3.5 py-2 rounded-xl border border-gray-300/80 bg-white/90 focus:bg-white focus:outline-none focus:ring-2 focus:ring-black text-xs md:text-sm font-sans placeholder:text-gray-400 shadow-sm transition-all"
-        />
-      </div>
-      <input
-        type="tel"
-        placeholder="Phone Number (Optional)"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        className="w-full px-3.5 py-2 rounded-xl border border-gray-300/80 bg-white/90 focus:bg-white focus:outline-none focus:ring-2 focus:ring-black text-xs md:text-sm font-sans placeholder:text-gray-400 shadow-sm transition-all"
-      />
-      <textarea
-        placeholder="Your Message *"
-        rows={2}
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        required
-        className="w-full px-3.5 py-2 rounded-xl border border-gray-300/80 bg-white/90 focus:bg-white focus:outline-none focus:ring-2 focus:ring-black text-xs md:text-sm font-sans placeholder:text-gray-400 shadow-sm transition-all resize-none"
-      />
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full py-2.5 px-5 rounded-xl bg-black text-white font-sans font-semibold text-xs md:text-sm hover:bg-neutral-800 disabled:opacity-50 transition-all shadow-md flex items-center justify-center gap-2"
-      >
-        {isSubmitting ? (
-          <>
-            <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-            <span>Sending message...</span>
-          </>
-        ) : (
-          <span>Send Message</span>
-        )}
-      </button>
-    </form>
-  );
-}
 
 function Reveal({
   children,
@@ -168,7 +97,9 @@ function Nav() {
         {/* Mobile Header Brand */}
         <div className="flex md:hidden items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-black/80" />
-          <span className="font-display tracking-widest text-xs text-black uppercase font-bold">Riddhi M.</span>
+          <span className="font-display tracking-widest text-xs text-black uppercase font-bold">
+            Riddhi M.
+          </span>
         </div>
 
         {/* Desktop navigation */}
@@ -223,32 +154,16 @@ function Nav() {
             className="md:hidden overflow-hidden mt-2 bg-white/95 rounded-b-xl"
           >
             <nav className="flex flex-col py-2">
-              <a
-                href="#about"
-                onClick={() => setIsOpen(false)}
-                className={mobileItem}
-              >
+              <a href="#about" onClick={() => setIsOpen(false)} className={mobileItem}>
                 ABOUT
               </a>
-              <a
-                href="#skills"
-                onClick={() => setIsOpen(false)}
-                className={mobileItem}
-              >
+              <a href="#skills" onClick={() => setIsOpen(false)} className={mobileItem}>
                 SKILLS
               </a>
-              <a
-                href="#projects"
-                onClick={() => setIsOpen(false)}
-                className={mobileItem}
-              >
+              <a href="#projects" onClick={() => setIsOpen(false)} className={mobileItem}>
                 PROJECTS
               </a>
-              <a
-                href="#contact"
-                onClick={() => setIsOpen(false)}
-                className={mobileItem}
-              >
+              <a href="#contact" onClick={() => setIsOpen(false)} className={mobileItem}>
                 CONTACT
               </a>
             </nav>
@@ -267,7 +182,10 @@ function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.2]);
 
   return (
-    <section ref={ref} className="relative px-4 md:px-8 pt-12 md:pt-20 pb-16 bg-gradient-to-b from-[#f7f6f2] via-[#faf9f6] to-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden">
+    <section
+      ref={ref}
+      className="relative px-4 md:px-8 pt-12 md:pt-20 pb-16 bg-gradient-to-b from-[#f7f6f2] via-[#faf9f6] to-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden"
+    >
       <motion.div style={{ y, opacity }} className="relative w-full flex flex-col items-center">
         <div className="relative w-full">
           <motion.svg
@@ -317,7 +235,10 @@ function About() {
   const contact = about.contact;
 
   return (
-    <section id="about" className="px-6 md:px-16 py-6 lg:py-8 min-h-screen lg:h-screen flex flex-col justify-center scroll-mt-0 bg-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden">
+    <section
+      id="about"
+      className="px-6 md:px-16 py-6 lg:py-8 min-h-screen lg:h-screen flex flex-col justify-center scroll-mt-0 bg-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden"
+    >
       <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-center max-w-6xl mx-auto w-full">
         <div className="w-full relative pt-2 md:pt-4">
           <div className="relative aspect-square max-w-lg md:max-w-xl lg:max-w-2xl mx-auto flex items-end justify-center md:-ml-8 lg:-ml-12">
@@ -595,7 +516,14 @@ function InstagramIcon() {
       fill="currentColor"
     >
       <rect width="24" height="24" rx="6" fill="black" />
-      <g transform="scale(0.8) translate(3, 3)" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <g
+        transform="scale(0.8) translate(3, 3)"
+        stroke="white"
+        strokeWidth="2"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
         <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
         <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
@@ -718,59 +646,183 @@ function Skills() {
     {
       name: "CSS3",
       icon: (
-        <svg viewBox="0 0 128 128" className="w-9 h-9 flex-shrink-0"><path fill="#1572B6" d="M18.814 114.123L8.76 1.352h110.48l-10.064 112.754-45.243 12.543-45.119-12.526z" /><path fill="#33A9DC" d="M64.001 117.062l36.559-10.136 8.601-96.354h-45.16v106.49z" /><path fill="#fff" d="M64.001 51.429h18.302l1.264-14.163H64.001V23.435h34.682l-.332 3.711-3.4 38.114h-30.95V51.429z" /><path fill="#EBEBEB" d="M64.083 87.349l-.061.018-15.403-4.159-.985-11.031H33.752l1.937 21.717 28.331 7.863.063-.018v-14.39z" /><path fill="#fff" d="M81.127 64.675l-1.666 18.522-15.426 4.164v14.39l28.354-7.858.208-2.337 2.406-26.881H81.127z" /><path fill="#EBEBEB" d="M64.048 23.435v13.831H30.64l-.277-3.108-.63-7.012-.331-3.711h34.646zm-.047 27.996v13.831H48.792l-.277-3.108-.631-7.012-.33-3.711h16.447z" /></svg>
-      )
+        <svg viewBox="0 0 128 128" className="w-9 h-9 flex-shrink-0">
+          <path
+            fill="#1572B6"
+            d="M18.814 114.123L8.76 1.352h110.48l-10.064 112.754-45.243 12.543-45.119-12.526z"
+          />
+          <path fill="#33A9DC" d="M64.001 117.062l36.559-10.136 8.601-96.354h-45.16v106.49z" />
+          <path
+            fill="#fff"
+            d="M64.001 51.429h18.302l1.264-14.163H64.001V23.435h34.682l-.332 3.711-3.4 38.114h-30.95V51.429z"
+          />
+          <path
+            fill="#EBEBEB"
+            d="M64.083 87.349l-.061.018-15.403-4.159-.985-11.031H33.752l1.937 21.717 28.331 7.863.063-.018v-14.39z"
+          />
+          <path
+            fill="#fff"
+            d="M81.127 64.675l-1.666 18.522-15.426 4.164v14.39l28.354-7.858.208-2.337 2.406-26.881H81.127z"
+          />
+          <path
+            fill="#EBEBEB"
+            d="M64.048 23.435v13.831H30.64l-.277-3.108-.63-7.012-.331-3.711h34.646zm-.047 27.996v13.831H48.792l-.277-3.108-.631-7.012-.33-3.711h16.447z"
+          />
+        </svg>
+      ),
     },
     {
       name: "HTML5",
       icon: (
-        <svg viewBox="0 0 128 128" className="w-9 h-9 flex-shrink-0"><path fill="#E44D26" d="M19.037 113.876L9.032 1.661h109.936l-10.016 112.198-45.019 12.48z" /><path fill="#F16529" d="M64 116.8l36.378-10.086 8.559-95.878H64z" /><path fill="#EBEBEB" d="M64 52.455H45.788L44.53 38.361H64V24.599H29.489l.33 3.692 3.382 37.927H64zm0 35.743l-.061.017-15.327-4.14-.979-10.975H33.816l1.928 21.609 28.193 7.826.063-.017z" /><path fill="#fff" d="M63.952 52.455v13.763h16.947l-1.597 17.849-15.35 4.143v14.319l28.215-7.82.207-2.325 3.234-36.233.335-3.696h-3.708zm0-27.856v13.762h33.244l.276-3.092.628-6.978.329-3.692z" /></svg>
-      )
+        <svg viewBox="0 0 128 128" className="w-9 h-9 flex-shrink-0">
+          <path
+            fill="#E44D26"
+            d="M19.037 113.876L9.032 1.661h109.936l-10.016 112.198-45.019 12.48z"
+          />
+          <path fill="#F16529" d="M64 116.8l36.378-10.086 8.559-95.878H64z" />
+          <path
+            fill="#EBEBEB"
+            d="M64 52.455H45.788L44.53 38.361H64V24.599H29.489l.33 3.692 3.382 37.927H64zm0 35.743l-.061.017-15.327-4.14-.979-10.975H33.816l1.928 21.609 28.193 7.826.063-.017z"
+          />
+          <path
+            fill="#fff"
+            d="M63.952 52.455v13.763h16.947l-1.597 17.849-15.35 4.143v14.319l28.215-7.82.207-2.325 3.234-36.233.335-3.696h-3.708zm0-27.856v13.762h33.244l.276-3.092.628-6.978.329-3.692z"
+          />
+        </svg>
+      ),
     },
     {
       name: "JavaScript",
       icon: (
-        <svg viewBox="0 0 128 128" className="w-9 h-9 flex-shrink-0"><path fill="#F0DB4F" d="M1.408 1.408h125.184v125.185H1.408z" /><path fill="#323330" d="M116.347 96.736c-.917-5.711-4.641-10.508-15.672-14.981-3.832-1.761-8.104-3.022-9.377-5.926-.452-1.69-.512-2.642-.226-3.665.821-3.32 4.784-4.355 7.925-3.403 2.023.678 3.938 2.237 5.093 4.724 5.402-3.498 5.391-3.475 9.163-5.879-1.381-2.141-2.118-3.129-3.022-4.045-3.249-3.629-7.676-5.498-14.756-5.355l-3.688.477c-3.534.893-6.902 2.748-8.877 5.235-5.926 6.724-4.236 18.492 2.975 23.335 7.104 5.332 17.54 6.545 18.873 11.531 1.297 6.104-4.486 8.08-10.234 7.378-4.236-.881-6.592-3.034-9.139-6.949-4.688 2.713-4.688 2.713-9.508 5.485 1.143 2.499 2.344 3.63 4.26 5.795 9.068 9.198 31.76 8.746 35.83-5.176.165-.478 1.261-3.666.38-8.581zM69.462 58.943H57.753l-.048 30.272c0 6.438.333 12.34-.714 14.149-1.713 3.558-6.152 3.117-8.175 2.427-2.059-1.012-3.106-2.451-4.319-4.485-.333-.584-.583-1.036-.667-1.071l-9.52 5.83c1.583 3.249 3.915 6.069 6.902 7.901 4.462 2.678 10.459 3.499 16.731 2.059 4.082-1.189 7.604-3.652 9.448-7.401 2.666-4.915 2.094-10.864 2.07-17.444.06-10.735.001-21.468.001-32.237z" /></svg>
-      )
+        <svg viewBox="0 0 128 128" className="w-9 h-9 flex-shrink-0">
+          <path fill="#F0DB4F" d="M1.408 1.408h125.184v125.185H1.408z" />
+          <path
+            fill="#323330"
+            d="M116.347 96.736c-.917-5.711-4.641-10.508-15.672-14.981-3.832-1.761-8.104-3.022-9.377-5.926-.452-1.69-.512-2.642-.226-3.665.821-3.32 4.784-4.355 7.925-3.403 2.023.678 3.938 2.237 5.093 4.724 5.402-3.498 5.391-3.475 9.163-5.879-1.381-2.141-2.118-3.129-3.022-4.045-3.249-3.629-7.676-5.498-14.756-5.355l-3.688.477c-3.534.893-6.902 2.748-8.877 5.235-5.926 6.724-4.236 18.492 2.975 23.335 7.104 5.332 17.54 6.545 18.873 11.531 1.297 6.104-4.486 8.08-10.234 7.378-4.236-.881-6.592-3.034-9.139-6.949-4.688 2.713-4.688 2.713-9.508 5.485 1.143 2.499 2.344 3.63 4.26 5.795 9.068 9.198 31.76 8.746 35.83-5.176.165-.478 1.261-3.666.38-8.581zM69.462 58.943H57.753l-.048 30.272c0 6.438.333 12.34-.714 14.149-1.713 3.558-6.152 3.117-8.175 2.427-2.059-1.012-3.106-2.451-4.319-4.485-.333-.584-.583-1.036-.667-1.071l-9.52 5.83c1.583 3.249 3.915 6.069 6.902 7.901 4.462 2.678 10.459 3.499 16.731 2.059 4.082-1.189 7.604-3.652 9.448-7.401 2.666-4.915 2.094-10.864 2.07-17.444.06-10.735.001-21.468.001-32.237z"
+          />
+        </svg>
+      ),
     },
     {
       name: "Java",
       icon: (
-        <svg viewBox="0 0 128 128" className="w-9 h-9 flex-shrink-0"><path fill="#0074BD" d="M47.617 98.12s-4.767 2.774 3.397 3.71c9.892 1.13 14.947.968 25.845-1.092 0 0 2.871 1.795 6.873 3.351-24.439 10.47-55.308-.607-36.115-5.969zm-2.988-13.665s-5.348 3.959 2.823 4.805c10.567 1.091 18.91 1.18 33.354-1.6 0 0 1.993 2.025 5.132 3.131-29.542 8.64-62.446.68-41.309-6.336z" /><path fill="#EA2D2E" d="M69.802 61.271c6.025 6.935-1.58 13.17-1.58 13.17s15.289-7.891 8.269-17.777c-6.559-9.215-11.587-13.792 15.635-29.58 0 .001-42.731 10.67-22.324 34.187z" /><path fill="#0074BD" d="M102.123 108.229s3.529 2.91-3.888 5.159c-14.102 4.272-58.706 5.56-71.094.171-4.451-1.938 3.899-4.625 6.526-5.192 2.739-.593 4.303-.485 4.303-.485-4.953-3.487-32.013 6.85-13.743 9.815 49.821 8.076 90.817-3.637 77.896-9.468zM49.912 70.294s-22.686 5.389-8.033 7.348c6.188.828 18.518.638 30.011-.326 9.39-.789 18.813-2.474 18.813-2.474s-3.308 1.419-5.704 3.053c-23.042 6.061-67.544 3.238-54.731-2.958 10.832-5.239 19.644-4.643 19.644-4.643zm40.697 22.747c23.421-12.167 12.591-23.86 5.032-22.285-1.848.385-2.677.72-2.677.72s.688-1.079 2-1.543c14.953-5.255 26.451 15.503-4.823 23.725 0-.002.359-.327.468-.617z" /><path fill="#EA2D2E" d="M76.491 1.587S89.459 14.563 64.188 34.51c-20.266 16.006-4.621 25.13-.007 35.559-11.831-10.673-20.509-20.07-14.688-28.815C58.041 28.42 81.722 22.195 76.491 1.587z" /><path fill="#0074BD" d="M52.214 126.021c22.476 1.437 57-.8 57.817-11.436 0 0-1.571 4.032-18.577 7.231-19.186 3.612-42.854 3.191-56.887.874 0 .001 2.875 2.381 17.647 3.331z" /></svg>
-      )
+        <svg viewBox="0 0 128 128" className="w-9 h-9 flex-shrink-0">
+          <path
+            fill="#0074BD"
+            d="M47.617 98.12s-4.767 2.774 3.397 3.71c9.892 1.13 14.947.968 25.845-1.092 0 0 2.871 1.795 6.873 3.351-24.439 10.47-55.308-.607-36.115-5.969zm-2.988-13.665s-5.348 3.959 2.823 4.805c10.567 1.091 18.91 1.18 33.354-1.6 0 0 1.993 2.025 5.132 3.131-29.542 8.64-62.446.68-41.309-6.336z"
+          />
+          <path
+            fill="#EA2D2E"
+            d="M69.802 61.271c6.025 6.935-1.58 13.17-1.58 13.17s15.289-7.891 8.269-17.777c-6.559-9.215-11.587-13.792 15.635-29.58 0 .001-42.731 10.67-22.324 34.187z"
+          />
+          <path
+            fill="#0074BD"
+            d="M102.123 108.229s3.529 2.91-3.888 5.159c-14.102 4.272-58.706 5.56-71.094.171-4.451-1.938 3.899-4.625 6.526-5.192 2.739-.593 4.303-.485 4.303-.485-4.953-3.487-32.013 6.85-13.743 9.815 49.821 8.076 90.817-3.637 77.896-9.468zM49.912 70.294s-22.686 5.389-8.033 7.348c6.188.828 18.518.638 30.011-.326 9.39-.789 18.813-2.474 18.813-2.474s-3.308 1.419-5.704 3.053c-23.042 6.061-67.544 3.238-54.731-2.958 10.832-5.239 19.644-4.643 19.644-4.643zm40.697 22.747c23.421-12.167 12.591-23.86 5.032-22.285-1.848.385-2.677.72-2.677.72s.688-1.079 2-1.543c14.953-5.255 26.451 15.503-4.823 23.725 0-.002.359-.327.468-.617z"
+          />
+          <path
+            fill="#EA2D2E"
+            d="M76.491 1.587S89.459 14.563 64.188 34.51c-20.266 16.006-4.621 25.13-.007 35.559-11.831-10.673-20.509-20.07-14.688-28.815C58.041 28.42 81.722 22.195 76.491 1.587z"
+          />
+          <path
+            fill="#0074BD"
+            d="M52.214 126.021c22.476 1.437 57-.8 57.817-11.436 0 0-1.571 4.032-18.577 7.231-19.186 3.612-42.854 3.191-56.887.874 0 .001 2.875 2.381 17.647 3.331z"
+          />
+        </svg>
+      ),
     },
     {
       name: "SQL DB",
       icon: (
         <svg viewBox="0 0 24 24" className="w-9 h-9 flex-shrink-0" fill="currentColor">
-          <path d="M12 0C5.373 0 0 1.79 0 4v3.5c0 2.21 5.373 4 12 4s12-1.79 12-4V4c0-2.21-5.373-4-12-4zm0 13.5c-6.627 0-12-1.79-12-4V13c0 2.21 5.373 4 12 4s12-1.79 12-4v-3.5c0 2.21-5.373 4-12 4zm0 6.5c-6.627 0-12-1.79-12-4V20c0 2.21 5.373 4 12 4s12-1.79 12-4v-3.5c0 2.21-5.373 4-12 4z" fill="#4479A1" />
+          <path
+            d="M12 0C5.373 0 0 1.79 0 4v3.5c0 2.21 5.373 4 12 4s12-1.79 12-4V4c0-2.21-5.373-4-12-4zm0 13.5c-6.627 0-12-1.79-12-4V13c0 2.21 5.373 4 12 4s12-1.79 12-4v-3.5c0 2.21-5.373 4-12 4zm0 6.5c-6.627 0-12-1.79-12-4V20c0 2.21 5.373 4 12 4s12-1.79 12-4v-3.5c0 2.21-5.373 4-12 4z"
+            fill="#4479A1"
+          />
         </svg>
-      )
+      ),
     },
     {
       name: "Bootstrap",
       icon: (
         <svg viewBox="0 0 16 16" className="w-9 h-9 flex-shrink-0">
-          <path fill="#7952B3" d="M2.5 14.14V1.86A.86.86 0 0 1 3.36 1h9.28a.86.86 0 0 1 .86.86v12.28a.86.86 0 0 1-.86.86H3.36a.86.86 0 0 1-.86-.86z" />
-          <path fill="#FFF" d="M4.96 11.2h3.36c1.65 0 2.65-.92 2.65-2.27 0-1.12-.73-1.84-1.74-2.02v-.07c.8-.18 1.4-.92 1.4-1.92 0-1.25-.96-2.11-2.48-2.11H4.96v8.39zm2.59-5.85h1.22c.86 0 1.25.43 1.25 1.11 0 .73-.41 1.12-1.2 1.12h-1.27v-2.23zm.1 4.93v-2.17h1.34c.95 0 1.39.46 1.39 1.16 0 .75-.46 1.15-1.32 1.15H7.65z" />
+          <path
+            fill="#7952B3"
+            d="M2.5 14.14V1.86A.86.86 0 0 1 3.36 1h9.28a.86.86 0 0 1 .86.86v12.28a.86.86 0 0 1-.86.86H3.36a.86.86 0 0 1-.86-.86z"
+          />
+          <path
+            fill="#FFF"
+            d="M4.96 11.2h3.36c1.65 0 2.65-.92 2.65-2.27 0-1.12-.73-1.84-1.74-2.02v-.07c.8-.18 1.4-.92 1.4-1.92 0-1.25-.96-2.11-2.48-2.11H4.96v8.39zm2.59-5.85h1.22c.86 0 1.25.43 1.25 1.11 0 .73-.41 1.12-1.2 1.12h-1.27v-2.23zm.1 4.93v-2.17h1.34c.95 0 1.39.46 1.39 1.16 0 .75-.46 1.15-1.32 1.15H7.65z"
+          />
         </svg>
-      )
+      ),
     },
     {
       name: "GitHub",
       icon: (
         <svg viewBox="0 0 24 24" className="w-9 h-9 flex-shrink-0" fill="currentColor">
-          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" fill="#181717" />
+          <path
+            d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+            fill="#181717"
+          />
         </svg>
-      )
+      ),
     },
     {
       name: "MS Excel",
       icon: (
         <svg viewBox="0 0 32 32" className="w-9 h-9 flex-shrink-0">
-          <defs><linearGradient id="SVGSuUii0pt" x1="4.494" x2="13.832" y1="-2092.086" y2="-2075.914" gradientTransform="translate(0 2100)" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#18884f" /><stop offset=".5" stopColor="#117e43" /><stop offset="1" stopColor="#0b6631" /></linearGradient></defs><path fill="#185c37" d="M19.581 15.35L8.512 13.4v14.409A1.19 1.19 0 0 0 9.705 29h19.1A1.19 1.19 0 0 0 30 27.809V22.5Z" /><path fill="#21a366" d="M19.581 3H9.705a1.19 1.19 0 0 0-1.193 1.191V9.5L19.581 16l5.861 1.95L30 16V9.5Z" /><path fill="#107c41" d="M8.512 9.5h11.069V16H8.512Z" /><path d="M16.434 8.2H8.512v16.25h7.922a1.2 1.2 0 0 0 1.194-1.191V9.391A1.2 1.2 0 0 0 16.434 8.2" opacity=".1" /><path d="M15.783 8.85H8.512V25.1h7.271a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191" opacity=".2" /><path d="M15.783 8.85H8.512V23.8h7.271a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191" opacity=".2" /><path d="M15.132 8.85h-6.62V23.8h6.62a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191" opacity=".2" /><path fill="url(#SVGSuUii0pt)" d="M3.194 8.85h11.938a1.193 1.193 0 0 1 1.194 1.191v11.918a1.193 1.193 0 0 1-1.194 1.191H3.194A1.19 1.19 0 0 1 2 21.959V10.041A1.19 1.19 0 0 1 3.194 8.85" /><path fill="#fff" d="m5.7 19.873l2.511-3.884l-2.3-3.862h1.847L9.013 14.6c.116.234.2.408.238.524h.017q.123-.281.26-.546l1.342-2.447h1.7l-2.359 3.84l2.419 3.905h-1.809l-1.45-2.711A2.4 2.4 0 0 1 9.2 16.8h-.024a1.7 1.7 0 0 1-.168.351l-1.493 2.722Z" /><path fill="#33c481" d="M28.806 3h-9.225v6.5H30V4.191A1.19 1.19 0 0 0 28.806 3" /><path fill="#107c41" d="M19.581 16H30v6.5H19.581Z" />
+          <defs>
+            <linearGradient
+              id="SVGSuUii0pt"
+              x1="4.494"
+              x2="13.832"
+              y1="-2092.086"
+              y2="-2075.914"
+              gradientTransform="translate(0 2100)"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0" stopColor="#18884f" />
+              <stop offset=".5" stopColor="#117e43" />
+              <stop offset="1" stopColor="#0b6631" />
+            </linearGradient>
+          </defs>
+          <path
+            fill="#185c37"
+            d="M19.581 15.35L8.512 13.4v14.409A1.19 1.19 0 0 0 9.705 29h19.1A1.19 1.19 0 0 0 30 27.809V22.5Z"
+          />
+          <path
+            fill="#21a366"
+            d="M19.581 3H9.705a1.19 1.19 0 0 0-1.193 1.191V9.5L19.581 16l5.861 1.95L30 16V9.5Z"
+          />
+          <path fill="#107c41" d="M8.512 9.5h11.069V16H8.512Z" />
+          <path
+            d="M16.434 8.2H8.512v16.25h7.922a1.2 1.2 0 0 0 1.194-1.191V9.391A1.2 1.2 0 0 0 16.434 8.2"
+            opacity=".1"
+          />
+          <path
+            d="M15.783 8.85H8.512V25.1h7.271a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191"
+            opacity=".2"
+          />
+          <path
+            d="M15.783 8.85H8.512V23.8h7.271a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191"
+            opacity=".2"
+          />
+          <path
+            d="M15.132 8.85h-6.62V23.8h6.62a1.2 1.2 0 0 0 1.194-1.191V10.041a1.2 1.2 0 0 0-1.194-1.191"
+            opacity=".2"
+          />
+          <path
+            fill="url(#SVGSuUii0pt)"
+            d="M3.194 8.85h11.938a1.193 1.193 0 0 1 1.194 1.191v11.918a1.193 1.193 0 0 1-1.194 1.191H3.194A1.19 1.19 0 0 1 2 21.959V10.041A1.19 1.19 0 0 1 3.194 8.85"
+          />
+          <path
+            fill="#fff"
+            d="m5.7 19.873l2.511-3.884l-2.3-3.862h1.847L9.013 14.6c.116.234.2.408.238.524h.017q.123-.281.26-.546l1.342-2.447h1.7l-2.359 3.84l2.419 3.905h-1.809l-1.45-2.711A2.4 2.4 0 0 1 9.2 16.8h-.024a1.7 1.7 0 0 1-.168.351l-1.493 2.722Z"
+          />
+          <path fill="#33c481" d="M28.806 3h-9.225v6.5H30V4.191A1.19 1.19 0 0 0 28.806 3" />
+          <path fill="#107c41" d="M19.581 16H30v6.5H19.581Z" />
         </svg>
-      )
+      ),
     },
     {
       name: "Power BI",
@@ -780,17 +832,21 @@ function Skills() {
           <path d="M10 7h4v17h-4z" fill="#F2C811" />
           <path d="M16 0h4v24h-4z" fill="#F9E589" />
         </svg>
-      )
-    }
+      ),
+    },
   ];
 
   return (
-    <section id="skills" className="px-6 md:px-16 py-6 lg:py-10 min-h-screen lg:h-screen flex flex-col justify-center scroll-mt-0 bg-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden">
+    <section
+      id="skills"
+      className="px-6 md:px-16 py-6 lg:py-10 min-h-screen lg:h-screen flex flex-col justify-center scroll-mt-0 bg-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden"
+    >
       <CertificateModal isOpen={showCertModal} onClose={() => setShowCertModal(false)} />
       <div className="max-w-6xl mx-auto w-full flex flex-col justify-center">
         <Reveal>
           <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight mb-8 lg:mb-12 text-black font-extrabold leading-none">
-            SKILLS &<br />CERTIFICATES
+            SKILLS &<br />
+            CERTIFICATES
           </h2>
         </Reveal>
 
@@ -799,9 +855,9 @@ function Skills() {
           <div className="md:col-span-5 space-y-6 md:space-y-8 flex flex-col justify-center">
             {certs.map((cert, i) => (
               <Reveal key={cert.title} delay={i * 0.1}>
-                <div 
-                  className={`flex gap-4 sm:gap-5 items-center ${'hasCertificate' in cert ? 'cursor-pointer group' : ''}`}
-                  onClick={() => 'hasCertificate' in cert && setShowCertModal(true)}
+                <div
+                  className={`flex gap-4 sm:gap-5 items-center ${"hasCertificate" in cert ? "cursor-pointer group" : ""}`}
+                  onClick={() => "hasCertificate" in cert && setShowCertModal(true)}
                 >
                   <AwardIcon />
                   <h4 className="font-sans flex flex-col gap-0.5">
@@ -810,7 +866,7 @@ function Skills() {
                     </span>
                     <span className="font-medium text-neutral-600 text-sm sm:text-base flex items-center gap-2 flex-wrap">
                       <span>by {cert.provider}</span>
-                      {'hasCertificate' in cert && (
+                      {"hasCertificate" in cert && (
                         <span className="text-xs font-normal normal-case text-neutral-500 underline underline-offset-4 group-hover:text-black transition-colors whitespace-nowrap">
                           (View Certificate)
                         </span>
@@ -868,7 +924,10 @@ function Projects() {
   const projectsList = data.projects || [];
 
   return (
-    <section id="projects" className="px-6 md:px-16 py-16 md:py-24 min-h-screen flex flex-col justify-center bg-white scroll-mt-6 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden">
+    <section
+      id="projects"
+      className="px-6 md:px-16 py-16 md:py-24 min-h-screen flex flex-col justify-center bg-white scroll-mt-6 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden"
+    >
       <Reveal>
         <h2 className="font-display text-5xl md:text-7xl tracking-tight text-center text-black font-extrabold">
           {data.projectsTitle || "PROJECTS"}
@@ -889,12 +948,14 @@ function Projects() {
             <path d="M5.5 3v14.5l4-4 5 5 1.5-1.5-5-5 5.5-1z" />
           </svg>
           <span className="text-[10px] font-bold text-black tracking-tight mt-1 text-center leading-tight">
-            Klick on the<br />folder
+            Klick on the
+            <br />
+            folder
           </span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 sm:gap-6 md:gap-12 justify-center">
-          {projectsList.map((p: any, i: number) => (
+          {projectsList.map((p: ProjectItem, i: number) => (
             <Reveal key={p.key} delay={i * 0.15}>
               <a href={`#${p.key}`} className="group block text-center">
                 <motion.div
@@ -951,7 +1012,11 @@ function CaseStudy({
   image?: string;
 }) {
   return (
-    <section id={id} className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center scroll-mt-6" style={{ backgroundColor: color || "#f0efeb" }}>
+    <section
+      id={id}
+      className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center scroll-mt-6"
+      style={{ backgroundColor: color || "#f0efeb" }}
+    >
       <div className="max-w-7xl mx-auto w-full">
         <Reveal className="text-center mb-6 lg:mb-8">
           <h3 className="font-display font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight text-black uppercase leading-none">
@@ -960,25 +1025,38 @@ function CaseStudy({
         </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-          
           {/* Left Column: DETAILS & GOAL */}
           <div className="lg:col-span-4 flex flex-col gap-4 lg:gap-6">
             <Reveal delay={0.1}>
               <div className="bg-white p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5">
-                <h4 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-2">DETAILS:</h4>
+                <h4 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-2">
+                  DETAILS:
+                </h4>
                 <div className="space-y-1 text-xs sm:text-sm lg:text-base text-neutral-700 font-sans">
-                  <p><span className="font-semibold text-black">Client:</span> {client}</p>
-                  <p><span className="font-semibold text-black">Industry:</span> {industry}</p>
-                  <p><span className="font-semibold text-black">Location:</span> {location}</p>
-                  <p><span className="font-semibold text-black">Platforms:</span> {platforms}</p>
+                  <p>
+                    <span className="font-semibold text-black">Client:</span> {client}
+                  </p>
+                  <p>
+                    <span className="font-semibold text-black">Industry:</span> {industry}
+                  </p>
+                  <p>
+                    <span className="font-semibold text-black">Location:</span> {location}
+                  </p>
+                  <p>
+                    <span className="font-semibold text-black">Platforms:</span> {platforms}
+                  </p>
                 </div>
               </div>
             </Reveal>
 
             <Reveal delay={0.2}>
               <div className="bg-white p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5">
-                <h4 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-2">GOAL:</h4>
-                <p className="font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed">{goal}</p>
+                <h4 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-2">
+                  GOAL:
+                </h4>
+                <p className="font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed">
+                  {goal}
+                </p>
               </div>
             </Reveal>
           </div>
@@ -998,12 +1076,18 @@ function CaseStudy({
                         <span className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
                         <span className="w-2 h-2 rounded-full bg-[#27c93f]" />
                       </div>
-                      <span className="text-[9.5px] text-neutral-700 font-bold uppercase truncate max-w-[180px]">{title}</span>
+                      <span className="text-[9.5px] text-neutral-700 font-bold uppercase truncate max-w-[180px]">
+                        {title}
+                      </span>
                       <div className="w-3" />
                     </div>
                     <div className="relative w-full flex-1 overflow-hidden">
                       {image ? (
-                        <img src={image} alt={title} className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+                        <img
+                          src={image}
+                          alt={title}
+                          className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                        />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-neutral-800 to-neutral-600 flex items-center justify-center text-white text-xs font-mono">
                           {title}
@@ -1023,15 +1107,23 @@ function CaseStudy({
           <div className="lg:col-span-4 flex">
             <Reveal delay={0.3} className="w-full flex">
               <div className="bg-white p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5 w-full flex flex-col justify-center">
-                <h4 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-2">APPROACH:</h4>
-                <p className="font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed mb-4">{approach}</p>
+                <h4 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-2">
+                  APPROACH:
+                </h4>
+                <p className="font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed mb-4">
+                  {approach}
+                </p>
 
                 {stats && stats.length > 0 && (
                   <div className="border-t border-black/10 pt-3 grid grid-cols-3 gap-2 text-center">
                     {stats.map((s) => (
                       <div key={s.l}>
-                        <div className="font-display text-base sm:text-lg lg:text-xl font-bold text-black">{s.n}</div>
-                        <div className="text-[10px] sm:text-xs text-neutral-500 mt-0.5 leading-tight">{s.l}</div>
+                        <div className="font-display text-base sm:text-lg lg:text-xl font-bold text-black">
+                          {s.n}
+                        </div>
+                        <div className="text-[10px] sm:text-xs text-neutral-500 mt-0.5 leading-tight">
+                          {s.l}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -1039,7 +1131,6 @@ function CaseStudy({
               </div>
             </Reveal>
           </div>
-
         </div>
       </div>
     </section>
@@ -1052,17 +1143,19 @@ function Contact() {
   const contact = about.contact;
 
   return (
-    <section id="contact" className="relative w-full py-6 lg:py-8 min-h-screen lg:h-screen flex flex-col justify-between items-center bg-[#f2f1ed] font-sans scroll-mt-0 overflow-hidden rounded-[2rem] md:rounded-[2.5rem]">
-      
+    <section
+      id="contact"
+      className="relative w-full py-6 lg:py-8 min-h-screen lg:h-screen flex flex-col justify-between items-center bg-[#f2f1ed] font-sans scroll-mt-0 overflow-hidden rounded-[2rem] md:rounded-[2.5rem]"
+    >
       {/* Top Social Icons Bar (GitHub, Instagram, LinkedIn - Exact Match to Screenshot) */}
       <Reveal>
         <div className="flex items-center justify-center gap-3.5 md:gap-5 mt-2 mb-4">
           {/* GitHub Icon */}
-          <a 
-            href={contact.github || "https://github.com/riddhimhatre12"} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            aria-label="GitHub" 
+          <a
+            href={contact.github || "https://github.com/riddhimhatre12"}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
             className="bg-black text-white w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-[14px] md:rounded-[16px] hover:scale-110 transition-transform shadow-sm"
           >
             <svg viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6" fill="currentColor">
@@ -1071,14 +1164,25 @@ function Contact() {
           </a>
 
           {/* Instagram Icon */}
-          <a 
-            href={contact.instagram || "https://www.instagram.com/riddhi_mhatre12?igsh=MXI4eW1rdjI0a3BzMw=="} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            aria-label="Instagram" 
+          <a
+            href={
+              contact.instagram ||
+              "https://www.instagram.com/riddhi_mhatre12?igsh=MXI4eW1rdjI0a3BzMw=="
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
             className="bg-black text-white w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-[14px] md:rounded-[16px] hover:scale-110 transition-transform shadow-sm"
           >
-            <svg viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              viewBox="0 0 24 24"
+              className="w-5 h-5 md:w-6 md:h-6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
@@ -1086,11 +1190,11 @@ function Contact() {
           </a>
 
           {/* LinkedIn Icon */}
-          <a 
-            href={contact.linkedin || "https://www.linkedin.com/in/riddhi-mhatre-909529342/"} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            aria-label="LinkedIn" 
+          <a
+            href={contact.linkedin || "https://www.linkedin.com/in/riddhi-mhatre-909529342/"}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
             className="bg-black text-white w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-[14px] md:rounded-[16px] hover:scale-110 transition-transform shadow-sm"
           >
             <svg viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6" fill="currentColor">
@@ -1103,12 +1207,10 @@ function Contact() {
       {/* Main White Pill Banner + Polaroid Stack Container */}
       <Reveal delay={0.1} className="w-full flex justify-center px-4 sm:px-6 my-auto">
         <div className="w-[96%] max-w-[1060px] relative">
-          
           <div className="w-full flex justify-center items-center relative">
-            
             {/* Main White Pill Banner (Grand & Bold Box) */}
             <div className="relative z-10 bg-white rounded-[100px] md:rounded-[140px] w-full py-8 sm:py-12 md:py-16 px-8 sm:px-16 md:px-24 flex items-center justify-center shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-gray-100/50">
-              <h2 
+              <h2
                 className="font-display font-black tracking-tighter leading-none text-[#1b1b1b] text-center w-full uppercase select-none"
                 style={{ fontSize: "clamp(30px, 6.8vw, 92px)", letterSpacing: "-0.03em" }}
               >
@@ -1117,7 +1219,7 @@ function Contact() {
             </div>
 
             {/* Polaroids Stack - Animated Slide-in FROM LEFT SIDE on Scroll */}
-            <motion.div 
+            <motion.div
               initial={{ x: -140, opacity: 0, rotate: -20 }}
               whileInView={{ x: 0, opacity: 1, rotate: 0 }}
               viewport={{ once: true, margin: "-40px" }}
@@ -1125,24 +1227,22 @@ function Contact() {
               className="absolute -left-5 sm:-left-7 md:-left-10 lg:-left-12 top-[95%] sm:top-[90%] md:top-[85%] lg:top-[80%] z-20 pointer-events-none drop-shadow-2xl w-[110px] sm:w-[145px] md:w-[175px] lg:w-[200px]"
             >
               <div className="relative w-full aspect-[4/4.6]">
-                
                 {/* Back Polaroid Card */}
                 <div className="absolute inset-0 bg-[#fdfdfd] p-2 md:p-3 shadow-md border border-gray-200/80 transform rotate-[7deg] translate-x-3 translate-y-3 md:translate-x-4 md:translate-y-3.5 rounded-sm flex flex-col">
                   <div className="w-full flex-1 bg-gray-200/90 border border-gray-200/60" />
                   <div className="h-4 md:h-8 bg-[#fdfdfd]" />
                 </div>
-                
+
                 {/* Front Polaroid Card */}
                 <div className="absolute inset-0 bg-[#fdfdfd] p-2 md:p-3 shadow-2xl border border-gray-100 transform rotate-[-9deg] rounded-sm flex flex-col">
-                  
                   {/* Realistic Metallic Paperclip (Clasping perfectly over top-right corner of polaroid photo frame) */}
-                  <svg 
-                    className="absolute -top-4 right-3 sm:-top-5 sm:right-4 md:-top-6 md:right-5 z-30 w-6 sm:w-7.5 md:w-9 h-13 sm:h-16 md:h-20 text-[#7d695b] drop-shadow-md rotate-[14deg] pointer-events-none" 
-                    viewBox="0 0 24 54" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2.2" 
-                    strokeLinecap="round" 
+                  <svg
+                    className="absolute -top-4 right-3 sm:-top-5 sm:right-4 md:-top-6 md:right-5 z-30 w-6 sm:w-7.5 md:w-9 h-13 sm:h-16 md:h-20 text-[#7d695b] drop-shadow-md rotate-[14deg] pointer-events-none"
+                    viewBox="0 0 24 54"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
                     strokeLinejoin="round"
                   >
                     <path d="M7 16V38C7 42.4 10.6 46 15 46C19.4 46 23 42.4 23 38V12C23 6.5 18.5 2 13 2C7.5 2 3 6.5 3 12V42" />
@@ -1158,18 +1258,10 @@ function Contact() {
                   {/* Polaroid White Margin at Bottom */}
                   <div className="h-4 md:h-8 bg-[#fdfdfd]" />
                 </div>
-
               </div>
             </motion.div>
-            
           </div>
-
         </div>
-      </Reveal>
-
-      {/* Contact Form Connected to Convex Database */}
-      <Reveal delay={0.15} className="w-full">
-        <ContactForm />
       </Reveal>
 
       {/* Contact Info Details (Email & Phone) */}
@@ -1178,8 +1270,8 @@ function Contact() {
           {contact.email && (
             <div className="flex items-center gap-3">
               <MailIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1b1b1b]" />
-              <a 
-                href={`mailto:${contact.email}`} 
+              <a
+                href={`mailto:${contact.email}`}
                 className="font-sans text-[15px] md:text-[19px] font-medium text-[#1b1b1b] tracking-wide hover:opacity-75 transition-opacity"
               >
                 {contact.email}
@@ -1189,8 +1281,8 @@ function Contact() {
           {contact.phone && (
             <div className="flex items-center gap-3">
               <PhoneIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1b1b1b]" />
-              <a 
-                href={`tel:${contact.phone}`} 
+              <a
+                href={`tel:${contact.phone}`}
                 className="font-sans text-[15px] md:text-[19px] font-medium text-[#1b1b1b] tracking-wide hover:opacity-75 transition-opacity"
               >
                 {contact.phone}
@@ -1223,14 +1315,16 @@ function ExperienceAndEducation() {
   const [showCertModal, setShowCertModal] = useState(false);
 
   return (
-    <section id="experience" className="px-5 md:px-12 py-6 lg:py-10 min-h-screen lg:h-screen flex flex-col justify-center bg-[#FAF9F6] font-sans scroll-mt-0 overflow-hidden relative rounded-[2rem] md:rounded-[2.5rem]">
+    <section
+      id="experience"
+      className="px-5 md:px-12 py-6 lg:py-10 min-h-screen lg:h-screen flex flex-col justify-center bg-[#FAF9F6] font-sans scroll-mt-0 overflow-hidden relative rounded-[2rem] md:rounded-[2.5rem]"
+    >
       <CertificateModal isOpen={showCertModal} onClose={() => setShowCertModal(false)} />
 
       {/* Decorative Subtle Background Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(#e5e3dc_1px,transparent_1px)] [background-size:24px_24px] opacity-35 pointer-events-none" />
 
       <div className="max-w-6xl mx-auto w-full relative z-10 flex flex-col items-center">
-        
         {/* Main Section Header */}
         <Reveal className="text-center mb-6 lg:mb-8">
           <span className="inline-block text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.25em] text-neutral-500 uppercase bg-neutral-200/70 px-3.5 py-1 rounded-full mb-2.5 border border-neutral-300/40">
@@ -1284,7 +1378,6 @@ function ExperienceAndEducation() {
         {/* Tab Content Display */}
         <div className="w-full max-w-4xl min-h-[340px] flex flex-col justify-center">
           <AnimatePresence mode="wait">
-            
             {/* TAB 1: EXPERIENCE & COURSES */}
             {activeTab === "experience" && (
               <motion.div
@@ -1295,7 +1388,7 @@ function ExperienceAndEducation() {
                 transition={{ duration: 0.35, ease: "easeOut" }}
                 className="grid md:grid-cols-2 gap-5 lg:gap-6 items-stretch w-full"
               >
-                {experiences.map((exp: any, i: number) => {
+                {experiences.map((exp: ExperienceItem, i: number) => {
                   const isBizTech = exp.company?.includes("BizTech");
 
                   return isBizTech ? (
@@ -1322,9 +1415,7 @@ function ExperienceAndEducation() {
                         <h4 className="font-sans text-xl sm:text-2xl font-black mt-4 text-[#111111] tracking-tight leading-snug">
                           {exp.title}
                         </h4>
-                        <p className="text-neutral-700 font-bold text-sm mt-1">
-                          {exp.company}
-                        </p>
+                        <p className="text-neutral-700 font-bold text-sm mt-1">{exp.company}</p>
 
                         {exp.description && (
                           <p className="text-neutral-600 text-xs sm:text-sm mt-3 leading-relaxed font-sans">
@@ -1341,7 +1432,9 @@ function ExperienceAndEducation() {
                           className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-black text-white hover:bg-neutral-800 font-sans text-xs font-extrabold transition-all duration-200 shadow-md hover:shadow-lg group/btn"
                         >
                           <span>View Official Certificate</span>
-                          <span className="text-[12px] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform">↗</span>
+                          <span className="text-[12px] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform">
+                            ↗
+                          </span>
                         </motion.button>
                         <span className="text-[10.5px] font-mono font-bold text-neutral-600 bg-neutral-100 px-2.5 py-1 rounded-lg border border-neutral-200">
                           #PC-F16833
@@ -1371,9 +1464,7 @@ function ExperienceAndEducation() {
                         <h4 className="font-sans text-xl font-black mt-4 text-[#111111] tracking-tight leading-snug">
                           {exp.title}
                         </h4>
-                        <p className="text-neutral-700 font-bold text-sm mt-1">
-                          {exp.company}
-                        </p>
+                        <p className="text-neutral-700 font-bold text-sm mt-1">{exp.company}</p>
 
                         {exp.description && (
                           <p className="text-neutral-600 text-xs sm:text-sm mt-3 leading-relaxed font-sans">
@@ -1383,11 +1474,16 @@ function ExperienceAndEducation() {
                       </div>
 
                       <div className="mt-6 pt-4 border-t border-neutral-150 flex items-center gap-1.5 flex-wrap">
-                        {["STLC", "Bug Reporting", "Test Cases", "Quality Assurance"].map((skill, skIdx) => (
-                          <span key={skIdx} className="text-[10px] font-mono font-bold bg-neutral-100 text-neutral-700 px-2.5 py-1 rounded-md border border-neutral-200/60">
-                            {skill}
-                          </span>
-                        ))}
+                        {["STLC", "Bug Reporting", "Test Cases", "Quality Assurance"].map(
+                          (skill, skIdx) => (
+                            <span
+                              key={skIdx}
+                              className="text-[10px] font-mono font-bold bg-neutral-100 text-neutral-700 px-2.5 py-1 rounded-md border border-neutral-200/60"
+                            >
+                              {skill}
+                            </span>
+                          ),
+                        )}
                       </div>
                     </motion.div>
                   );
@@ -1405,7 +1501,7 @@ function ExperienceAndEducation() {
                 transition={{ duration: 0.35, ease: "easeOut" }}
                 className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 items-stretch w-full"
               >
-                {education.map((edu: any, i: number) => {
+                {education.map((edu: EducationItem, i: number) => {
                   const isDegree = i === 0;
 
                   return (
@@ -1415,12 +1511,15 @@ function ExperienceAndEducation() {
                       transition={{ type: "spring", stiffness: 280, damping: 20 }}
                       className="bg-white text-black p-5 sm:p-6 rounded-[22px] shadow-[0_4px_25px_rgba(0,0,0,0.03)] border border-neutral-200/90 hover:border-black/30 hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
                     >
-
                       <div>
                         <div className="flex items-center justify-between gap-1.5 flex-wrap">
-                          <span className={`inline-block text-[9.5px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider ${
-                            isDegree ? "bg-black text-white" : "bg-neutral-100 text-neutral-700 border border-neutral-200/60"
-                          }`}>
+                          <span
+                            className={`inline-block text-[9.5px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider ${
+                              isDegree
+                                ? "bg-black text-white"
+                                : "bg-neutral-100 text-neutral-700 border border-neutral-200/60"
+                            }`}
+                          >
                             {isDegree ? "Bachelor Degree" : "Schooling"}
                           </span>
                           {edu.period && (
@@ -1447,7 +1546,10 @@ function ExperienceAndEducation() {
                       {edu.highlights && edu.highlights.length > 0 && (
                         <div className="mt-3.5 pt-2.5 border-t border-neutral-150 flex items-center gap-1.5 flex-wrap">
                           {edu.highlights.map((tag: string, tagIdx: number) => (
-                            <span key={tagIdx} className="text-[9.5px] font-mono font-extrabold bg-neutral-100 text-[#111111] px-2 py-0.5 rounded border border-neutral-200">
+                            <span
+                              key={tagIdx}
+                              className="text-[9.5px] font-mono font-extrabold bg-neutral-100 text-[#111111] px-2 py-0.5 rounded border border-neutral-200"
+                            >
                               {tag}
                             </span>
                           ))}
@@ -1458,10 +1560,8 @@ function ExperienceAndEducation() {
                 })}
               </motion.div>
             )}
-
           </AnimatePresence>
         </div>
-
       </div>
     </section>
   );
@@ -1469,9 +1569,11 @@ function ExperienceAndEducation() {
 
 function ExerCoachProject() {
   return (
-    <section id="exercoach" className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-white font-sans border-t border-black/5 rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6">
+    <section
+      id="exercoach"
+      className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-white font-sans border-t border-black/5 rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6"
+    >
       <div className="max-w-7xl mx-auto w-full">
-        
         {/* Title & Subtitle */}
         <Reveal className="text-center mb-6 lg:mb-8">
           <h2 className="font-display font-black tracking-tight text-3xl sm:text-4xl lg:text-5xl text-[#111111] uppercase leading-none">
@@ -1484,10 +1586,8 @@ function ExerCoachProject() {
 
         {/* 3-Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-          
           {/* Left Column (OBJECTIVE + DETAILS) */}
           <div className="lg:col-span-4 flex flex-col gap-4 lg:gap-6">
-            
             {/* OBJECTIVE Card */}
             <Reveal delay={0.1}>
               <div className="bg-white p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5">
@@ -1495,7 +1595,8 @@ function ExerCoachProject() {
                   OBJECTIVE:
                 </h3>
                 <p className="font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed">
-                  Develop a high-impact, modern, and fully responsive website to establish the gym's online presence, showcase training programs, and drive membership registrations.
+                  Develop a high-impact, modern, and fully responsive website to establish the gym's
+                  online presence, showcase training programs, and drive membership registrations.
                 </p>
               </div>
             </Reveal>
@@ -1507,23 +1608,22 @@ function ExerCoachProject() {
                   DETAILS:
                 </h3>
                 <p className="font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed">
-                  Designed and developed the live website <span className="font-semibold text-black">exercoachgym.com</span> from scratch as a freelance developer. Structured class directories, contact integrations, and coach rosters with a performance-first approach.
+                  Designed and developed the live website{" "}
+                  <span className="font-semibold text-black">exercoachgym.com</span> from scratch as
+                  a freelance developer. Structured class directories, contact integrations, and
+                  coach rosters with a performance-first approach.
                 </p>
               </div>
             </Reveal>
-
           </div>
 
           {/* Center Column (Broad Classic White/Cream Laptop Mockup) */}
           <div className="lg:col-span-4 flex flex-col items-center justify-center my-3 lg:my-0">
             <Reveal delay={0.15} className="w-full flex flex-col items-center">
-              
               {/* Broad Laptop Outer Group */}
               <div className="relative w-full max-w-[380px] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[520px] flex flex-col items-center group hover:scale-[1.02] transition-transform duration-500">
-                
                 {/* Cream/White Laptop Screen Frame */}
                 <div className="relative w-full bg-[#FAF8F5] p-2 sm:p-3 rounded-t-[1.4rem] lg:rounded-t-[1.8rem] shadow-[0_15px_40px_rgba(0,0,0,0.1)] border-[5px] lg:border-[6px] border-[#E8E3DA] z-10">
-                  
                   {/* Top Webcam Dot */}
                   <div className="flex justify-center mb-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#3a3a3a] ring-1 ring-black/10" />
@@ -1531,7 +1631,6 @@ function ExerCoachProject() {
 
                   {/* Inner Screen Display */}
                   <div className="relative overflow-hidden rounded-[0.8rem] lg:rounded-[1rem] bg-black border border-neutral-300/40 flex flex-col aspect-[16/9.5]">
-                    
                     {/* Cream Browser Navigation Bar */}
                     <div className="bg-[#F4F0E8] px-3 py-1 flex items-center justify-between text-[10px] text-neutral-600 font-mono border-b border-neutral-300/50">
                       <div className="flex items-center gap-1">
@@ -1540,7 +1639,11 @@ function ExerCoachProject() {
                         <span className="w-2 h-2 rounded-full bg-[#27c93f]" />
                       </div>
                       <div className="flex items-center gap-1 bg-[#FAF8F5] px-2.5 py-0.5 rounded-md text-[9.5px] text-neutral-700 border border-neutral-300/50 shadow-inner">
-                        <svg className="w-2 h-2 text-emerald-600" viewBox="0 0 24 24" fill="currentColor">
+                        <svg
+                          className="w-2 h-2 text-emerald-600"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
                           <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
                         </svg>
                         exercoachgym.com
@@ -1558,7 +1661,7 @@ function ExerCoachProject() {
                           repeat: Infinity,
                           repeatType: "loop",
                           ease: [0.45, 0, 0.55, 1],
-                          times: [0, 0.42, 0.5, 0.92, 1]
+                          times: [0, 0.42, 0.5, 0.92, 1],
                         }}
                       >
                         <img
@@ -1575,32 +1678,38 @@ function ExerCoachProject() {
                         <span>LIVE PREVIEW</span>
                       </div>
                     </div>
-
                   </div>
-
                 </div>
 
                 {/* Laptop Hinge & Base Lip */}
                 <div className="w-[104%] h-3 lg:h-3.5 bg-gradient-to-b from-[#F2EEE7] via-[#E6E0D5] to-[#D8D2C4] rounded-b-xl border-t border-[#D0C9BB] shadow-xl relative z-20 flex justify-center items-start -mt-0.5">
                   <div className="w-12 h-1 bg-[#C8C1B2] rounded-b-sm mt-0.5" />
                 </div>
-
               </div>
 
               {/* Live Status Badge Below Laptop */}
-              <a 
-                href="https://exercoachgym.com" 
-                target="_blank" 
+              <a
+                href="https://exercoachgym.com"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="mt-3.5 inline-flex items-center gap-2 bg-black text-white font-mono text-[11px] lg:text-xs px-3.5 py-1.5 rounded-full hover:bg-neutral-800 transition-colors shadow-md border border-white/10 group"
               >
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span>LIVE • exercoachgym.com</span>
-                <svg className="w-3 h-3 opacity-60 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                <svg
+                  className="w-3 h-3 opacity-60 group-hover:translate-x-0.5 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
                 </svg>
               </a>
-
             </Reveal>
           </div>
 
@@ -1636,9 +1745,7 @@ function ExerCoachProject() {
               </div>
             </Reveal>
           </div>
-
         </div>
-
       </div>
     </section>
   );
@@ -1646,35 +1753,43 @@ function ExerCoachProject() {
 
 function UnlimitedDemocracy() {
   return (
-    <section id="exercoach-mobile" className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-white font-sans border-t border-black/5 rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6">
+    <section
+      id="exercoach-mobile"
+      className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-white font-sans border-t border-black/5 rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6"
+    >
       <div className="max-w-7xl mx-auto w-full">
-        
         {/* Title */}
         <Reveal className="mb-4 lg:mb-6">
           <h2 className="font-display font-black tracking-tighter text-4xl sm:text-5xl lg:text-6xl text-[#111111] uppercase leading-none">
-            EXERCOACH<br />GYM
+            EXERCOACH
+            <br />
+            GYM
           </h2>
         </Reveal>
 
         {/* 3-Column Grid (Shifted up with tight gap) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-          
           {/* Left Column (Details/Goal/Approach Card - Shifted Up, Logo Removed) */}
           <div className="lg:col-span-4 flex flex-col gap-4">
-            
             {/* DETAILS, PLANFORMS, GOAL, APPROACH Card */}
             <Reveal delay={0.1}>
               <div className="bg-[#f0efeb] p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5 flex flex-col gap-3.5">
-                
                 {/* DETAILS */}
                 <div>
                   <h3 className="font-display font-black text-sm lg:text-base tracking-wider text-black uppercase mb-1">
                     DETAILS:
                   </h3>
                   <div className="space-y-0.5 text-xs sm:text-sm text-neutral-700 font-sans">
-                    <p><span className="font-semibold text-black">Client:</span> Freelance Client</p>
-                    <p><span className="font-semibold text-black">Industry:</span> Fitness & Personal Coaching</p>
-                    <p><span className="font-semibold text-black">Location:</span> Remote</p>
+                    <p>
+                      <span className="font-semibold text-black">Client:</span> Freelance Client
+                    </p>
+                    <p>
+                      <span className="font-semibold text-black">Industry:</span> Fitness & Personal
+                      Coaching
+                    </p>
+                    <p>
+                      <span className="font-semibold text-black">Location:</span> Remote
+                    </p>
                   </div>
                 </div>
 
@@ -1694,7 +1809,9 @@ function UnlimitedDemocracy() {
                     GOAL:
                   </h3>
                   <p className="font-sans text-neutral-700 text-xs sm:text-sm leading-relaxed">
-                    Develop a high-impact, modern, and fully responsive website to establish the gym's online presence, showcase training programs, and drive membership registrations.
+                    Develop a high-impact, modern, and fully responsive website to establish the
+                    gym's online presence, showcase training programs, and drive membership
+                    registrations.
                   </p>
                 </div>
 
@@ -1704,25 +1821,22 @@ function UnlimitedDemocracy() {
                     APPROACH:
                   </h3>
                   <p className="font-sans text-neutral-700 text-xs sm:text-sm leading-relaxed">
-                    Designed and developed the live website exercoachgym.com from scratch as a freelance developer. Structured class directories, contact integrations, and coach rosters with a performance-first approach.
+                    Designed and developed the live website exercoachgym.com from scratch as a
+                    freelance developer. Structured class directories, contact integrations, and
+                    coach rosters with a performance-first approach.
                   </p>
                 </div>
-
               </div>
             </Reveal>
-
           </div>
 
           {/* Center Column (Single Sleek iPhone 16 Pro Screen Mockup) */}
           <div className="lg:col-span-3 flex flex-col items-center justify-center my-3 lg:my-0">
             <Reveal delay={0.15} className="w-full flex flex-col items-center">
-              
               {/* Sleek iPhone Outer Container */}
               <div className="relative w-full max-w-[240px] sm:max-w-[260px] md:max-w-[275px] group hover:scale-[1.02] transition-transform duration-500">
-                
                 {/* Titanium Phone Body Frame */}
                 <div className="relative w-full bg-[#1c1c1e] p-[8px] sm:p-[9px] rounded-[2.8rem] sm:rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.22)] border-[2px] border-[#3a3a3c] ring-1 ring-black/50">
-                  
                   {/* Outer Buttons (Volume & Power) */}
                   <div className="absolute -left-[3px] top-16 w-[3px] h-6 bg-[#2c2c2e] rounded-l-sm" />
                   <div className="absolute -left-[3px] top-24 w-[3px] h-6 bg-[#2c2c2e] rounded-l-sm" />
@@ -1730,7 +1844,6 @@ function UnlimitedDemocracy() {
 
                   {/* Inner Screen Display */}
                   <div className="relative overflow-hidden rounded-[2.3rem] sm:rounded-[2.5rem] bg-black aspect-[9/19.2] border border-neutral-800">
-                    
                     {/* Status Bar / Dynamic Island */}
                     <div className="absolute top-0 inset-x-0 h-7 z-30 flex items-center justify-between px-5 pt-1 text-white font-mono text-[9px] pointer-events-none select-none">
                       <span className="font-semibold text-white/90">9:41</span>
@@ -1739,7 +1852,9 @@ function UnlimitedDemocracy() {
                         <span className="w-1.5 h-1.5 rounded-full bg-[#0c1524] ring-1 ring-blue-500/50" />
                       </div>
                       <div className="flex items-center gap-1 text-white/90">
-                        <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.2 19.54 10.55 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/></svg>
+                        <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.2 19.54 10.55 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9z" />
+                        </svg>
                         <span className="w-2.5 h-1.5 bg-current rounded-xs" />
                       </div>
                     </div>
@@ -1754,7 +1869,7 @@ function UnlimitedDemocracy() {
                           repeat: Infinity,
                           repeatType: "loop",
                           ease: [0.45, 0, 0.55, 1],
-                          times: [0, 0.45, 0.5, 0.95, 1]
+                          times: [0, 0.45, 0.5, 0.95, 1],
                         }}
                       >
                         <img
@@ -1783,15 +1898,13 @@ function UnlimitedDemocracy() {
                       <span className="w-24 h-1 bg-white/40 rounded-full" />
                     </div>
                   </div>
-
                 </div>
-
               </div>
 
               {/* Live Status Badge Below Phone */}
-              <a 
-                href="https://exercoachgym.com" 
-                target="_blank" 
+              <a
+                href="https://exercoachgym.com"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="mt-3.5 inline-flex items-center gap-2 bg-black text-white font-mono text-[11px] lg:text-xs px-3.5 py-1.5 rounded-full hover:bg-neutral-800 transition-colors shadow-md border border-white/10 group"
               >
@@ -1804,7 +1917,6 @@ function UnlimitedDemocracy() {
           {/* Right Column (ExerCoach Gym Website & Admin Portal Showcase) */}
           <div className="lg:col-span-5 flex flex-col gap-5">
             <Reveal delay={0.25} className="w-full">
-              
               {/* Section 1: Client Website Mobile Screens */}
               <div>
                 <h4 className="font-display font-black text-xs uppercase tracking-wider text-black mb-2 flex items-center gap-1.5">
@@ -1812,7 +1924,6 @@ function UnlimitedDemocracy() {
                   <span>PUBLIC WEBSITE (MOBILE)</span>
                 </h4>
                 <div className="grid grid-cols-3 gap-2.5 sm:gap-3 w-full items-start">
-                  
                   {/* Phone 1: Hero & Trial */}
                   <div className="bg-[#1c1c1e] p-1.5 rounded-[1.4rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
                     <div className="w-full overflow-hidden rounded-[1.1rem] bg-black aspect-[9/19] relative border border-neutral-800">
@@ -1822,7 +1933,9 @@ function UnlimitedDemocracy() {
                         className="w-full h-full object-cover object-top select-none"
                       />
                     </div>
-                    <span className="text-[9px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Hero & Trial</span>
+                    <span className="text-[9px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">
+                      Hero & Trial
+                    </span>
                   </div>
 
                   {/* Phone 2: Contact & Info */}
@@ -1834,7 +1947,9 @@ function UnlimitedDemocracy() {
                         className="w-full h-full object-cover object-top select-none"
                       />
                     </div>
-                    <span className="text-[9px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Contact & Info</span>
+                    <span className="text-[9px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">
+                      Contact & Info
+                    </span>
                   </div>
 
                   {/* Phone 3: Membership Plans */}
@@ -1846,9 +1961,10 @@ function UnlimitedDemocracy() {
                         className="w-full h-full object-cover object-top select-none"
                       />
                     </div>
-                    <span className="text-[9px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Plans & Rates</span>
+                    <span className="text-[9px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">
+                      Plans & Rates
+                    </span>
                   </div>
-
                 </div>
               </div>
 
@@ -1859,7 +1975,6 @@ function UnlimitedDemocracy() {
                   <span>ADMIN DASHBOARD & CMS PORTAL</span>
                 </h4>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 w-full items-start">
-                  
                   {/* Admin Phone 1: Dashboard */}
                   <div className="bg-[#1c1c1e] p-1.5 rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
                     <div className="w-full overflow-hidden rounded-[1rem] bg-black aspect-[9/19] relative border border-neutral-800">
@@ -1869,7 +1984,9 @@ function UnlimitedDemocracy() {
                         className="w-full h-full object-cover object-top select-none"
                       />
                     </div>
-                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Dashboard</span>
+                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">
+                      Dashboard
+                    </span>
                   </div>
 
                   {/* Admin Phone 2: Navigation Menu */}
@@ -1881,7 +1998,9 @@ function UnlimitedDemocracy() {
                         className="w-full h-full object-cover object-top select-none"
                       />
                     </div>
-                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Nav Menu</span>
+                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">
+                      Nav Menu
+                    </span>
                   </div>
 
                   {/* Admin Phone 3: Leads Portal */}
@@ -1893,7 +2012,9 @@ function UnlimitedDemocracy() {
                         className="w-full h-full object-cover object-top select-none"
                       />
                     </div>
-                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Leads CMS</span>
+                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">
+                      Leads CMS
+                    </span>
                   </div>
 
                   {/* Admin Phone 4: Gallery Management */}
@@ -1905,17 +2026,15 @@ function UnlimitedDemocracy() {
                         className="w-full h-full object-cover object-top select-none"
                       />
                     </div>
-                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">Gallery CMS</span>
+                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">
+                      Gallery CMS
+                    </span>
                   </div>
-
                 </div>
               </div>
-
             </Reveal>
           </div>
-
         </div>
-
       </div>
     </section>
   );
@@ -1923,7 +2042,7 @@ function UnlimitedDemocracy() {
 
 function Index() {
   const data = Route.useLoaderData();
-  const caseStudies = (data.caseStudies || []).filter((cs: any) => cs.id !== "exercoach");
+  const caseStudies = (data.caseStudies || []).filter((cs: CaseStudyItem) => cs.id !== "exercoach");
 
   return (
     <div className="min-h-screen bg-[#f0efeb] text-[#111111] font-sans overflow-x-hidden flex flex-col relative">
@@ -1938,7 +2057,7 @@ function Index() {
         <Projects />
         <ExerCoachProject />
         <UnlimitedDemocracy />
-        {caseStudies.map((cs: any) => (
+        {caseStudies.map((cs: CaseStudyItem) => (
           <CaseStudy
             key={cs.id}
             id={cs.id}

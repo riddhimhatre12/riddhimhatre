@@ -24,15 +24,9 @@ function applySecurityHeaders(response: Response): Response {
   headers.set("X-Frame-Options", "DENY");
   headers.set("X-XSS-Protection", "1; mode=block");
   headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
-  headers.set(
-    "Permissions-Policy",
-    "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
-  );
+  headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=(), usb=()");
   if (process.env.NODE_ENV === "production") {
-    headers.set(
-      "Strict-Transport-Security",
-      "max-age=31536000; includeSubDomains; preload"
-    );
+    headers.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
   }
   return new Response(response.body, {
     status: response.status,
@@ -56,7 +50,7 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
     new Response(renderErrorPage(), {
       status: 500,
       headers: { "content-type": "text/html; charset=utf-8" },
-    })
+    }),
   );
 }
 
@@ -81,7 +75,7 @@ export default {
         new Response(renderErrorPage(), {
           status: 500,
           headers: { "content-type": "text/html; charset=utf-8" },
-        })
+        }),
       );
     }
   },

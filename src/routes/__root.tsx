@@ -87,7 +87,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Riddhi Mhatre, riddhimhatre, Riddhi Mhatre portfolio, riddhimhatre portfolio, Riddhi Mhatre Data Analyst, Riddhi Mhatre B.Sc IT, Riddhi Mhatre Mumbai, Riddhi Mhatre IT Graduate, Riddhi Mhatre Web Developer, Riddhi Mhatre SQL, Riddhi Mhatre BizTech",
       },
       { name: "author", content: "Riddhi Mhatre" },
-      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      {
+        name: "robots",
+        content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      },
       { name: "googlebot", content: "index, follow" },
 
       { property: "og:title", content: "Riddhi Mhatre | Riddhimhatre Portfolio" },
@@ -142,33 +145,33 @@ function RootShell({ children }: { children: ReactNode }) {
   const jsonLdData = {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "Riddhi Mhatre",
-    "alternateName": ["riddhimhatre", "Riddhi Girish Mhatre", "Riddhi Mhatre Portfolio"],
-    "url": "https://riddhimhatre.com",
-    "image": "https://riddhimhatre.com/biztech_certificate.png",
-    "jobTitle": "Data Analyst & Information Technology Graduate",
-    "worksFor": {
+    name: "Riddhi Mhatre",
+    alternateName: ["riddhimhatre", "Riddhi Girish Mhatre", "Riddhi Mhatre Portfolio"],
+    url: "https://riddhimhatre.com",
+    image: "https://riddhimhatre.com/biztech_certificate.png",
+    jobTitle: "Data Analyst & Information Technology Graduate",
+    worksFor: {
       "@type": "Organization",
-      "name": "BizTech IT Solutions"
+      name: "BizTech IT Solutions",
     },
-    "alumniOf": {
+    alumniOf: {
       "@type": "EducationalOrganization",
-      "name": "University of Mumbai"
+      name: "University of Mumbai",
     },
-    "knowsAbout": [
+    knowsAbout: [
       "Data Analytics",
       "SQL",
       "Web Development",
       "Java",
       "Manual Testing",
       "Power BI",
-      "Information Technology"
+      "Information Technology",
     ],
-    "sameAs": [
+    sameAs: [
       "https://github.com/riddhimhatre12",
       "https://www.linkedin.com/in/riddhi-mhatre-909529342/",
-      "https://www.instagram.com/riddhi_mhatre12"
-    ]
+      "https://www.instagram.com/riddhi_mhatre12",
+    ],
   };
 
   return (

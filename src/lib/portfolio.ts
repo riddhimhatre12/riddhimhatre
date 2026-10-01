@@ -45,6 +45,7 @@ export interface EducationItem {
   school: string;
   period: string;
   description: string;
+  highlights?: string[];
 }
 
 export interface ProjectItem {
@@ -116,17 +117,16 @@ function isSessionValid(sessionToken: string | undefined): boolean {
 }
 
 // 1. Get Portfolio Data
-export const getPortfolioData = createServerFn({ method: "GET" })
-  .handler(async () => {
-    const filePath = getFilePath();
-    try {
-      const fileContent = await fs.readFile(filePath, "utf-8");
-      return JSON.parse(fileContent) as PortfolioData;
-    } catch (error) {
-      console.error("Error reading portfolio data:", error);
-      throw new Error("Failed to load portfolio data");
-    }
-  });
+export const getPortfolioData = createServerFn({ method: "GET" }).handler(async () => {
+  const filePath = getFilePath();
+  try {
+    const fileContent = await fs.readFile(filePath, "utf-8");
+    return JSON.parse(fileContent) as PortfolioData;
+  } catch (error) {
+    console.error("Error reading portfolio data:", error);
+    throw new Error("Failed to load portfolio data");
+  }
+});
 
 // 2. Save Portfolio Data (requires auth verification)
 export const savePortfolioData = createServerFn({ method: "POST" })
@@ -186,17 +186,15 @@ export const loginAdmin = createServerFn({ method: "POST" })
   });
 
 // 4. Logout Admin
-export const logoutAdmin = createServerFn({ method: "POST" })
-  .handler(async () => {
-    const { deleteCookie } = await import("@tanstack/react-start/server");
-    deleteCookie(SESSION_COOKIE_NAME, { path: "/" });
-    return { success: true, message: "Logged out successfully." };
-  });
+export const logoutAdmin = createServerFn({ method: "POST" }).handler(async () => {
+  const { deleteCookie } = await import("@tanstack/react-start/server");
+  deleteCookie(SESSION_COOKIE_NAME, { path: "/" });
+  return { success: true, message: "Logged out successfully." };
+});
 
 // 5. Check Auth Status
-export const checkAuthStatus = createServerFn({ method: "GET" })
-  .handler(async () => {
-    const { getCookie } = await import("@tanstack/react-start/server");
-    const sessionToken = getCookie(SESSION_COOKIE_NAME);
-    return { isAuthenticated: isSessionValid(sessionToken) };
-  });
+export const checkAuthStatus = createServerFn({ method: "GET" }).handler(async () => {
+  const { getCookie } = await import("@tanstack/react-start/server");
+  const sessionToken = getCookie(SESSION_COOKIE_NAME);
+  return { isAuthenticated: isSessionValid(sessionToken) };
+});
