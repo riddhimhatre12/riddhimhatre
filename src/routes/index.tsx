@@ -17,6 +17,7 @@ import healthcareAnalytics from "@/assets/healthcare_analytics.png";
 import consumerShoppingTrends from "@/assets/consumer_shopping_trends.png";
 import biztechCertificate from "@/assets/biztech_certificate.png";
 import exercoachgym from "@/assets/exercoachgym.png";
+import exercoachMobile from "@/assets/exercoach_mobile.png";
 import exercoachMobileScreen1 from "@/assets/exercoach_mobile_screen1.png";
 import exercoachMobileScreen2 from "@/assets/exercoach_mobile_screen2.png";
 import exercoachMobileScreen3 from "@/assets/exercoach_mobile_screen3.png";
@@ -1571,7 +1572,7 @@ function ExerCoachProject() {
   return (
     <section
       id="exercoach"
-      className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-white font-sans border-t border-black/5 rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6"
+      className="px-4 sm:px-6 md:px-12 py-8 sm:py-12 lg:py-16 min-h-screen flex flex-col justify-center bg-white font-sans border-t border-black/5 rounded-[1.8rem] sm:rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-4 sm:my-6 md:my-10 scroll-mt-6"
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Title & Subtitle */}
@@ -1590,8 +1591,8 @@ function ExerCoachProject() {
           <div className="lg:col-span-4 flex flex-col gap-4 lg:gap-6">
             {/* OBJECTIVE Card */}
             <Reveal delay={0.1}>
-              <div className="bg-white p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5">
-                <h3 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-2">
+              <div className="bg-white p-4 sm:p-5 lg:p-6 rounded-[1.5rem] sm:rounded-[2rem] shadow-sm border border-black/5">
+                <h3 className="font-display font-black text-sm sm:text-base lg:text-lg tracking-wider text-black uppercase mb-2">
                   OBJECTIVE:
                 </h3>
                 <p className="font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed">
@@ -1603,8 +1604,8 @@ function ExerCoachProject() {
 
             {/* DETAILS Card */}
             <Reveal delay={0.2}>
-              <div className="bg-white p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5">
-                <h3 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-2">
+              <div className="bg-white p-4 sm:p-5 lg:p-6 rounded-[1.5rem] sm:rounded-[2rem] shadow-sm border border-black/5">
+                <h3 className="font-display font-black text-sm sm:text-base lg:text-lg tracking-wider text-black uppercase mb-2">
                   DETAILS:
                 </h3>
                 <p className="font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed">
@@ -1621,24 +1622,24 @@ function ExerCoachProject() {
           <div className="lg:col-span-4 flex flex-col items-center justify-center my-3 lg:my-0">
             <Reveal delay={0.15} className="w-full flex flex-col items-center">
               {/* Broad Laptop Outer Group */}
-              <div className="relative w-full max-w-[380px] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[520px] flex flex-col items-center group hover:scale-[1.02] transition-transform duration-500">
+              <div className="relative w-full max-w-[300px] xs:max-w-[340px] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[520px] flex flex-col items-center group hover:scale-[1.02] transition-transform duration-500">
                 {/* Cream/White Laptop Screen Frame */}
-                <div className="relative w-full bg-[#FAF8F5] p-2 sm:p-3 rounded-t-[1.4rem] lg:rounded-t-[1.8rem] shadow-[0_15px_40px_rgba(0,0,0,0.1)] border-[5px] lg:border-[6px] border-[#E8E3DA] z-10">
+                <div className="relative w-full bg-[#FAF8F5] p-2 sm:p-3 rounded-t-[1.2rem] sm:rounded-t-[1.4rem] lg:rounded-t-[1.8rem] shadow-[0_15px_40px_rgba(0,0,0,0.1)] border-[4px] sm:border-[5px] lg:border-[6px] border-[#E8E3DA] z-10">
                   {/* Top Webcam Dot */}
                   <div className="flex justify-center mb-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#3a3a3a] ring-1 ring-black/10" />
                   </div>
 
                   {/* Inner Screen Display */}
-                  <div className="relative overflow-hidden rounded-[0.8rem] lg:rounded-[1rem] bg-black border border-neutral-300/40 flex flex-col aspect-[16/9.5]">
+                  <div className="relative overflow-hidden rounded-[0.6rem] sm:rounded-[0.8rem] lg:rounded-[1rem] bg-black border border-neutral-300/40 flex flex-col aspect-[16/9.5]">
                     {/* Cream Browser Navigation Bar */}
-                    <div className="bg-[#F4F0E8] px-3 py-1 flex items-center justify-between text-[10px] text-neutral-600 font-mono border-b border-neutral-300/50">
+                    <div className="bg-[#F4F0E8] px-2.5 sm:px-3 py-1 flex items-center justify-between text-[9px] sm:text-[10px] text-neutral-600 font-mono border-b border-neutral-300/50">
                       <div className="flex items-center gap-1">
-                        <span className="w-2 h-2 rounded-full bg-[#ff5f56]" />
-                        <span className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
-                        <span className="w-2 h-2 rounded-full bg-[#27c93f]" />
+                        <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#ff5f56]" />
+                        <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#ffbd2e]" />
+                        <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#27c93f]" />
                       </div>
-                      <div className="flex items-center gap-1 bg-[#FAF8F5] px-2.5 py-0.5 rounded-md text-[9.5px] text-neutral-700 border border-neutral-300/50 shadow-inner">
+                      <div className="flex items-center gap-1 bg-[#FAF8F5] px-2 sm:px-2.5 py-0.5 rounded-md text-[8.5px] sm:text-[9.5px] text-neutral-700 border border-neutral-300/50 shadow-inner">
                         <svg
                           className="w-2 h-2 text-emerald-600"
                           viewBox="0 0 24 24"
@@ -1716,8 +1717,8 @@ function ExerCoachProject() {
           {/* Right Column (MY ROLE) */}
           <div className="lg:col-span-4 flex">
             <Reveal delay={0.3} className="w-full flex">
-              <div className="bg-white p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5 w-full flex flex-col justify-center">
-                <h3 className="font-display font-black text-base lg:text-lg tracking-wider text-black uppercase mb-3">
+              <div className="bg-white p-4 sm:p-5 lg:p-6 rounded-[1.5rem] sm:rounded-[2rem] shadow-sm border border-black/5 w-full flex flex-col justify-center">
+                <h3 className="font-display font-black text-sm sm:text-base lg:text-lg tracking-wider text-black uppercase mb-3">
                   MY ROLE:
                 </h3>
                 <ul className="space-y-2.5 font-sans text-neutral-700 text-xs sm:text-sm lg:text-base leading-relaxed">
@@ -1751,32 +1752,32 @@ function ExerCoachProject() {
   );
 }
 
-function UnlimitedDemocracy() {
+function ExerCoachMobileProject() {
   return (
     <section
       id="exercoach-mobile"
-      className="px-6 md:px-12 py-10 lg:py-16 min-h-screen flex flex-col justify-center bg-white font-sans border-t border-black/5 rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-6 md:my-10 scroll-mt-6"
+      className="px-4 sm:px-6 md:px-12 py-8 sm:py-12 lg:py-16 min-h-screen flex flex-col justify-center bg-white font-sans border-t border-black/5 rounded-[1.8rem] sm:rounded-[2.5rem] md:rounded-[3.5rem] shadow-sm my-4 sm:my-6 md:my-10 scroll-mt-6"
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Title */}
-        <Reveal className="mb-4 lg:mb-6">
-          <h2 className="font-display font-black tracking-tighter text-4xl sm:text-5xl lg:text-6xl text-[#111111] uppercase leading-none">
-            EXERCOACH
-            <br />
-            GYM
+        <Reveal className="text-center mb-6 lg:mb-8">
+          <h2 className="font-display font-black tracking-tight text-3xl sm:text-4xl lg:text-5xl text-[#111111] uppercase leading-none">
+            EXERCOACH GYM
           </h2>
+          <p className="font-script text-xl sm:text-2xl lg:text-3xl text-neutral-800 mt-1 italic">
+            (mobile app & admin portal showcase)
+          </p>
         </Reveal>
 
-        {/* 3-Column Grid (Shifted up with tight gap) */}
+        {/* 3-Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-          {/* Left Column (Details/Goal/Approach Card - Shifted Up, Logo Removed) */}
+          {/* Left Column (Details/Goal/Approach Card) */}
           <div className="lg:col-span-4 flex flex-col gap-4">
-            {/* DETAILS, PLANFORMS, GOAL, APPROACH Card */}
             <Reveal delay={0.1}>
-              <div className="bg-[#f0efeb] p-5 lg:p-6 rounded-[2rem] shadow-sm border border-black/5 flex flex-col gap-3.5">
+              <div className="bg-[#f0efeb] p-4 sm:p-5 lg:p-6 rounded-[1.5rem] sm:rounded-[2rem] shadow-sm border border-black/5 flex flex-col gap-3.5">
                 {/* DETAILS */}
                 <div>
-                  <h3 className="font-display font-black text-sm lg:text-base tracking-wider text-black uppercase mb-1">
+                  <h3 className="font-display font-black text-xs sm:text-sm lg:text-base tracking-wider text-black uppercase mb-1">
                     DETAILS:
                   </h3>
                   <div className="space-y-0.5 text-xs sm:text-sm text-neutral-700 font-sans">
@@ -1793,9 +1794,9 @@ function UnlimitedDemocracy() {
                   </div>
                 </div>
 
-                {/* PLANFORMS */}
+                {/* PLATFORMS */}
                 <div>
-                  <h3 className="font-display font-black text-sm lg:text-base tracking-wider text-black uppercase mb-1">
+                  <h3 className="font-display font-black text-xs sm:text-sm lg:text-base tracking-wider text-black uppercase mb-1">
                     PLATFORMS:
                   </h3>
                   <p className="font-sans text-neutral-700 text-xs sm:text-sm">
@@ -1805,7 +1806,7 @@ function UnlimitedDemocracy() {
 
                 {/* GOAL */}
                 <div>
-                  <h3 className="font-display font-black text-sm lg:text-base tracking-wider text-black uppercase mb-1">
+                  <h3 className="font-display font-black text-xs sm:text-sm lg:text-base tracking-wider text-black uppercase mb-1">
                     GOAL:
                   </h3>
                   <p className="font-sans text-neutral-700 text-xs sm:text-sm leading-relaxed">
@@ -1817,7 +1818,7 @@ function UnlimitedDemocracy() {
 
                 {/* APPROACH */}
                 <div>
-                  <h3 className="font-display font-black text-sm lg:text-base tracking-wider text-black uppercase mb-1">
+                  <h3 className="font-display font-black text-xs sm:text-sm lg:text-base tracking-wider text-black uppercase mb-1">
                     APPROACH:
                   </h3>
                   <p className="font-sans text-neutral-700 text-xs sm:text-sm leading-relaxed">
@@ -1830,25 +1831,25 @@ function UnlimitedDemocracy() {
             </Reveal>
           </div>
 
-          {/* Center Column (Single Sleek iPhone 16 Pro Screen Mockup) */}
+          {/* Center Column (Single Sleek iPhone 16 Pro Screen Mockup with continuous scroll) */}
           <div className="lg:col-span-3 flex flex-col items-center justify-center my-3 lg:my-0">
             <Reveal delay={0.15} className="w-full flex flex-col items-center">
               {/* Sleek iPhone Outer Container */}
-              <div className="relative w-full max-w-[240px] sm:max-w-[260px] md:max-w-[275px] group hover:scale-[1.02] transition-transform duration-500">
+              <div className="relative w-full max-w-[210px] xs:max-w-[235px] sm:max-w-[260px] md:max-w-[275px] group hover:scale-[1.02] transition-transform duration-500">
                 {/* Titanium Phone Body Frame */}
-                <div className="relative w-full bg-[#1c1c1e] p-[8px] sm:p-[9px] rounded-[2.8rem] sm:rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.22)] border-[2px] border-[#3a3a3c] ring-1 ring-black/50">
+                <div className="relative w-full bg-[#1c1c1e] p-[7px] sm:p-[9px] rounded-[2.6rem] sm:rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.22)] border-[2px] border-[#3a3a3c] ring-1 ring-black/50">
                   {/* Outer Buttons (Volume & Power) */}
                   <div className="absolute -left-[3px] top-16 w-[3px] h-6 bg-[#2c2c2e] rounded-l-sm" />
                   <div className="absolute -left-[3px] top-24 w-[3px] h-6 bg-[#2c2c2e] rounded-l-sm" />
                   <div className="absolute -right-[3px] top-20 w-[3px] h-9 bg-[#2c2c2e] rounded-r-sm" />
 
                   {/* Inner Screen Display */}
-                  <div className="relative overflow-hidden rounded-[2.3rem] sm:rounded-[2.5rem] bg-black aspect-[9/19.2] border border-neutral-800">
+                  <div className="relative overflow-hidden rounded-[2.1rem] sm:rounded-[2.5rem] bg-black aspect-[9/19.2] border border-neutral-800">
                     {/* Status Bar / Dynamic Island */}
                     <div className="absolute top-0 inset-x-0 h-7 z-30 flex items-center justify-between px-5 pt-1 text-white font-mono text-[9px] pointer-events-none select-none">
                       <span className="font-semibold text-white/90">9:41</span>
                       {/* Dynamic Island */}
-                      <div className="w-16 h-3.5 bg-black rounded-full flex items-center justify-end px-1.5 gap-1 ring-1 ring-white/10">
+                      <div className="w-14 sm:w-16 h-3 sm:h-3.5 bg-black rounded-full flex items-center justify-end px-1.5 gap-1 ring-1 ring-white/10">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#0c1524] ring-1 ring-blue-500/50" />
                       </div>
                       <div className="flex items-center gap-1 text-white/90">
@@ -1859,13 +1860,13 @@ function UnlimitedDemocracy() {
                       </div>
                     </div>
 
-                    {/* ExerCoach Mobile Website Screen Animated Image */}
+                    {/* ExerCoach Mobile Website Screen Animated Continuous Image Scroll */}
                     <div className="w-full h-full overflow-hidden bg-black">
                       <motion.div
-                        className="w-full flex flex-col"
-                        animate={{ y: ["0%", "-66.6%", "-66.6%", "0%", "0%"] }}
+                        className="w-full"
+                        animate={{ y: ["0%", "-75%", "-75%", "0%", "0%"] }}
                         transition={{
-                          duration: 16,
+                          duration: 18,
                           repeat: Infinity,
                           repeatType: "loop",
                           ease: [0.45, 0, 0.55, 1],
@@ -1873,18 +1874,8 @@ function UnlimitedDemocracy() {
                         }}
                       >
                         <img
-                          src={exercoachMobileScreen1}
-                          alt="ExerCoach Gym Mobile Screen 1 - Hero & Trial"
-                          className="w-full h-auto block select-none pointer-events-none"
-                        />
-                        <img
-                          src={exercoachMobileScreen2}
-                          alt="ExerCoach Gym Mobile Screen 2 - Contact"
-                          className="w-full h-auto block select-none pointer-events-none"
-                        />
-                        <img
-                          src={exercoachMobileScreen3}
-                          alt="ExerCoach Gym Mobile Screen 3 - Plans"
+                          src={exercoachMobile}
+                          alt="ExerCoach Gym Mobile Screen Live Scroll"
                           className="w-full h-auto block select-none pointer-events-none"
                         />
                       </motion.div>
@@ -1895,7 +1886,7 @@ function UnlimitedDemocracy() {
 
                     {/* iPhone Home Indicator Bar */}
                     <div className="absolute bottom-1 inset-x-0 flex justify-center z-30 pointer-events-none">
-                      <span className="w-24 h-1 bg-white/40 rounded-full" />
+                      <span className="w-20 sm:w-24 h-1 bg-white/40 rounded-full" />
                     </div>
                   </div>
                 </div>
@@ -1923,45 +1914,45 @@ function UnlimitedDemocracy() {
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                   <span>PUBLIC WEBSITE (MOBILE)</span>
                 </h4>
-                <div className="grid grid-cols-3 gap-2.5 sm:gap-3 w-full items-start">
+                <div className="grid grid-cols-3 gap-1.5 xs:gap-2 sm:gap-3 w-full items-start">
                   {/* Phone 1: Hero & Trial */}
-                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.4rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
-                    <div className="w-full overflow-hidden rounded-[1.1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                  <div className="bg-[#1c1c1e] p-1 sm:p-1.5 rounded-[1.1rem] sm:rounded-[1.4rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[0.8rem] sm:rounded-[1.1rem] bg-black aspect-[9/18.5] relative border border-neutral-800">
                       <img
                         src={exercoachMobileScreen1}
                         alt="ExerCoach Mobile Screen 1 - Hero & Free Trial Session"
                         className="w-full h-full object-cover object-top select-none"
                       />
                     </div>
-                    <span className="text-[9px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">
+                    <span className="text-[8px] sm:text-[9.5px] font-mono font-bold text-neutral-400 mt-1 tracking-tight text-center truncate w-full px-0.5">
                       Hero & Trial
                     </span>
                   </div>
 
                   {/* Phone 2: Contact & Info */}
-                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.4rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
-                    <div className="w-full overflow-hidden rounded-[1.1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                  <div className="bg-[#1c1c1e] p-1 sm:p-1.5 rounded-[1.1rem] sm:rounded-[1.4rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[0.8rem] sm:rounded-[1.1rem] bg-black aspect-[9/18.5] relative border border-neutral-800">
                       <img
                         src={exercoachMobileScreen2}
                         alt="ExerCoach Mobile Screen 2 - Get in Touch & Contact"
                         className="w-full h-full object-cover object-top select-none"
                       />
                     </div>
-                    <span className="text-[9px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">
+                    <span className="text-[8px] sm:text-[9.5px] font-mono font-bold text-neutral-400 mt-1 tracking-tight text-center truncate w-full px-0.5">
                       Contact & Info
                     </span>
                   </div>
 
                   {/* Phone 3: Membership Plans */}
-                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.4rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
-                    <div className="w-full overflow-hidden rounded-[1.1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                  <div className="bg-[#1c1c1e] p-1 sm:p-1.5 rounded-[1.1rem] sm:rounded-[1.4rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[0.8rem] sm:rounded-[1.1rem] bg-black aspect-[9/18.5] relative border border-neutral-800">
                       <img
                         src={exercoachMobileScreen3}
                         alt="ExerCoach Mobile Screen 3 - Membership Plans"
                         className="w-full h-full object-cover object-top select-none"
                       />
                     </div>
-                    <span className="text-[9px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">
+                    <span className="text-[8px] sm:text-[9.5px] font-mono font-bold text-neutral-400 mt-1 tracking-tight text-center truncate w-full px-0.5">
                       Plans & Rates
                     </span>
                   </div>
@@ -1974,59 +1965,59 @@ function UnlimitedDemocracy() {
                   <span className="w-1.5 h-1.5 rounded-full bg-red-600" />
                   <span>ADMIN DASHBOARD & CMS PORTAL</span>
                 </h4>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 w-full items-start">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 xs:gap-2 sm:gap-2.5 w-full items-start">
                   {/* Admin Phone 1: Dashboard */}
-                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
-                    <div className="w-full overflow-hidden rounded-[1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                  <div className="bg-[#1c1c1e] p-1 sm:p-1.5 rounded-[1rem] sm:rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[0.7rem] sm:rounded-[1rem] bg-black aspect-[9/18.5] relative border border-neutral-800">
                       <img
                         src={exercoachAdminDashboard}
                         alt="ExerCoach Admin Dashboard Overview"
                         className="w-full h-full object-cover object-top select-none"
                       />
                     </div>
-                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">
+                    <span className="text-[8px] sm:text-[8.5px] font-mono font-bold text-neutral-400 mt-1 tracking-tight text-center truncate w-full px-0.5">
                       Dashboard
                     </span>
                   </div>
 
                   {/* Admin Phone 2: Navigation Menu */}
-                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
-                    <div className="w-full overflow-hidden rounded-[1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                  <div className="bg-[#1c1c1e] p-1 sm:p-1.5 rounded-[1rem] sm:rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[0.7rem] sm:rounded-[1rem] bg-black aspect-[9/18.5] relative border border-neutral-800">
                       <img
                         src={exercoachAdminMenu}
                         alt="ExerCoach Admin Navigation Menu"
                         className="w-full h-full object-cover object-top select-none"
                       />
                     </div>
-                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">
+                    <span className="text-[8px] sm:text-[8.5px] font-mono font-bold text-neutral-400 mt-1 tracking-tight text-center truncate w-full px-0.5">
                       Nav Menu
                     </span>
                   </div>
 
                   {/* Admin Phone 3: Leads Portal */}
-                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
-                    <div className="w-full overflow-hidden rounded-[1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                  <div className="bg-[#1c1c1e] p-1 sm:p-1.5 rounded-[1rem] sm:rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[0.7rem] sm:rounded-[1rem] bg-black aspect-[9/18.5] relative border border-neutral-800">
                       <img
                         src={exercoachAdminLeads}
                         alt="ExerCoach Customer Leads Management"
                         className="w-full h-full object-cover object-top select-none"
                       />
                     </div>
-                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">
+                    <span className="text-[8px] sm:text-[8.5px] font-mono font-bold text-neutral-400 mt-1 tracking-tight text-center truncate w-full px-0.5">
                       Leads CMS
                     </span>
                   </div>
 
                   {/* Admin Phone 4: Gallery Management */}
-                  <div className="bg-[#1c1c1e] p-1.5 rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
-                    <div className="w-full overflow-hidden rounded-[1rem] bg-black aspect-[9/19] relative border border-neutral-800">
+                  <div className="bg-[#1c1c1e] p-1 sm:p-1.5 rounded-[1rem] sm:rounded-[1.3rem] shadow-sm border border-[#3a3a3c] flex flex-col items-center group hover:scale-[1.03] transition-transform duration-300">
+                    <div className="w-full overflow-hidden rounded-[0.7rem] sm:rounded-[1rem] bg-black aspect-[9/18.5] relative border border-neutral-800">
                       <img
                         src={exercoachAdminGallery}
                         alt="ExerCoach Gallery Media Management"
                         className="w-full h-full object-cover object-top select-none"
                       />
                     </div>
-                    <span className="text-[8.5px] font-mono font-medium text-neutral-500 mt-1.5 tracking-tight">
+                    <span className="text-[8px] sm:text-[8.5px] font-mono font-bold text-neutral-400 mt-1 tracking-tight text-center truncate w-full px-0.5">
                       Gallery CMS
                     </span>
                   </div>
@@ -2056,7 +2047,7 @@ function Index() {
         <ExperienceAndEducation />
         <Projects />
         <ExerCoachProject />
-        <UnlimitedDemocracy />
+        <ExerCoachMobileProject />
         {caseStudies.map((cs: CaseStudyItem) => (
           <CaseStudy
             key={cs.id}
